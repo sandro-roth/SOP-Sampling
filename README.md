@@ -8,10 +8,14 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/sandro-roth/SOP-Sampling">
+    <img src="images/SOP.jpeg" alt="Logo" width="200" height="200">
+  </a>
 
-
-
-
+<h3 align="center">SOP sampling USZ Webinterface and Database</h3>
 
 
 
