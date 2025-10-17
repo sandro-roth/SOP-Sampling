@@ -1,1 +1,45 @@
-# SOP-Sampling
+<h1 id="readme-top">SOP-Sampling</h1></h1>
+
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![project_license][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/sandro-roth/SOP-Sampling.svg?style=for-the-badge
+[contributors-url]: https://github.com/sandro-roth/SOP-Sampling/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/sandro-roth/SOP-Sampling.svg?style=for-the-badge
+[forks-url]: https://github.com/sandro-roth/SOP-Sampling/network/members
+[stars-shield]: https://img.shields.io/github/stars/sandro-roth/SOP-Sampling.svg?style=for-the-badge
+[stars-url]: https://github.com/sandro-roth/SOP-Sampling/stargazers
+[issues-shield]: https://img.shields.io/github/issues/sandro-roth/SOP-Sampling.svg?style=for-the-badge
+[issues-url]: https://github.com/sandro-roth/SOP-Sampling/issues
+[license-shield]: https://img.shields.io/github/license/sandro-roth/SOP-Sampling.svg?style=for-the-badge
+[license-url]: https://github.com/sandro-roth/SOP-Sampling/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/sandro-roth-80035080
