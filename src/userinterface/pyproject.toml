@@ -5,8 +5,10 @@ build-backend = 'hatchling.build'
 [project]
 name = 'sop-ui'
 dynamic = ['version']
+description = 'graphical user interface for sop sampling'
 dependencies = [
-    'requests>=2.32'
+    'requests>=2.32',
+    'flask>=3.1.0'
 ]
 authors = [
     {name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}
