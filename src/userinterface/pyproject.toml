@@ -3,7 +3,7 @@ requires = ['hatchling >= 1.26']
 build-backend = 'hatchling.build'
 
 [project]
-name = 'usierinterface'
+name = 'sop-ui'
 dynamic = ['version']
 dependencies = [
     'requests>=2.32'
@@ -14,3 +14,6 @@ authors = [
 maintainers = [
     {name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}
 ]
+
+[project.scripts]
+sop-ui = 'sop-ui.app:main'
