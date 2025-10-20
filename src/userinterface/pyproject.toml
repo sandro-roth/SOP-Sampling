@@ -1,3 +1,16 @@
 [build-system]
 requires = ['hatchling >= 1.26']
 build-backend = 'hatchling.build'
+
+[project]
+name = 'usierinterface'
+dynamic = ['version']
+dependencies = [
+    'requests>=2.32'
+]
+authors = [
+    {name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}
+]
+maintainers = [
+    {name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}
+]
