@@ -14,6 +14,8 @@ dependencies = [
 authors = [{name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}]
 maintainers = [{name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}]
 
+[tool.hatch.build.targets.wheel]
+packages = ["."]
 
 [project.scripts]
 sop-ui = 'sop_ui.app:main'
