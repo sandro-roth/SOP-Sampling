@@ -1,2 +1,4 @@
 .idea
 .env
+.ui_venv
+certs
