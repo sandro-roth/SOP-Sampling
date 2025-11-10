@@ -2,3 +2,5 @@
 .env
 .venvs
 certs
+
+__pycache__
