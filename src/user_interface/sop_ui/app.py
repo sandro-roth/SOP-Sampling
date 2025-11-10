@@ -6,7 +6,7 @@ items = []
 
 @app.get('/')
 def index():
-    return "UI is up"
+    return "UI is up and running"
 
 
 def main():
