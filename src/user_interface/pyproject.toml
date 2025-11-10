@@ -15,10 +15,10 @@ authors = [{name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}]
 maintainers = [{name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}]
 
 [tool.hatch.build.targets.wheel]
-packages = ["."]
+packages = ['sop_ui']
 
 [project.scripts]
 sop-ui = 'sop_ui.app:main'
 
 [tool.hatch.version]
-path = '__init__.py'
+path = 'sop_ui/__init__.py'
