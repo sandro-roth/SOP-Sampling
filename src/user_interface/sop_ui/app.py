@@ -1,8 +1,11 @@
 import os
+
 from dotenv import load_dotenv, find_dotenv
 from pathlib import Path
 from flask import Flask, render_template, request, redirect, url_for
 from markupsafe import escape
+
+from utils import setup_logging, get_logger
 
 # Setup
 cwd = Path(__file__).resolve()
@@ -89,10 +92,13 @@ def main() -> None:
     Returns:
         None
     """
+    setup_logging(app_name='user_interface', log_dir=os.getenv('GUI_LOG_DIR'))
+    log = get_logger(__name__)
+
     app = create_app()
     port = int(os.getenv("SOP_UI_PORT", "8000"))
-    print(f".env loaded from: {loaded_from}")
-    print(f"SOP_UI_PORT = {port}")
+    log.info(f".env loaded from: {loaded_from}")
+    log.info(f"SOP_UI_PORT = {port}")
     app.run(host='0.0.0.0', port=port, debug=False)
 
 
