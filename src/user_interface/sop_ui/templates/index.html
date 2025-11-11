@@ -8,7 +8,7 @@
 </head>
 <body class="container">
   <h1>Demo list</h1>
-  <form hx-post="/add" hx-target="#list" hx-swap="outerHTML">
+  <form hx-post="/add" hx-target="#list" hx-swap="innerHTML">
     <input name="text" placeholder="Add item" required>
     <button type="submit">Add</button>
   </form>
