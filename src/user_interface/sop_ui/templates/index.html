@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SOP UI</title>
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+</head>
+<body class="container">
+  <h1>Demo list</h1>
+  <form hx-post="/add" hx-target="#list" hx-swap="outerHTML">
+    <input name="text" placeholder="Add item" required>
+    <button type="submit">Add</button>
+  </form>
+  <div id="list">{% include "_list.html" %}</div>
+</body>
+</html>
