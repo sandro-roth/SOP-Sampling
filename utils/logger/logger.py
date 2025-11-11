@@ -1,7 +1,6 @@
 import logging
 import os
 from pathlib import Path
-from datetime import datetime
 from logging.handlers import TimedRotatingFileHandler
 
 class _ServiceFilter(logging.Filter):
@@ -20,13 +19,8 @@ class _ServiceFilter(logging.Filter):
         record.service = self.service
         return True
 
-def setup_logging(
-        app_name: str = 'app',
-        log_dir: str | None = None,
-        retention: int = 30,
-        level: int = logging.INFO,
-        to_stdout: bool = True
-) -> logging.Logger:
+def setup_logging(app_name: str = 'app', log_dir: str | None = None, retention: int = 30, level: int = logging.INFO,
+        to_stdout: bool = True) -> logging.Logger:
     """
     Configure and initialize the application-wide logging system.
 
@@ -62,4 +56,29 @@ def setup_logging(
     for h in list(root.handlers):
         root.removeHandler(h)
 
-    
+    log_path = service_log_dir / 'app.log'
+    file_handler = TimedRotatingFileHandler(
+        filename=str(log_path),
+        when='midnight',
+        interval=1,
+        backupCount=retention,
+        encoding='utf-8',
+        utc=False,
+        delay=True
+    )
+    file_handler.suffix = '%Y-%m-%d'
+
+    # Formatter with service and name
+    file_fmt = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    file_handler.setFormatter(file_fmt)
+    file_handler.addFilter(_ServiceFilter(app_name))
+    root.addHandler(file_handler)
+
+    if to_stdout:
+        console = logging.StreamHandler()
+        console.setFormatter(file_fmt)
+        console.addFilter(_ServiceFilter(app_name))
+        root.addHandler(console)
+
+    root.info(f'[{app_name}] Logging initialized -> {service_log_dir}')
+    return root
