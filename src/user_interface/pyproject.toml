@@ -8,7 +8,8 @@ dynamic = ['version']
 description = 'graphical user interface for sop sampling'
 dependencies = [
     "requests>=2.32",
-    "flask>=3.1.0"
+    "flask>=3.1.0",
+    "python-dotenv"
 ]
 
 authors = [{name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}]
