@@ -7,26 +7,31 @@ from markupsafe import escape
 # Setup
 cwd = Path(__file__).resolve()
 
+def _load_env() -> str | None:
+    """
+    Load environment variables from a suitable .env file.
 
-def _laod_env():
-    '''
-    loading .env var depending on how the script is called
-    :return: str, path to .env file
-    '''
+    The function searches for a .env file in several prioritized locations:
+    1. A path explicitly defined in the environment variable `SOP_UI_DOTENV_PATH`.
+    2. A `.env` file located three directories above the current working file
+       (used when running directly from an IDE or development environment).
+    3. A `.env` file found automatically in the current working directory.
 
-    # Called from terminal with "export SOP_UI_DOTENV_PATH=..." defined for venv
+    Once found, the .env file is loaded using `python-dotenv`.
+
+    Returns:
+        str | None: The path to the loaded .env file, or None if no .env file was found.
+    """
     explicit = os.getenv('SOP_UI_DOTENV_PATH')
     if explicit and Path(explicit).exists():
         load_dotenv(explicit)
         return explicit
 
-    # Run without sop-ui package from your IDE
     candidate = cwd.parents[3] / '.env' if len(cwd.parents) >= 4 else None
     if candidate and candidate.exists():
         load_dotenv(candidate)
         return str(candidate)
 
-    # Fallback to a .env in the cwd
     found = find_dotenv(usecwd=True)
     if found:
         load_dotenv(found)
@@ -34,9 +39,23 @@ def _laod_env():
 
     return None
 
-loaded_from = _laod_env()
+loaded_from = _load_env()
 
-def create_app():
+def create_app() -> Flask:
+    """
+    Create and configure the Flask application.
+
+    This function initializes a Flask app instance, sets up basic configuration,
+    and defines routes for displaying and adding items to a list.
+
+    Routes:
+        GET /    – Render the main page showing the current list of items.
+        POST /add – Add a new item to the list and update the page dynamically
+                    if requested via HTMX.
+
+    Returns:
+        Flask: The configured Flask application instance.
+    """
     app = Flask(__name__, template_folder=str(cwd.parent / 'templates'))
     app.config['TEMPLATES_AUTO_RELOAD'] = True
     items = []
@@ -56,7 +75,20 @@ def create_app():
 
     return app
 
-def main():
+def main() -> None:
+    """
+    Entry point for running the Flask application.
+
+    This function creates the Flask app instance, reads the desired port
+    from the environment variable `SOP_UI_PORT` (defaulting to 8000),
+    and starts the development server.
+
+    It also prints information about the loaded .env file and the chosen port
+    for easier debugging and transparency during startup.
+
+    Returns:
+        None
+    """
     app = create_app()
     port = int(os.getenv("SOP_UI_PORT", "8000"))
     print(f".env loaded from: {loaded_from}")
