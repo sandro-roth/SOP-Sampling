@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title>SOP UI</title>
-  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
-  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='pico.min.css') }}">
+  <script src="{{ url_for('static', filename='htmx.min.js') }}"></script>
 </head>
 <body class="container">
   <h1>Demo list</h1>
