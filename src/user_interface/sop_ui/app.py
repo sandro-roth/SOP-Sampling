@@ -4,6 +4,9 @@ from pathlib import Path
 from flask import Flask, render_template, request
 from markupsafe import escape
 
+# Setup
+cwd = Path(__file__).resolve()
+
 
 def _laod_env():
     '''
@@ -18,7 +21,6 @@ def _laod_env():
         return explicit
 
     # Run without sop-ui package from your IDE
-    cwd = Path(__file__).resolve()
     candidate = cwd.parents[3] / '.env' if len(cwd.parents) >= 4 else None
     if candidate and candidate.exists():
         load_dotenv(candidate)
@@ -35,7 +37,7 @@ def _laod_env():
 loaded_from = _laod_env()
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder=str(cwd.parent / 'templates'))
     app.config['TEMPLATES_AUTO_RELOAD'] = True
     items = []
 
