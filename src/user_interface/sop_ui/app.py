@@ -36,6 +36,7 @@ loaded_from = _laod_env()
 
 def create_app():
     app = Flask(__name__)
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
     items = []
 
     @app.get('/')
@@ -54,7 +55,8 @@ def create_app():
 def main():
     app = create_app()
     port = int(os.getenv("SOP_UI_PORT", "8000"))
-    print(f"Loaded SOP_UI_PORT={port} from {ENV_PATH}")
+    print(f".env loaded from: {loaded_from}")
+    print(f"SOP_UI_PORT = {port}")
     app.run(host='0.0.0.0', port=port, debug=False)
 
 
