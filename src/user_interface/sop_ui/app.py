@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv, find_dotenv
 from pathlib import Path
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from markupsafe import escape
 
 # Setup
@@ -50,7 +50,9 @@ def create_app():
         text = request.form.get("text", "").strip()
         if text:
             items.append(escape(text))
-        return render_template("_list.html", items=items)
+        if request.headers.get("HX-Request"):
+            return render_template("_list.html", items=items)
+        return redirect(url_for('home'))
 
     return app
 
