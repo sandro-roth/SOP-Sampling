@@ -18,3 +18,35 @@ class _ServiceFilter(logging.Filter):
     def filter(self, record: logging.LogRecord) -> bool:
         record.service = self.service
         return True
+
+def setup_logging(
+        app_name: str = 'app',
+        log_dir: str | None = None,
+        retention: int = 30,
+        level: int = logging.INFO,
+        to_stdout: bool = True
+) -> logging.Logger:
+    """
+    Configure and initialize the application-wide logging system.
+
+    This function sets up a rotating file logger and, optionally, console output.
+    Log files are stored in a directory structure organized by service name, and
+    old logs are automatically rotated daily and deleted after the retention period.
+
+    Steps performed:
+        1. Creates a log directory for the given app (default: ./logs/<app_name>).
+        2. Configures the root logger with the specified log level.
+        3. Adds a timed rotating file handler that rolls over at midnight.
+        4. Optionally adds a StreamHandler to print logs to stdout.
+        5. Applies the custom _ServiceFilter to include the service name in each log record.
+
+    Args:
+        app_name (str): Name of the application or service (used in log directory and record filter).
+        log_dir (str | None): Base directory for log files. Defaults to current working directory/logs.
+        retention (int): Number of daily log files to retain before old ones are deleted.
+        level (int): Logging level (e.g. logging.INFO, logging.DEBUG).
+        to_stdout (bool): If True, logs are also printed to the console.
+
+    Returns:
+        logging.Logger: The configured root logger instance.
+    """
