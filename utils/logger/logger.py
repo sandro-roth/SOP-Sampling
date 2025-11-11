@@ -1,5 +1,6 @@
 import logging
 import os
+from pathlib import Path
 from datetime import datetime
 from logging.handlers import TimedRotatingFileHandler
 
@@ -50,3 +51,15 @@ def setup_logging(
     Returns:
         logging.Logger: The configured root logger instance.
     """
+    base_log_dir = Path(log_dir or os.getenv('LOG_DIR', Path(__file__).resolve().parent / 'logs'))
+    service_log_dir = base_log_dir / app_name
+    service_log_dir.mkdir(parents=True, exist_ok=True)
+
+    root = logging.getLogger()
+    root.setLevel(level)
+
+    # Make sure Handlers are not duplicated
+    for h in list(root.handlers):
+        root.removeHandler(h)
+
+    
