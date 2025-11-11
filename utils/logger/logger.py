@@ -45,7 +45,7 @@ def setup_logging(app_name: str = 'app', log_dir: str | None = None, retention: 
     Returns:
         logging.Logger: The configured root logger instance.
     """
-    base_log_dir = Path(log_dir or os.getenv('LOG_DIR', Path(__file__).resolve().parent / 'logs'))
+    base_log_dir = Path(log_dir or os.getenv('LOG_DIR', Path(__file__).resolve().parents[3] / 'logs'))
     service_log_dir = base_log_dir / app_name
     service_log_dir.mkdir(parents=True, exist_ok=True)
 
@@ -56,7 +56,7 @@ def setup_logging(app_name: str = 'app', log_dir: str | None = None, retention: 
     for h in list(root.handlers):
         root.removeHandler(h)
 
-    log_path = service_log_dir / 'app.log'
+    log_path = service_log_dir / 'service.log'
     file_handler = TimedRotatingFileHandler(
         filename=str(log_path),
         when='midnight',
@@ -69,7 +69,7 @@ def setup_logging(app_name: str = 'app', log_dir: str | None = None, retention: 
     file_handler.suffix = '%Y-%m-%d'
 
     # Formatter with service and name
-    file_fmt = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    file_fmt = logging.Formatter('%(asctime)s [%(levelname)s] [%(service)s] %(name)s: %(message)s')
     file_handler.setFormatter(file_fmt)
     file_handler.addFilter(_ServiceFilter(app_name))
     root.addHandler(file_handler)
@@ -80,5 +80,20 @@ def setup_logging(app_name: str = 'app', log_dir: str | None = None, retention: 
         console.addFilter(_ServiceFilter(app_name))
         root.addHandler(console)
 
-    root.info(f'[{app_name}] Logging initialized -> {service_log_dir}')
+    root.info(f'[{app_name}] Logging initialized at {service_log_dir}')
     return root
+
+def get_logger(app_name: str | None = None) -> logging.Logger:
+    """
+    Retrieve a logger by name, inheriting the configuration from the root logger.
+
+    This is a convenience function to obtain a logger instance anywhere in the code
+    after `setup_logging()` has initialized the logging system.
+
+    Args:
+        app_name (str | None): Optional name for the logger. If None, returns the root logger.
+
+    Returns:
+        logging.Logger: The requested logger instance.
+    """
+    return logging.getLogger(app_name)
