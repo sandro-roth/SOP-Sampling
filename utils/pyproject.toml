@@ -1,0 +1,12 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "utils"
+version = "1.0.0"
+description = "Shared utilities for all services"
+dependencies = []
+
+[tool.hatch.build.targets.wheel]
+packages = ["utils"]
