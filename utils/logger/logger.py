@@ -45,7 +45,7 @@ def setup_logging(app_name: str = 'app', log_dir: str | None = None, retention: 
     Returns:
         logging.Logger: The configured root logger instance.
     """
-    base_log_dir = Path(log_dir or os.getenv('LOG_DIR', Path(__file__).resolve().parents[3] / 'logs'))
+    base_log_dir = Path(log_dir or os.getenv('LOG_DIR', Path(__file__).resolve().parents[2] / 'logs'))
     service_log_dir = base_log_dir / app_name
     service_log_dir.mkdir(parents=True, exist_ok=True)
 
