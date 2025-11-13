@@ -14,9 +14,6 @@ maintainers = [{name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}]
 [tool.hatch.build.targets.wheel]
 packages = ['sop_sql']
 
-[tool.hatch.build]
-include = ["sop_ui/templates/**/*", "sop_ui/static/**/*"]
-
 [project.scripts]
 sop-ui = 'sop_PostgreSQL.main:main'
 
