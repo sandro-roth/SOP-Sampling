@@ -59,7 +59,7 @@ def get_next_example_from_db() -> tuple[int, str, str, str]:
     return question_id, question_text, answer_text, passage_text
 
 def save_annotation_to_db(question_id: int, flu: int, comp: int, fact: int,
-                          rej_q: bool, alt_q: str | None) -> None:
+                          rej_q: bool, alt_q: str | None, rej_a: bool, alt_a: str | None) -> None:
     """
     Takes Userinterface inputs which describe the answer to the question like how fluent, comprehensive and factual
     the answer is. It is called from the Flask app posting to the /submit_annotation.
@@ -70,7 +70,9 @@ def save_annotation_to_db(question_id: int, flu: int, comp: int, fact: int,
         comp (int): Comprehensive parameter, describes how comprehensive the question is with ratings (1-5).
         fact (int): Factual parameter, describes how factual the questions is with ratings (1-5).
         rej_q (bool): Rejected question, set to True if the question is rejected.
-        alt_q (str): Alternative question, user input of a question example if original question is rejected.
+        alt_q (str | None): Alternative question, user input of a question example if original question is rejected.
+        rej_a (bool): Rejected answer, set to True if the answer is rejected.
+        alt_a (str | None): Alternative answer, user input of a answer example if original answer is rejected.
     """
     pass
 
@@ -110,17 +112,25 @@ def create_app() -> Flask:
         factual = int(request.form['factuality'])
 
         # Check if question is rejected!
-        rejected = request.form.get("reject_question", "0") == "1"
-        alternative_question = request.form.get("alternative_question", "").strip()
+        rejected = request.form.get('reject_question', '0') == '1'
+        alternative_question = request.form.get('alternative_question', '').strip()
         if not rejected:
             alternative_question = None
+
+        # Check if answer is rejected!
+        rejected_a = request.form.get('reject_answer', '0') == '1'
+        alternative_answer = request.form.get('alternative_answer', '').strip()
+        if not rejected_a:
+            alternative_answer = None
 
         # Store in DB
         flask_log.info(f'\nQuestion_id: {question_id}\nFluency: {fluency}\nComprehensiveness: {comprehensive}\nFactual: {factual}')
         flask_log.info(f'Alternative Question: {alternative_question}')
+        flask_log.info(f'Alternative Answer: {alternative_answer}')
         save_annotation_to_db(question_id=question_id, flu=fluency,
                               comp=comprehensive, fact=factual,
-                              rej_q=rejected, alt_q=alternative_question)
+                              rej_q=rejected, alt_q=alternative_question,
+                              rej_a=rejected_a, alt_a=alternative_answer)
 
         # Load next question
         return redirect(url_for('home'))

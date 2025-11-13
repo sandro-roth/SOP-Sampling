@@ -132,6 +132,9 @@
         <div class="controls-row">
           <button type="button" id="rejectQuestionBtn">Reject question</button>
           <input type="hidden" name="reject_question" id="rejectQuestionInput" value="0">
+
+          <button type="button" id="rejectAnswerBtn" style="margin-left: 0.5rem;">Reject answer</button>
+          <input type="hidden" name="reject_answer" id="rejectAnswerInput" value="0">
         </div>
         <!-- Hidden ID so the backend knows which question this is -->
         <input type="hidden" name="question_id" value="{{ question_id }}">
@@ -157,12 +160,22 @@
         </div>
 
         <!-- Answer box (read-only) -->
-        <div class="box-header">
+        <div class="box-header" id="answerBox">
           <div class="box-header-top">
             <div class="box-title">Answer </div>
           </div>
           <div class="box-content">
             {{ answer_text }}
+          </div>
+        </div>
+
+        <!-- Alternative answer box (shown only when answer is rejected) -->
+        <div class="box-header" id="alternativeAnswerWrapper" style="display: none; margin-top: 0.5rem;">
+          <div class="box-header-top">
+            <div class="box-title">Alternative answer</div>
+          </div>
+          <div class="box-content">
+            <textarea name="alternative_answer" rows="4" style="width: 100%;"></textarea>
           </div>
         </div>
 
@@ -225,33 +238,62 @@
   </div>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const btn = document.getElementById('rejectQuestionBtn');
-    const hidden = document.getElementById('rejectQuestionInput');
+    // Question reject
+    const qBtn = document.getElementById('rejectQuestionBtn');
+    const qHidden = document.getElementById('rejectQuestionInput');
     const questionBox = document.getElementById('questionBox');
-    const altWrapper = document.getElementById('alternativeQuestionWrapper');
+    const altQWrapper = document.getElementById('alternativeQuestionWrapper');
 
-    btn.addEventListener('click', function () {
-      const isActive = hidden.value === '1';
+    qBtn.addEventListener('click', function () {
+      const isActive = qHidden.value === '1';
 
       if (isActive) {
-        // Turn rejection off
-        hidden.value = '0';
-        btn.textContent = 'Reject question';
+        qHidden.value = '0';
+        qBtn.textContent = 'Reject question';
         if (questionBox) {
           questionBox.classList.remove('box-rejected');
         }
-        if (altWrapper) {
-          altWrapper.style.display = 'none';
+        if (altQWrapper) {
+          altQWrapper.style.display = 'none';
         }
       } else {
-        // Turn rejection on
-        hidden.value = '1';
-        btn.textContent = 'Undo reject';
+        qHidden.value = '1';
+        qBtn.textContent = 'Undo reject';
         if (questionBox) {
           questionBox.classList.add('box-rejected');
         }
-        if (altWrapper) {
-          altWrapper.style.display = 'block';
+        if (altQWrapper) {
+          altQWrapper.style.display = 'block';
+        }
+      }
+    });
+
+    // Answer reject
+    const aBtn = document.getElementById('rejectAnswerBtn');
+    const aHidden = document.getElementById('rejectAnswerInput');
+    const answerBox = document.getElementById('answerBox');
+    const altAWrapper = document.getElementById('alternativeAnswerWrapper');
+
+    aBtn.addEventListener('click', function () {
+      const isActive = aHidden.value === '1';
+
+      if (isActive) {
+        aHidden.value = '0';
+        aBtn.textContent = 'Reject answer';
+        if (answerBox) {
+          answerBox.classList.remove('box-rejected');
+        }
+        if (altAWrapper) {
+          altAWrapper.style.display = 'none';
+        }
+      } else {
+        aHidden.value = '1';
+        aBtn.textContent = 'Undo reject';
+        if (answerBox) {
+          answerBox.classList.add('box-rejected');
+        }
+        if (altAWrapper) {
+          altAWrapper.style.display = 'block';
         }
       }
     });
