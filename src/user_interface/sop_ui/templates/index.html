@@ -106,9 +106,9 @@
 
     .passage-box {
       border: 1px solid #ccc;
-      padding: 0.5rem;
+      padding: 0.4rem 0.6rem;
       border-radius: 4px;
-      min-height: 480px;
+      min-height: 465px;
       background: var(--pico-muted-border-color);
       overflow-y: auto;
       font-size: 0.95rem;
@@ -235,9 +235,7 @@
     <!-- RIGHT COLUMN: passage (read-only) -->
     <div class="right-column">
       <div class="passage-title">Passage</div>
-      <div class="passage-box">
-        {{ passage_text }}
-      </div>
+      <div class="passage-box">{{ passage_text | trim }}</div>
     </div>
 
   </div>
