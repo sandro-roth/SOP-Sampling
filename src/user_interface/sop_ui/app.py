@@ -59,7 +59,18 @@ def get_next_example_from_db() -> tuple[int, str, str, str]:
                      'Later this text will come from Postgres.')
     return question_id, question_text, answer_text, passage_text
 
+def save_annotation_to_db(question_id: int, flu: int, comp: int, fact: int) -> None:
+    """
+    Takes Userinterface inputs which describe the answer to the question like how fluent, comprehensive and factual
+    the answer is. It is called from the Flask app posting to the /submit_annotation.
 
+    Args:
+        question_id (int): Unique ID to keep track of the answered and unanswered questions.
+        flu (int): Fluent parameter, describes how fluent the question is with ratings (1-5).
+        comp (int): Comprehensive parameter, describes how comprehensive the question is with ratings (1-5).
+        fact (int): Factual parameter, describes how factual the questions is with ratings (1-5).
+    """
+    pass
 
 def create_app() -> Flask:
     """
