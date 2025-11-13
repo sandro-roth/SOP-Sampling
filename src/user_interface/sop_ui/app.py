@@ -77,31 +77,39 @@ def create_app() -> Flask:
     Create and configure the Flask application.
 
     This function initializes a Flask app instance, sets up basic configuration,
-    and defines routes for displaying and adding items to a list.
+    and defines routes for adding parameter Values to Database
 
     Routes:
-        GET /    – Render the main page showing the current list of items.
-        POST /add – Add a new item to the list and update the page dynamically
-                    if requested via HTMX.
+        GET /                       – Render the main page showing calling a question from the DB.
+        POST /submit_annotation     – Add the values of fluency, comprehensiveness and factual to the DB.
 
     Returns:
         Flask: The configured Flask application instance.
     """
     app = Flask(__name__, template_folder=str(cwd.parent / 'templates'))
     app.config['TEMPLATES_AUTO_RELOAD'] = True
-    items = []
 
     @app.get('/')
     def home():
-        return render_template('index.html', items=items)
+        # Load one question
+        question_id, question_text, answer_text, passage_text = get_next_example_from_db()
+        return render_template('index.html', question_id=question_id,
+                               question_text=question_text, answer_text=answer_text,
+                               passage_text=passage_text)
 
-    @app.post('/add')
-    def add():
-        text = request.form.get("text", "").strip()
-        if text:
-            items.append(escape(text))
-        if request.headers.get("HX-Request"):
-            return render_template("_list.html", items=items)
+    @app.post('/submit_annotation')
+    def submit_annotation():
+        # Read values fro UI
+        question_id = int(request.form['question_id'])
+        fluency = int(request.form['fluency'])
+        comprehensive = int(request.form['comprehensiveness'])
+        factual = int(request.form['factuality'])
+
+        # Store in DB
+        save_annotation_to_db(question_id=question_id, flu=fluency,
+                              comp=comprehensive, fact=factual)
+
+        # Load next question
         return redirect(url_for('home'))
 
     return app
