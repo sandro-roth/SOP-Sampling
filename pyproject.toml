@@ -3,7 +3,7 @@ requires = ["hatchling>=1.26"]
 build-backend = "hatchling.build"
 
 [project]
-name = "utils"
+name = "my-utils"
 version = "1.0.0"
 description = "Shared utilities for all services"
 dependencies = []
