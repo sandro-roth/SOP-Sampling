@@ -105,6 +105,19 @@
       font-size: 0.95rem;
       white-space: pre-wrap;
     }
+
+    .controls-row {
+      margin-bottom: 0.8rem;
+    }
+
+    .box-rejected {
+      opacity: 0.6;
+    }
+
+    .box-rejected .box-title,
+    .box-rejected .box-content {
+      text-decoration: line-through;
+    }
   </style>
 </head>
 <body class="container">
@@ -116,25 +129,37 @@
     <!-- LEFT COLUMN: question, answer, ratings, button -->
     <div class="left-column">
       <form method="post" action="{{ url_for('submit_annotation') }}">
+        <div class="controls-row">
+          <button type="button" id="rejectQuestionBtn">Reject question</button>
+          <input type="hidden" name="reject_question" id="rejectQuestionInput" value="0">
+        </div>
         <!-- Hidden ID so the backend knows which question this is -->
         <input type="hidden" name="question_id" value="{{ question_id }}">
 
         <!-- Question box (read-only) -->
         <div class="box-header">
           <div class="box-header-top">
-            <div class="box-title">Question <small>(not editable)</small></div>
-            <div class="arrow">↩</div>
+            <div class="box-title">Question </div>
           </div>
           <div class="box-content">
             {{ question_text }}
           </div>
         </div>
 
+        <!-- Alternative question box (shown only when question is rejected) -->
+        <div class="box-header" id="alternativeQuestionWrapper" style="display: none; margin-top: 0.5rem;">
+          <div class="box-header-top">
+            <div class="box-title">Alternative question</div>
+          </div>
+          <div class="box-content">
+            <textarea name="alternative_question" rows="3" style="width: 100%;"></textarea>
+          </div>
+        </div>
+
         <!-- Answer box (read-only) -->
         <div class="box-header">
           <div class="box-header-top">
-            <div class="box-title">Answer <small>(not editable)</small></div>
-            <div class="arrow">↩</div>
+            <div class="box-title">Answer </div>
           </div>
           <div class="box-content">
             {{ answer_text }}
@@ -198,6 +223,39 @@
     </div>
 
   </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const btn = document.getElementById('rejectQuestionBtn');
+    const hidden = document.getElementById('rejectQuestionInput');
+    const questionBox = document.getElementById('questionBox');
+    const altWrapper = document.getElementById('alternativeQuestionWrapper');
 
+    btn.addEventListener('click', function () {
+      const isActive = hidden.value === '1';
+
+      if (isActive) {
+        // Turn rejection off
+        hidden.value = '0';
+        btn.textContent = 'Reject question';
+        if (questionBox) {
+          questionBox.classList.remove('box-rejected');
+        }
+        if (altWrapper) {
+          altWrapper.style.display = 'none';
+        }
+      } else {
+        // Turn rejection on
+        hidden.value = '1';
+        btn.textContent = 'Undo reject';
+        if (questionBox) {
+          questionBox.classList.add('box-rejected');
+        }
+        if (altWrapper) {
+          altWrapper.style.display = 'block';
+        }
+      }
+    });
+  });
+</script>
 </body>
 </html>

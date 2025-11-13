@@ -3,7 +3,6 @@ import os
 from dotenv import load_dotenv, find_dotenv
 from pathlib import Path
 from flask import Flask, render_template, request, redirect, url_for
-from markupsafe import escape
 
 from utils import setup_logging, get_logger
 # from utils import conn_db, pull_db, push_db
@@ -59,7 +58,8 @@ def get_next_example_from_db() -> tuple[int, str, str, str]:
                      'Later this text will come from Postgres.')
     return question_id, question_text, answer_text, passage_text
 
-def save_annotation_to_db(question_id: int, flu: int, comp: int, fact: int) -> None:
+def save_annotation_to_db(question_id: int, flu: int, comp: int, fact: int,
+                          rej_q: bool, alt_q: str | None) -> None:
     """
     Takes Userinterface inputs which describe the answer to the question like how fluent, comprehensive and factual
     the answer is. It is called from the Flask app posting to the /submit_annotation.
@@ -69,6 +69,8 @@ def save_annotation_to_db(question_id: int, flu: int, comp: int, fact: int) -> N
         flu (int): Fluent parameter, describes how fluent the question is with ratings (1-5).
         comp (int): Comprehensive parameter, describes how comprehensive the question is with ratings (1-5).
         fact (int): Factual parameter, describes how factual the questions is with ratings (1-5).
+        rej_q (bool): Rejected question, set to True if the question is rejected.
+        alt_q (str): Alternative question, user input of a question example if original question is rejected.
     """
     pass
 
@@ -88,10 +90,12 @@ def create_app() -> Flask:
     """
     app = Flask(__name__, template_folder=str(cwd.parent / 'templates'))
     app.config['TEMPLATES_AUTO_RELOAD'] = True
+    flask_log = get_logger(__name__)
 
     @app.get('/')
     def home():
         # Load one question
+        flask_log.info('New Question loaded')
         question_id, question_text, answer_text, passage_text = get_next_example_from_db()
         return render_template('index.html', question_id=question_id,
                                question_text=question_text, answer_text=answer_text,
@@ -105,9 +109,18 @@ def create_app() -> Flask:
         comprehensive = int(request.form['comprehensiveness'])
         factual = int(request.form['factuality'])
 
+        # Check if question is rejected!
+        rejected = request.form.get("reject_question", "0") == "1"
+        alternative_question = request.form.get("alternative_question", "").strip()
+        if not rejected:
+            alternative_question = None
+
         # Store in DB
+        flask_log.info(f'\nQuestion_id: {question_id}\nFluency: {fluency}\nComprehensiveness: {comprehensive}\nFactual: {factual}')
+        flask_log.info(f'Alternative Question: {alternative_question}')
         save_annotation_to_db(question_id=question_id, flu=fluency,
-                              comp=comprehensive, fact=factual)
+                              comp=comprehensive, fact=factual,
+                              rej_q=rejected, alt_q=alternative_question)
 
         # Load next question
         return redirect(url_for('home'))
