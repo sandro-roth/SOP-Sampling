@@ -1,17 +1,203 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>SOP UI</title>
+
+  <!-- Pico CSS and HTMX from your static folder -->
   <link rel="stylesheet" href="{{ url_for('static', filename='pico.min.css') }}">
   <script src="{{ url_for('static', filename='htmx.min.js') }}"></script>
+
+  <style>
+    body.container {
+      max-width: 1200px;
+      margin: 2rem auto;
+    }
+
+    .layout {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .left-column {
+      flex: 2;
+    }
+
+    .right-column {
+      flex: 1;
+    }
+
+    .box-header {
+      border: 1px solid #ccc;
+      padding: 0.6rem 0.8rem;
+      border-radius: 4px;
+      margin-bottom: 0.8rem;
+      background: var(--pico-background-color);
+    }
+
+    .box-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.4rem;
+    }
+
+    .box-title {
+      font-weight: 600;
+    }
+
+    .arrow {
+      font-size: 1.4rem;
+    }
+
+    .box-content {
+      font-size: 0.95rem;
+      white-space: pre-wrap; /* keeps line breaks from DB */
+    }
+
+    .ratings-heading {
+      margin-top: 1rem;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+
+    .ratings-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+    }
+
+    .ratings-table th,
+    .ratings-table td {
+      border: 1px solid #ccc;
+      text-align: center;
+      padding: 0.35rem 0.4rem;
+    }
+
+    .ratings-table th:first-child,
+    .ratings-table td:first-child {
+      text-align: left;
+      width: 25%;
+      font-weight: 500;
+    }
+
+    .ratings-table input[type="radio"] {
+      cursor: pointer;
+    }
+
+    .submit-row {
+      margin-top: 1rem;
+    }
+
+    .passage-title {
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+
+    .passage-box {
+      border: 1px solid #ccc;
+      padding: 0.8rem;
+      border-radius: 4px;
+      min-height: 280px;
+      background: var(--pico-muted-border-color);
+      overflow-y: auto;
+      font-size: 0.95rem;
+      white-space: pre-wrap;
+    }
+  </style>
 </head>
 <body class="container">
-  <h1>Demo list</h1>
-  <form hx-post="/add" hx-target="#list" hx-swap="innerHTML">
-    <input name="text" placeholder="Add item" required>
-    <button type="submit">Add</button>
-  </form>
-  <div id="list">{% include "_list.html" %}</div>
+
+  <h1>SOP Annotation</h1>
+
+  <div class="layout">
+
+    <!-- LEFT COLUMN: question, answer, ratings, button -->
+    <div class="left-column">
+      <form method="post" action="{{ url_for('submit_annotation') }}">
+        <!-- Hidden ID so the backend knows which question this is -->
+        <input type="hidden" name="question_id" value="{{ question_id }}">
+
+        <!-- Question box (read-only) -->
+        <div class="box-header">
+          <div class="box-header-top">
+            <div class="box-title">Question <small>(not editable)</small></div>
+            <div class="arrow">↩</div>
+          </div>
+          <div class="box-content">
+            {{ question_text }}
+          </div>
+        </div>
+
+        <!-- Answer box (read-only) -->
+        <div class="box-header">
+          <div class="box-header-top">
+            <div class="box-title">Answer <small>(not editable)</small></div>
+            <div class="arrow">↩</div>
+          </div>
+          <div class="box-content">
+            {{ answer_text }}
+          </div>
+        </div>
+
+        <!-- Ratings -->
+        <p class="ratings-heading">The answer is</p>
+        <table class="ratings-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>1 (no)</th>
+              <th>2</th>
+              <th>3</th>
+              <th>4</th>
+              <th>5 (yes)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Fluent</td>
+              <td><input type="radio" name="fluency" value="1" required></td>
+              <td><input type="radio" name="fluency" value="2"></td>
+              <td><input type="radio" name="fluency" value="3"></td>
+              <td><input type="radio" name="fluency" value="4"></td>
+              <td><input type="radio" name="fluency" value="5"></td>
+            </tr>
+            <tr>
+              <td>Comprehensive</td>
+              <td><input type="radio" name="comprehensiveness" value="1" required></td>
+              <td><input type="radio" name="comprehensiveness" value="2"></td>
+              <td><input type="radio" name="comprehensiveness" value="3"></td>
+              <td><input type="radio" name="comprehensiveness" value="4"></td>
+              <td><input type="radio" name="comprehensiveness" value="5"></td>
+            </tr>
+            <tr>
+              <td>Factual</td>
+              <td><input type="radio" name="factuality" value="1" required></td>
+              <td><input type="radio" name="factuality" value="2"></td>
+              <td><input type="radio" name="factuality" value="3"></td>
+              <td><input type="radio" name="factuality" value="4"></td>
+              <td><input type="radio" name="factuality" value="5"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Submit button -->
+        <div class="submit-row">
+          <button type="submit">Submit and Next Question</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- RIGHT COLUMN: passage (read-only) -->
+    <div class="right-column">
+      <div class="passage-title">Passage</div>
+      <div class="passage-box">
+        {{ passage_text }}
+      </div>
+    </div>
+
+  </div>
+
 </body>
 </html>
