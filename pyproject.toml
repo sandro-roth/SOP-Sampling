@@ -6,7 +6,9 @@ build-backend = "hatchling.build"
 name = "my-utils"
 version = "1.0.0"
 description = "Shared utilities for all services"
-dependencies = []
+dependencies = [
+    "python-dotenv"
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["utils"]

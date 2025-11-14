@@ -1,48 +1,13 @@
 import os
 
-from dotenv import load_dotenv, find_dotenv
 from pathlib import Path
 from flask import Flask, render_template, request, redirect, url_for
 
-from utils import setup_logging, get_logger
-# from utils import conn_db, pull_db, push_db
+from utils import setup_logging, get_logger, __load_env
 
 # Setup
 cwd = Path(__file__).resolve()
-
-def _load_env() -> str | None:
-    """
-    Load environment variables from a suitable .env file.
-
-    The function searches for a .env file in several prioritized locations:
-    1. A path explicitly defined in the environment variable `SOP_UI_DOTENV_PATH`.
-    2. A `.env` file located three directories above the current working file
-       (used when running directly from an IDE or development environment).
-    3. A `.env` file found automatically in the current working directory.
-
-    Once found, the .env file is loaded using `python-dotenv`.
-
-    Returns:
-        str | None: The path to the loaded .env file, or None if no .env file was found.
-    """
-    explicit = os.getenv('SOP_UI_DOTENV_PATH')
-    if explicit and Path(explicit).exists():
-        load_dotenv(explicit)
-        return explicit
-
-    candidate = cwd.parents[3] / '.env' if len(cwd.parents) >= 4 else None
-    if candidate and candidate.exists():
-        load_dotenv(candidate)
-        return str(candidate)
-
-    found = find_dotenv(usecwd=True)
-    if found:
-        load_dotenv(found)
-        return found
-
-    return None
-
-loaded_from = _load_env()
+loaded_from = __load_env(cwd=cwd)
 
 def get_next_example_from_db() -> tuple[int, str, str, str]:
     """
