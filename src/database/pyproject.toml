@@ -5,19 +5,17 @@ build-backend = 'hatchling.build'
 [project]
 name = 'sop-sql'
 dynamic = ['version']
-description = 'Creation of PostgreSQL Database'
-dependencies = [
-    "psycopg2==2.9.11"
-]
+description = 'Creation of sqLite Database'
+dependencies = []
 
 authors = [{name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}]
 maintainers = [{name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}]
 
 [tool.hatch.build.targets.wheel]
-packages = ['sop_PostgreSQL']
+packages = ['sop_sql']
 
 [project.scripts]
-sop-sql = 'sop_PostgreSQL.main:main'
+sop-sql = 'sop_sql.main:main'
 
 [tool.hatch.version]
-path = 'sop_PostgreSQL/__init__.py'
+path = 'sop_sql/__init__.py'
