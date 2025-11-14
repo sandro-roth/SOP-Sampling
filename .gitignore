@@ -2,6 +2,7 @@
 .env
 .venvs
 certs
+data
 
 __pycache__
 logs
