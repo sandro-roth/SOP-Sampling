@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 from utils import setup_logging, get_logger, __load_env
+from function_table import CREATE_FUNCTION_TABLE
 
 def main():
     cwd = Path(__file__).resolve()
