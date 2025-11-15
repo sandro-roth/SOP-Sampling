@@ -31,6 +31,23 @@ def db_push():
     pass
 
 def preview_db(db: str, limit=5):
+    """
+        Preview the contents of all tables in a SQLite database.
+
+        This function connects to the given SQLite file, lists all tables,
+        and prints the first few rows of each table using pandas for easy viewing.
+
+        Args:
+            db (str):
+                Path to the SQLite `.db` file.
+            limit (int, optional):
+                Maximum number of rows to display per table.
+                Defaults to 5.
+
+        Prints:
+            - A list of all table names found in the database.
+            - For each table, a pandas DataFrame showing up to `limit` rows.
+        """
     con = sqlite3.connect(db)
     cur = con.cursor()
     cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
