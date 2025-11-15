@@ -7,7 +7,8 @@ name = "my-utils"
 version = "1.0.0"
 description = "Shared utilities for all services"
 dependencies = [
-    "python-dotenv"
+    "python-dotenv",
+    "pandas"
 ]
 
 [tool.hatch.build.targets.wheel]
