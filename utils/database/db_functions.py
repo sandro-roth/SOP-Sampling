@@ -29,12 +29,24 @@ def db_conn(db: str):
 def db_pull():
     pass
 
-def db_push(db: str, ) -> None:
-    # Connect to db
-    #
+def db_push(data, db: str, template) -> None:
+    # Connect to db (check with db it is)
+    if db == os.getenv('DATA_DIR_QUESTIONS'):
+        with db_conn(db) as (con, cur):
+            # add question to original and backup db
+            pass
+    elif db == os.getenv('DATA_DIR'):
+        pass
+    # then push data according to template
+    # --- question.db
+    #   --- only 1 table = 1 template
+    # --- survey.db
+    #   --- user_table + Function_table combined (pushed once and remember User_table PK (Id))
+    #   --- Annotation_table
     pass
 
 def db_row_delete():
+    # if question was asked 2 for same function delete question in original!
     pass
 
 def preview_db(db: str, pre_dir:str | None = None, limit: int = 5) -> None:
