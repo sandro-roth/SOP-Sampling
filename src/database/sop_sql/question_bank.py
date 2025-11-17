@@ -7,3 +7,11 @@ CREATE TABLE IF NOT EXISTS questions (
     passage TEXT NOT NULL
 );
 """
+CREATE_BACKUP = """
+CREATE TABLE IF NOT EXISTS backup (
+    question_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    question TEXT NOT NULL,
+    answer TEXT NOT NULL,
+    passage TEXT NOT NULL
+);
+"""

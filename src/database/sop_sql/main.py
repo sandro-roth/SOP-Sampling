@@ -5,7 +5,7 @@ from utils import setup_logging, get_logger, __load_env, db_conn, preview_db
 from .function_table import CREATE_FUNCTION_TABLE
 from .user_table import CREATE_USER_TABLE
 from .annotations_table import CREATE_ANNOTATION_TABLE
-from .question_bank import CREATE_QUESTIONS_TABLE
+from .question_bank import CREATE_QUESTIONS_TABLE, CREATE_BACKUP
 
 def main():
     cwd = Path(__file__).resolve()
@@ -26,7 +26,7 @@ def main():
 
     with db_conn(qdb_path) as (con, cur):
         cur.execute(CREATE_QUESTIONS_TABLE)
-        # add backup_db
+        cur.execute(CREATE_BACKUP)
 
     preview_db(db_path)
     preview_db(qdb_path)
