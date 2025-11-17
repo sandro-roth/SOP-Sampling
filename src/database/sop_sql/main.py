@@ -27,8 +27,8 @@ def main():
     with db_conn(qdb_path) as (con, cur):
         cur.execute(CREATE_QUESTIONS_TABLE)
 
-    preview_db(db_path, pre_dir=os.getenv('PREVIEW_DIR'))
-    preview_db(qdb_path, pre_dir=os.getenv('PREVIEW_DIR'))
+    preview_db(db_path)
+    preview_db(qdb_path)
 
 
 # Interact class (loading a table then write methods to pull, push/add, delete)
