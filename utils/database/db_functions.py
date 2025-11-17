@@ -1,5 +1,6 @@
 from contextlib import contextmanager
 import sqlite3
+from pathlib import Path
 import pandas as pd
 
 @contextmanager
@@ -30,7 +31,7 @@ def db_pull():
 def db_push():
     pass
 
-def preview_db(db: str, limit=5):
+def preview_db(db: str, pre_dir:str, limit: int = 5):
     """
         Preview the contents of all tables in a SQLite database.
 
@@ -40,6 +41,8 @@ def preview_db(db: str, limit=5):
         Args:
             db (str):
                 Path to the SQLite `.db` file.
+            pre_dir (str):
+                Path to previews directory.
             limit (int, optional):
                 Maximum number of rows to display per table.
                 Defaults to 5.
@@ -53,13 +56,11 @@ def preview_db(db: str, limit=5):
     cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
     tables = [row[0] for row in cur.fetchall()]
 
-    print("Found tables:", tables)
-    print()
+    pre_dir = Path(pre_dir)
+    pre_dir.mkdir(parents=True, exist_ok=True)
 
     for t in tables:
-        print(f"Table: {t}")
-        df = pd.read_sql(f"SELECT * FROM {t} LIMIT {limit}", con)
-        print(df)
-        print("-" * 40)
+        with open (f'{pre_dir / t}.txt', 'w') as file:
+            file.write(f'{pd.read_sql(f"SELECT * FROM {t} LIMIT {limit}", con)}')
 
     con.close()
