@@ -5,6 +5,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Sequence, List
 
+
 @contextmanager
 def db_conn(db: str):
     """
@@ -31,14 +32,24 @@ def db_pull():
     # randomly select question from question_db_original
     pass
 
-def db_push(data, db: str, table) -> None:
+def db_push(data, db: str, table: str, statements:dict) -> None:
     # Connect to db (check with db it is)
+    placeholders = ','.join('?' for _ in range(len(data[0])))
     if db == os.getenv('DATA_DIR_QUESTIONS'):
         with db_conn(db) as (con, cur):
-            validate_rows_for_table_db(cur, table=table, rows=data)
+            try:
+                c_names = ','.join(validate_rows_for_table_db(cur, table=table, rows=data))
+                exec_cmd = statements['INSERT_INTO'].format(table='questions',
+                                                            col_names=c_names,
+                                                            tuple_q_marks=placeholders)
+                cur.executemany(exec_cmd, data)
+                con.commit()
+
+            except ValueError as e:
+                print('Your data structure is invalid')
+
             # check if potential entry already in backup table (print and log!)
             # else add question to original and backup db
-            pass
     elif db == os.getenv('DATA_DIR'):
         pass
     # then push data according to template
@@ -64,7 +75,7 @@ def check_entry():
 def get_insert_columns(cur: sqlite3.Cursor, table: str) -> List[str]:
     """
     Return the list of columns that should be provided for INSERT,
-    skipping an autoincrement primary key named Id.
+    skipping an autoincrement primary key named Id or question_id.
     """
     cur.execute(f"PRAGMA table_info({table})")
     cols = []
@@ -75,10 +86,19 @@ def get_insert_columns(cur: sqlite3.Cursor, table: str) -> List[str]:
         cols.append(name)
     return cols
 
-def validate_rows_for_table_db(cur: sqlite3.Cursor, table: str, rows: Sequence[Sequence]) -> bool:
+def validate_rows_for_table_db(cur: sqlite3.Cursor, table: str, rows: Sequence[Sequence]) -> List[str]:
     """
     Validate rows by checking length against columns from the database.
-    Returns True if validation passes.
+    Returns number of rows in the input data
+
+    Args:
+        cur (sqlite3.Cursor): Sqlite DB connection cursor.
+        table (str): table name of sqlite DB to connect to.
+        rows (Sequence[Sequence]): Data entries, added to the table.
+
+    Returns:
+        List of column names for table of interest
+
     """
     columns = get_insert_columns(cur, table)
     expected = len(columns)
@@ -91,11 +111,9 @@ def validate_rows_for_table_db(cur: sqlite3.Cursor, table: str, rows: Sequence[S
     if errors:
         raise ValueError("Invalid rows for table {table}: " + " | ".join(errors))
 
-    else:
-        return True
+    return columns
 
-
-def preview_db(db: str, pre_dir:str | None = None, limit: int = 5) -> None:
+def preview_db(db: str, pre_dir:str | None = None, limit: int = 20) -> None:
     """
         Preview the contents of all tables in a SQLite database.
 
