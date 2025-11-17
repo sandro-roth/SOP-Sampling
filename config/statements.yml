@@ -1,0 +1,3 @@
+---
+INSERT_INTO:
+  "INSERT INTO {table} VALUES{tuple_q_marks}"
