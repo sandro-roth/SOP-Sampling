@@ -22,7 +22,7 @@ def main():
         cur.execute(CREATE_USER_TABLE)
         cur.execute(CREATE_ANNOTATION_TABLE)
 
-    preview_db(db_path)
+    preview_db(db_path, pre_dir=os.getenv('PREVIEW_DIR'))
 
 
 # Interact class (loading a table then write methods to pull, push/add, delete)
