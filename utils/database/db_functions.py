@@ -1,8 +1,9 @@
-from contextlib import contextmanager
 import os
-import sqlite3
-from pathlib import Path
 import pandas as pd
+import sqlite3
+from contextlib import contextmanager
+from pathlib import Path
+from typing import Sequence, List
 
 @contextmanager
 def db_conn(db: str):
@@ -27,14 +28,16 @@ def db_conn(db: str):
        con.close()
 
 def db_pull():
+    # randomly select question from question_db_original
     pass
 
 def db_push(data, db: str, template) -> None:
     # Connect to db (check with db it is)
     if db == os.getenv('DATA_DIR_QUESTIONS'):
         with db_conn(db) as (con, cur):
-            # check if potential entry already in backup db (if so ignore)
-            # add question to original and backup db
+
+            # check if potential entry already in backup table (print and log!)
+            # else add question to original and backup db (with template)
             pass
     elif db == os.getenv('DATA_DIR'):
         pass
@@ -45,7 +48,7 @@ def db_push(data, db: str, template) -> None:
 
     # --- survey.db
     #   --- user_table + Function_table combined (pushed once and remember User_table PK (Id))
-    #   --- check if entry already present (ask user if already registerd --> yes and "go back" options"
+    #   --- check if entry already present (ask user if already registered --> yes and "go back" options"
     #       --- if yes load that PK!
     #   --- Annotation_table
     pass
@@ -57,6 +60,39 @@ def db_row_delete():
 def check_entry():
     # check if data entry already in db
     pass
+
+def get_insert_columns(con: sqlite3.Connection, table: str) -> List[str]:
+    """
+    Return the list of columns that should be provided for INSERT,
+    skipping an autoincrement primary key named Id.
+    """
+    cur = con.cursor()
+    cur.execute(f"PRAGMA table_info({table})")
+    cols = []
+    for cid, name, col_type, notnull, dflt_value, pk in cur.fetchall():
+        # If Id is the primary key and auto increment, we do not insert it
+        if pk == 1 and name.lower() == "id":
+            continue
+        cols.append(name)
+    return cols
+
+def validate_rows_for_table_db(con: sqlite3.Connection, table: str, rows: Sequence[Sequence]) -> List[str]:
+    """
+    Validate rows by checking length against columns from the database.
+    Returns the list of columns if validation passes.
+    """
+    columns = get_insert_columns(con, table)
+    expected = len(columns)
+    errors = []
+
+    for idx, row in enumerate(rows):
+        if len(row) != expected:
+            errors.append(f"Row {idx} has {len(row)} values, expected {expected}")
+
+    if errors:
+        raise ValueError("Invalid rows for table {table}: " + " | ".join(errors))
+
+    return columns
 
 def preview_db(db: str, pre_dir:str | None = None, limit: int = 5) -> None:
     """
