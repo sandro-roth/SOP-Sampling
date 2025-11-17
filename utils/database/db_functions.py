@@ -37,7 +37,7 @@ def db_push(data, db: str, table) -> None:
         with db_conn(db) as (con, cur):
             validate_rows_for_table_db(cur, table=table, rows=data)
             # check if potential entry already in backup table (print and log!)
-            # else add question to original and backup db (with template)
+            # else add question to original and backup db
             pass
     elif db == os.getenv('DATA_DIR'):
         pass
@@ -69,9 +69,8 @@ def get_insert_columns(cur: sqlite3.Cursor, table: str) -> List[str]:
     cur.execute(f"PRAGMA table_info({table})")
     cols = []
     for cid, name, col_type, notnull, dflt_value, pk in cur.fetchall():
-        # If Id is the primary key and auto increment, we do not insert
-        # it
-        if pk == 1 and name.lower() == "id":
+        # If Id is the primary key and auto increment, we do not insert it
+        if pk == 1 and (name.lower() == 'Id' or name.lower() == 'question_id'):
             continue
         cols.append(name)
     return cols
