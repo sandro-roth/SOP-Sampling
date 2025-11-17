@@ -31,11 +31,11 @@ def db_pull():
     # randomly select question from question_db_original
     pass
 
-def db_push(data, db: str, template) -> None:
+def db_push(data, db: str, table) -> None:
     # Connect to db (check with db it is)
     if db == os.getenv('DATA_DIR_QUESTIONS'):
         with db_conn(db) as (con, cur):
-
+            validate_rows_for_table_db(cur, table=table, rows=data)
             # check if potential entry already in backup table (print and log!)
             # else add question to original and backup db (with template)
             pass
@@ -61,27 +61,27 @@ def check_entry():
     # check if data entry already in db
     pass
 
-def get_insert_columns(con: sqlite3.Connection, table: str) -> List[str]:
+def get_insert_columns(cur: sqlite3.Cursor, table: str) -> List[str]:
     """
     Return the list of columns that should be provided for INSERT,
     skipping an autoincrement primary key named Id.
     """
-    cur = con.cursor()
     cur.execute(f"PRAGMA table_info({table})")
     cols = []
     for cid, name, col_type, notnull, dflt_value, pk in cur.fetchall():
-        # If Id is the primary key and auto increment, we do not insert it
+        # If Id is the primary key and auto increment, we do not insert
+        # it
         if pk == 1 and name.lower() == "id":
             continue
         cols.append(name)
     return cols
 
-def validate_rows_for_table_db(con: sqlite3.Connection, table: str, rows: Sequence[Sequence]) -> List[str]:
+def validate_rows_for_table_db(cur: sqlite3.Cursor, table: str, rows: Sequence[Sequence]) -> bool:
     """
     Validate rows by checking length against columns from the database.
-    Returns the list of columns if validation passes.
+    Returns True if validation passes.
     """
-    columns = get_insert_columns(con, table)
+    columns = get_insert_columns(cur, table)
     expected = len(columns)
     errors = []
 
@@ -92,7 +92,9 @@ def validate_rows_for_table_db(con: sqlite3.Connection, table: str, rows: Sequen
     if errors:
         raise ValueError("Invalid rows for table {table}: " + " | ".join(errors))
 
-    return columns
+    else:
+        return True
+
 
 def preview_db(db: str, pre_dir:str | None = None, limit: int = 5) -> None:
     """
