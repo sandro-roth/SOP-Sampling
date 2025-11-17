@@ -29,10 +29,15 @@ def db_conn(db: str):
 def db_pull():
     pass
 
-def db_push():
+def db_push(db: str, ) -> None:
+    # Connect to db
+    #
     pass
 
-def preview_db(db: str, pre_dir:str | None = None, limit: int = 5):
+def db_row_delete():
+    pass
+
+def preview_db(db: str, pre_dir:str | None = None, limit: int = 5) -> None:
     """
         Preview the contents of all tables in a SQLite database.
 
