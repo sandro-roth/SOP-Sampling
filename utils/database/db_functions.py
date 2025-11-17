@@ -33,7 +33,7 @@ def db_pull():
     pass
 
 def db_push(data, db: str, table: str, statements:dict) -> None:
-    # Connect to db (check with db it is)
+    # Connect to questions database
     placeholders = ','.join('?' for _ in range(len(data[0])))
     if db == os.getenv('DATA_DIR_QUESTIONS'):
         with db_conn(db) as (con, cur):
@@ -42,11 +42,15 @@ def db_push(data, db: str, table: str, statements:dict) -> None:
                 exec_cmd = statements['INSERT_INTO'].format(table='questions',
                                                             col_names=c_names,
                                                             tuple_q_marks=placeholders)
+                exec_cmd_b = statements['INSERT_INTO'].format(table='backup',
+                                                            col_names=c_names,
+                                                            tuple_q_marks=placeholders)
                 cur.executemany(exec_cmd, data)
+                cur.executemany(exec_cmd_b, data)
                 con.commit()
 
             except ValueError as e:
-                print('Your data structure is invalid')
+                print(f'Your data structure is invalid ValueError {e}')
 
             # check if potential entry already in backup table (print and log!)
             # else add question to original and backup db
