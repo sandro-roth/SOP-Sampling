@@ -2,7 +2,8 @@
 CREATE_USER_TABLE = """
 CREATE TABLE IF NOT EXISTS user (
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
-    Name TEXT NOT NULL,
+    First_name TEXT NOT NULL,
+    Surname TEXT NOT NULL,
     function INTEGER NOT NULL,
     years_in_the_function INTEGER,
     FOREIGN KEY (function) REFERENCES function(Id)
