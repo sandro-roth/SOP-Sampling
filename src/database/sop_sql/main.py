@@ -26,6 +26,7 @@ def main():
 
     with db_conn(qdb_path) as (con, cur):
         cur.execute(CREATE_QUESTIONS_TABLE)
+        # add backup_db
 
     preview_db(db_path)
     preview_db(qdb_path)
