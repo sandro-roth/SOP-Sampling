@@ -39,6 +39,9 @@ def db_push(data, db: str, table: str, statements:dict) -> None:
         with db_conn(db) as (con, cur):
             try:
                 c_names = ','.join(validate_rows_for_table_db(cur, table=table, rows=data))
+                # check if potential entry already in backup table (print and log!)
+
+                # if not add question to original and backup
                 exec_cmd = statements['INSERT_INTO'].format(table='questions',
                                                             col_names=c_names,
                                                             tuple_q_marks=placeholders)
@@ -52,8 +55,6 @@ def db_push(data, db: str, table: str, statements:dict) -> None:
             except ValueError as e:
                 print(f'Your data structure is invalid ValueError {e}')
 
-            # check if potential entry already in backup table (print and log!)
-            # else add question to original and backup db
     elif db == os.getenv('DATA_DIR'):
         pass
     # then push data according to template
