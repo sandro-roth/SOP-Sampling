@@ -38,7 +38,7 @@ def db_pull():
     pass
 
 
-def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict, user_add: bool = False, user_id: int | None = None) -> None:
+def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict, user_add: bool = False) -> int | None:
     """
     Docstring!
 
@@ -48,7 +48,6 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
         table (str):            ...
         statements (dict):      ...
         user_add (bool):        ...
-        user_id (int | None):   ...
 
     Returns:
         Goal of calling the function is altering specific tables there is no return value.
@@ -79,9 +78,8 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
 
     elif db == os.getenv('DATA_DIR'):
         with db_conn(db) as (con, cur):
-            if user_add and table=='function':
+            if user_add and table == 'function':
                 try:
-                    # data_input =  [('First_name', 'Surname', 'years_in_the_function', 'function')]
                     # check if function in Function table:
                     names = ','.join(get_insert_columns(cur=cur, table=table))
                     if check_entry(cur=cur, data=data, statements=statements, col_names=names, table=table):
@@ -89,21 +87,28 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                         cur.execute(exec_cmd, data)
                         con.commit()
 
-
                     exec_cmd = statements['SELECT_PK_FUNCTION'].format(function=data[0])
-                    pk_function = cur.execute(exec_cmd).fetchall()[0][0]
+                    pk_function = cur.execute(exec_cmd).fetchone()[0]
                     return pk_function
-                    #
-                    # check if user already in user + function table
-                    # if yes return user_id (PK)
-                    # else add user and return user_id (PK)
-                    #   fetch last PK add 1
-                    # return PK
                 except:
                     pass
 
-            else:
-                anno_table_FK = user_id
+            if user_add and table == 'user':
+                try:
+                    # check if user already in User table:
+                    names = ','.join(get_insert_columns(cur=cur, table=table))
+                    if check_entry(cur=cur, data=data, statements=statements, col_names=names, table=table):
+                        exec_cmd = statements['INSERT_IN_USER']
+                        cur.execute(exec_cmd, data)
+                        con.commit()
+
+                    exec_cmd = statements['SELECT_PK_USER']
+                    pk_user = cur.execute(exec_cmd, data).fetchone()[0]
+                    return pk_user
+                except:
+                    pass
+
+            elif not user_add and table == 'annotations':
                 # pust to Annotations table (only condition: FK == PK in User_tabel present!)
                 pass
 
