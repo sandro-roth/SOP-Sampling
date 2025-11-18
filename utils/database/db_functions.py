@@ -28,11 +28,13 @@ def db_conn(db: str):
     finally:
        con.close()
 
+
 def db_pull():
     # randomly select question from question_db_original
     # if question already answered twice in same profession:
     #   tbl_row_delete(db= 'path/to/questions.db', table= 'questions')
     pass
+
 
 def db_push(data: List[tuple], db: str, table: str, statements:dict) -> None:
     # Connect to questions database
@@ -71,9 +73,11 @@ def db_push(data: List[tuple], db: str, table: str, statements:dict) -> None:
     #   --- Annotation_table
     pass
 
+
 def tbl_row_delete():
     # if question was asked 2 for same function delete question in original!
     pass
+
 
 def check_entry(cur: sqlite3.Cursor, data: List[tuple], table: str | None, statements: dict) -> List[tuple]:
     """
@@ -115,6 +119,7 @@ def get_insert_columns(cur: sqlite3.Cursor, table: str) -> List[str]:
         cols.append(name)
     return cols
 
+
 def validate_rows_for_table_db(cur: sqlite3.Cursor, table: str, rows: Sequence[Sequence]) -> List[str]:
     """
     Validate rows by checking length against columns from the database.
@@ -141,6 +146,7 @@ def validate_rows_for_table_db(cur: sqlite3.Cursor, table: str, rows: Sequence[S
         raise ValueError("Invalid rows for table {table}: " + " | ".join(errors))
 
     return columns
+
 
 def preview_db(db: str, pre_dir:str | None = None, limit: int = 20) -> None:
     """
