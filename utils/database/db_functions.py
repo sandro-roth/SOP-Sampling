@@ -113,13 +113,6 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                 pass
 
 
-    # --- survey.db
-    #   --- user_table + Function_table combined (pushed once and remember User_table PK (Id))
-    #   --- check if entry already present (ask user if already registered --> yes and "go back" options"
-    #       --- if yes load that PK!
-    #   --- Annotation_table
-    pass
-
 
 def tbl_row_delete():
     # if question was asked 2 for same function delete question in original!
