@@ -1,3 +1,6 @@
 ---
 INSERT_INTO:
-  "INSERT INTO {table} ({col_names}) VALUES ({tuple_q_marks})"
+  'INSERT INTO {table} ({col_names}) VALUES ({tuple_q_marks})'
+
+SELECT_ALL:
+  'SELECT * FROM {table}'
