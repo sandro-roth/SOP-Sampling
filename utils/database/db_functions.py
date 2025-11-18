@@ -75,11 +75,31 @@ def tbl_row_delete():
     # if question was asked 2 for same function delete question in original!
     pass
 
-def check_entry(cur: sqlite3.Cursor, data: List[tuple], db: str | None, table: str | None, statements: dict) -> None:
-    # fetch all from table if None go for os.getenv('DATA_DIR_QUESTIONS') and table == 'questions'
+def check_entry(cur: sqlite3.Cursor, data: List[tuple], table: str | None, statements: dict) -> List[tuple]:
+    """
+    Checking data entry into DB. Assures no duplication entries into connected database.
+
+    Args:
+        cur (sqlite3.Cursor): Sqlite DB connection cursor.
+        data (List[tuple]): Entry data set to be tested.
+        table (str | None]: Table to connect to defaults to 'questions' - table if nothing specified.
+        statements (dict): Dictionary of possible SQLite statements from INSERT to SELECT.
+
+    Returns:
+        new data set without the entries already present in the current database/table.
+
+    """
+    # fetch all from table if None go for table == 'questions'
+    exe_cmd = statements['SELECT_ALL'].format(table=table or 'questions')
+    c_table = cur.execute(exe_cmd).fetchall()
+
     # for row in data check if in table
-    #   if row in table delete row in data
-    pass
+    rows_delete = [idx for idx, row in enumerate(data) if row in c_table]
+    new_data = [row for idx, row in enumerate(data) if idx not in rows_delete]
+    # add to log indices with rows of not added entries which are already in tables
+
+    return new_data
+
 
 def get_insert_columns(cur: sqlite3.Cursor, table: str) -> List[str]:
     """
