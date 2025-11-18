@@ -41,11 +41,17 @@ def main():
     ]
     db_push(data=question_data, db=qdb_path, table='questions', statements=statements)
 
-    # CHECK PUSHING TO SURVEY.DB / USER AND FUNCTION TABLE
-    f_data = ['Wissenschaftlicher Mitarbeiter']
-    db_push(data=f_data, db=db_path, table='function', statements=statements, user_add=True)
 
-    #u_data = [('Sandro', 'Roth', 1, 1)]
+    # CHECK PUSHING TO SURVEY.DB / USER AND FUNCTION TABLE
+    f_data = ['AI Specialist']
+    pk_function = db_push(data=f_data, db=db_path, table='function', statements=statements, user_add=True)
+    print(f'The primary_key for the function {f_data}:\n'
+          f'{pk_function}')
+
+    u_data = [('Sandro', 'Roth', pk_function, 1)]
+    pk_user = db_push(data=u_data, db=db_path, table='user', statements=statements, user_add=True)
+    print(f'The primary_key for the user {u_data}:\n'
+          f'{pk_user}')
 
     # CHECK PUSHING TO SURVEY.DB / ANNOTATIONS TABLE
 # ----------------------------------------------------------------------------------------------------------------------
