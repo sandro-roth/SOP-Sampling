@@ -5,6 +5,8 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Sequence, List
 
+from pandas.io.sql import table_exists
+
 
 @contextmanager
 def db_conn(db: str):
@@ -36,7 +38,7 @@ def db_pull():
     pass
 
 
-def db_push(data: List[tuple], db: str, table: str, statements:dict, user_add: bool = False, user_id: int | None = None) -> None:
+def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict, user_add: bool = False, user_id: int | None = None) -> None:
     """
     Docstring!
 
@@ -62,7 +64,7 @@ def db_push(data: List[tuple], db: str, table: str, statements:dict, user_add: b
                 c_data = check_entry(cur=cur, data=data, statements=statements, col_names=c_names)
 
                 # if not add question to original and backup
-                exec_cmd = statements['INSERT_INTO'].format(table='questions',
+                exec_cmd = statements['INSERT_INTO'].format(table=table,
                                                             col_names=c_names,
                                                             tuple_q_marks=placeholders)
                 exec_cmd_b = statements['INSERT_INTO'].format(table='backup',
@@ -76,20 +78,34 @@ def db_push(data: List[tuple], db: str, table: str, statements:dict, user_add: b
                 print(f'Your data structure is invalid ValueError {e}')
 
     elif db == os.getenv('DATA_DIR'):
-        if user_add:
-            try:
-                # check if user already in user + function table
-                # if yes return user_id (PK)
-                # else add user and return user_id (PK)
-                #   fetch last PK add 1
-                pass
-            except:
-                pass
+        with db_conn(db) as (con, cur):
+            if user_add and table=='function':
+                try:
+                    # data_input =  [('First_name', 'Surname', 'years_in_the_function', 'function')]
+                    # check if function in Function table:
+                    names = ','.join(get_insert_columns(cur=cur, table=table))
+                    if check_entry(cur=cur, data=data, statements=statements, col_names=names, table=table):
+                        exec_cmd = statements['INSERT_IN_FUNCTION']
+                        cur.execute(exec_cmd, data)
+                        con.commit()
 
-        else:
-            anno_table_FK = user_id
-            # pust to Annotations table (only condition: FK == PK in User_tabel present!)
-            pass
+
+                    exec_cmd = statements['SELECT_PK_FUNCTION'].format(function=data[0])
+                    pk_function = cur.execute(exec_cmd).fetchall()[0][0]
+                    return pk_function
+                    #
+                    # check if user already in user + function table
+                    # if yes return user_id (PK)
+                    # else add user and return user_id (PK)
+                    #   fetch last PK add 1
+                    # return PK
+                except:
+                    pass
+
+            else:
+                anno_table_FK = user_id
+                # pust to Annotations table (only condition: FK == PK in User_tabel present!)
+                pass
 
 
     # --- survey.db
@@ -105,7 +121,7 @@ def tbl_row_delete():
     pass
 
 
-def check_entry(cur: sqlite3.Cursor, data: List[tuple], statements: dict,  col_names: str, table: str | None = None) -> List[tuple]:
+def check_entry(cur: sqlite3.Cursor, data: List[tuple] | List[str], statements: dict,  col_names: str, table: str | None = None) -> List[tuple] | None:
     """
     Checking data entry into DB. Assures no duplication entries into connected database.
 
@@ -125,14 +141,20 @@ def check_entry(cur: sqlite3.Cursor, data: List[tuple], statements: dict,  col_n
     exe_cmd = statements['SELECT_ALL'].format(column_names=col_names, table=table or 'questions')
     c_table = cur.execute(exe_cmd).fetchall()
 
-    # for row in data check if in table
-    rows_delete = [idx for idx, row in enumerate(data) if row in c_table]
-    new_data = [row for idx, row in enumerate(data) if idx not in rows_delete]
-    # add to log indices with rows of not added entries which are already in tables
-    print(f'find_print_statement: /utils/database/db_functions/check_entry\n'
-          f'duplicated rows: {rows_delete}')
+    if isinstance(data[0], str):
+        if any(row[0] == data[0] for row in c_table):
+            return None
+        return data
 
-    return new_data
+    else:
+        # for row in data check if in table
+        rows_delete = [idx for idx, row in enumerate(data) if row in c_table]
+        new_data = [row for idx, row in enumerate(data) if idx not in rows_delete]
+        # add to log indices with rows of not added entries which are already in tables
+        print(f'find_print_statement: /utils/database/db_functions/check_entry\n'
+              f'duplicated rows: {rows_delete}')
+
+        return new_data
 
 
 def get_insert_columns(cur: sqlite3.Cursor, table: str) -> List[str]:
