@@ -113,7 +113,8 @@ def check_entry(cur: sqlite3.Cursor, data: List[tuple], statements: dict,  col_n
     rows_delete = [idx for idx, row in enumerate(data) if row in c_table]
     new_data = [row for idx, row in enumerate(data) if idx not in rows_delete]
     # add to log indices with rows of not added entries which are already in tables
-    print(rows_delete)
+    print(f'find_print_statement: /utils/database/db_functions/check_entry\n'
+          f'duplicated rows: {rows_delete}')
 
     return new_data
 
@@ -124,12 +125,10 @@ def get_insert_columns(cur: sqlite3.Cursor, table: str) -> List[str]:
     skipping an autoincrement primary key named Id or question_id.
     """
     cur.execute(f"PRAGMA table_info({table})")
-    cols = []
-    for cid, name, col_type, notnull, dflt_value, pk in cur.fetchall():
-        # If Id is the primary key and auto increment, we do not insert it
-        if pk == 1 and (name.lower() == 'Id' or name.lower() == 'question_id'):
-            continue
-        cols.append(name)
+    rows = cur.fetchall()
+    cols = [name for cid, name, col_type, notnull, dflt_value, pk in rows
+            if not (pk == 1 and name.lower() in ('id', 'question_id'))]
+
     return cols
 
 
@@ -149,11 +148,7 @@ def validate_rows_for_table_db(cur: sqlite3.Cursor, table: str, rows: Sequence[S
     """
     columns = get_insert_columns(cur, table)
     expected = len(columns)
-    errors = []
-
-    for idx, row in enumerate(rows):
-        if len(row) != expected:
-            errors.append(f"Row {idx} has {len(row)} values, expected {expected}")
+    errors = [f'Row {idx} has {len(row)} values, expected {expected}' for idx, row in enumerate(rows) if len(row) != expected]
 
     if errors:
         raise ValueError("Invalid rows for table {table}: " + " | ".join(errors))
