@@ -193,7 +193,7 @@ def validate_rows_for_table_db(cur: sqlite3.Cursor, table: str, rows: Sequence[S
     return columns
 
 
-def preview_db(db: str, pre_dir:str | None = None, limit: int = 20) -> None:
+def preview_db(db: str, pre_dir:str | None = None, limit: int | None = 20) -> None:
     """
         Preview the contents of all tables in a SQLite database.
 
@@ -224,6 +224,10 @@ def preview_db(db: str, pre_dir:str | None = None, limit: int = 20) -> None:
 
     for t in tables:
         with open (f'{pre_dir / t}.txt', 'w') as file:
-            file.write(f'{pd.read_sql(f"SELECT * FROM {t} LIMIT {limit}", con)}')
+            if limit is None:
+                df = pd.read_sql(f'SELECT * from {t}', con)
+            else:
+                df = pd.read_sql(f'SELECT * FROM {t} LIMIT {limit}', con)
+            file.write(str(df))
 
     con.close()
