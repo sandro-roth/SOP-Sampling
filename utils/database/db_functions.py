@@ -44,6 +44,7 @@ def db_push(data: List[tuple], db: str, table: str, statements:dict) -> None:
             try:
                 c_names = ','.join(validate_rows_for_table_db(cur, table=table, rows=data))
                 # check if potential entry already in backup table (print and log!)
+                c_data = check_entry(cur=cur, data=data, statements=statements, col_names=c_names)
 
                 # if not add question to original and backup
                 exec_cmd = statements['INSERT_INTO'].format(table='questions',
@@ -52,8 +53,8 @@ def db_push(data: List[tuple], db: str, table: str, statements:dict) -> None:
                 exec_cmd_b = statements['INSERT_INTO'].format(table='backup',
                                                             col_names=c_names,
                                                             tuple_q_marks=placeholders)
-                cur.executemany(exec_cmd, data)
-                cur.executemany(exec_cmd_b, data)
+                cur.executemany(exec_cmd, c_data)
+                cur.executemany(exec_cmd_b, c_data)
                 con.commit()
 
             except ValueError as e:
@@ -79,28 +80,30 @@ def tbl_row_delete():
     pass
 
 
-def check_entry(cur: sqlite3.Cursor, data: List[tuple], table: str | None, statements: dict) -> List[tuple]:
+def check_entry(cur: sqlite3.Cursor, data: List[tuple], statements: dict,  col_names: str, table: str | None = None) -> List[tuple]:
     """
     Checking data entry into DB. Assures no duplication entries into connected database.
 
     Args:
         cur (sqlite3.Cursor): Sqlite DB connection cursor.
         data (List[tuple]): Entry data set to be tested.
-        table (str | None]: Table to connect to defaults to 'questions' - table if nothing specified.
         statements (dict): Dictionary of possible SQLite statements from INSERT to SELECT.
+        col_names (str): string of comma separated colum names of table.
+        table (str | None]: Table to connect to defaults to 'questions' - table if nothing specified.
 
     Returns:
         new data set without the entries already present in the current database/table.
 
     """
     # fetch all from table if None go for table == 'questions'
-    exe_cmd = statements['SELECT_ALL'].format(table=table or 'questions')
+    exe_cmd = statements['SELECT_ALL'].format(column_names=col_names, table=table or 'questions')
     c_table = cur.execute(exe_cmd).fetchall()
 
     # for row in data check if in table
     rows_delete = [idx for idx, row in enumerate(data) if row in c_table]
     new_data = [row for idx, row in enumerate(data) if idx not in rows_delete]
     # add to log indices with rows of not added entries which are already in tables
+    print(rows_delete)
 
     return new_data
 
