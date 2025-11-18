@@ -29,7 +29,10 @@ def main():
         cur.execute(CREATE_QUESTIONS_TABLE)
         cur.execute(CREATE_BACKUP)
 
-    # check if pushing possible
+
+# ---------------------------------------- All of Pushing, Pulling, Deleting -------------------------------------------
+# ------------------------------ which is tested here will be moved to src/main ----------------------------------------
+    # CHECK PUSHING TO QUESTION.DB
     question_data = [
         ('is it possible', 'yes it is', 'the passage this is from'),
         ('does it look different', 'no it does not', 'no passage'),
@@ -38,12 +41,14 @@ def main():
     ]
     db_push(question_data, qdb_path, table='questions', statements=statements)
 
+    # CHECK PUSHING TO SURVEY.DB / USER AND FUNCTION TABLE
+
+    # CHECK PUSHING TO SURVEY.DB / ANNOTATIONS TABLE
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+
     preview_db(db_path)
     preview_db(qdb_path)
-
-
-# Interact class (loading a table then write methods to pull, push/add, delete)
-
 
 if __name__ == '__main__':
     main()
