@@ -103,7 +103,7 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                         con.commit()
 
                     exec_cmd = statements['SELECT_PK_USER']
-                    pk_user = cur.execute(exec_cmd, data).fetchone()[0]
+                    pk_user = cur.execute(exec_cmd, data[0]).fetchone()[0]
                     return pk_user
                 except:
                     pass
