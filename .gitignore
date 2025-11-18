@@ -3,6 +3,6 @@
 .venvs
 certs
 data
-
+/tests
 __pycache__
 logs
