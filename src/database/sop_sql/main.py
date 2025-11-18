@@ -39,9 +39,13 @@ def main():
         ('is this the third time?', 'maybe it is ', 'passage one'),
         ('....?', '....!', '....')
     ]
-    db_push(question_data, qdb_path, table='questions', statements=statements)
+    db_push(data=question_data, db=qdb_path, table='questions', statements=statements)
 
     # CHECK PUSHING TO SURVEY.DB / USER AND FUNCTION TABLE
+    f_data = ['Wissenschaftlicher Mitarbeiter']
+    db_push(data=f_data, db=db_path, table='function', statements=statements, user_add=True)
+
+    #u_data = [('Sandro', 'Roth', 1, 1)]
 
     # CHECK PUSHING TO SURVEY.DB / ANNOTATIONS TABLE
 # ----------------------------------------------------------------------------------------------------------------------
