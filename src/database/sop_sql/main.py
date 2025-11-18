@@ -36,7 +36,7 @@ def main():
         ('is this the third time?', 'maybe it is ', 'passage one'),
         ('....?', '....!', '....')
     ]
-    db_push(question_data, qdb_path, 'questions', statements=statements)
+    db_push(question_data, qdb_path, table='questions', statements=statements)
 
     preview_db(db_path)
     preview_db(qdb_path)
