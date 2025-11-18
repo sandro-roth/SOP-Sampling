@@ -18,4 +18,4 @@ SELECT_PK_FUNCTION:
   'SELECT Id FROM function WHERE function_name = "{function}"'
 
 SELECT_PK_USER:
-  'SELECT Id FROM user WHERE function_name = "{function}"'
+  'SELECT Id FROM user WHERE First_name = ? AND Surname = ? AND function = ? AND years_in_the_function = ?'
