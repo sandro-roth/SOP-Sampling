@@ -36,7 +36,7 @@ def db_pull():
     pass
 
 
-def db_push(data: List[tuple], db: str, table: str, statements:dict) -> None:
+def db_push(data: List[tuple], db: str, table: str, statements:dict, user_add: bool = False, user_id: int | None = None) -> None:
     # Connect to questions database
     placeholders = ','.join('?' for _ in range(len(data[0])))
     if db == os.getenv('DATA_DIR_QUESTIONS'):
@@ -61,10 +61,20 @@ def db_push(data: List[tuple], db: str, table: str, statements:dict) -> None:
                 print(f'Your data structure is invalid ValueError {e}')
 
     elif db == os.getenv('DATA_DIR'):
-        pass
-    # then push data according to template
-    # --- question.db
-    #   --- only 1 table = 1 template
+        if user_add:
+            try:
+                # check if user already in user + function table
+                # if yes return user_id (PK)
+                # else add user and return user_id (PK)
+                #   fetch last PK add 1
+                pass
+            except:
+                pass
+
+        else:
+            anno_table_FK = user_id
+            # pust to Annotations table (only condition: FK == PK in User_tabel present!)
+            pass
 
 
     # --- survey.db
