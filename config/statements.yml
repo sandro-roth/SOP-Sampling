@@ -2,5 +2,11 @@
 INSERT_INTO:
   'INSERT INTO {table} ({col_names}) VALUES ({tuple_q_marks})'
 
+INSERT_IN_FUNCTION:
+  'INSERT INTO function (function_name) VALUES (?)'
+
 SELECT_ALL:
   'SELECT {column_names} FROM {table}'
+
+SELECT_PK_FUNCTION:
+  'SELECT Id FROM function WHERE function_name = "{function}"'
