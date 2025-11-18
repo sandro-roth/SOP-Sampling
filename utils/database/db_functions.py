@@ -30,9 +30,11 @@ def db_conn(db: str):
 
 def db_pull():
     # randomly select question from question_db_original
+    # if question already answered twice in same profession:
+    #   tbl_row_delete(db= 'path/to/questions.db', table= 'questions')
     pass
 
-def db_push(data, db: str, table: str, statements:dict) -> None:
+def db_push(data: List[tuple], db: str, table: str, statements:dict) -> None:
     # Connect to questions database
     placeholders = ','.join('?' for _ in range(len(data[0])))
     if db == os.getenv('DATA_DIR_QUESTIONS'):
@@ -69,12 +71,14 @@ def db_push(data, db: str, table: str, statements:dict) -> None:
     #   --- Annotation_table
     pass
 
-def db_row_delete():
+def tbl_row_delete():
     # if question was asked 2 for same function delete question in original!
     pass
 
-def check_entry():
-    # check if data entry already in db
+def check_entry(cur: sqlite3.Cursor, data: List[tuple], db: str | None, table: str | None, statements: dict) -> None:
+    # fetch all from table if None go for os.getenv('DATA_DIR_QUESTIONS') and table == 'questions'
+    # for row in data check if in table
+    #   if row in table delete row in data
     pass
 
 def get_insert_columns(cur: sqlite3.Cursor, table: str) -> List[str]:
