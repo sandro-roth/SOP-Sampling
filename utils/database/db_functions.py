@@ -99,7 +99,7 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                     names = ','.join(get_insert_columns(cur=cur, table=table))
                     if check_entry(cur=cur, data=data, statements=statements, col_names=names, table=table):
                         exec_cmd = statements['INSERT_IN_USER']
-                        cur.execute(exec_cmd, data)
+                        cur.execute(exec_cmd, data[0])
                         con.commit()
 
                     exec_cmd = statements['SELECT_PK_USER']
@@ -158,7 +158,6 @@ def check_entry(cur: sqlite3.Cursor, data: List[tuple] | List[str], statements: 
         # add to log indices with rows of not added entries which are already in tables
         print(f'find_print_statement: /utils/database/db_functions/check_entry\n'
               f'duplicated rows: {rows_delete}')
-
         return new_data
 
 
