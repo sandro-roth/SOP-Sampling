@@ -48,7 +48,7 @@ def main():
     print(f'The primary_key for the function {f_data}:\n'
           f'{pk_function}')
 
-    u_data = [('Sandro', 'Roth', pk_function, 1)]
+    u_data = [('Daniel', 'Roth', pk_function, 1)]
     pk_user = db_push(data=u_data, db=db_path, table='user', statements=statements, user_add=True)
     print(f'The primary_key for the user {u_data}:\n'
           f'{pk_user}')
