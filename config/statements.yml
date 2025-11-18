@@ -5,8 +5,17 @@ INSERT_INTO:
 INSERT_IN_FUNCTION:
   'INSERT INTO function (function_name) VALUES (?)'
 
+INSERT_IN_USER:
+  'INSERT INTO user (First_name, Surname, function, years_in_the_function) VALUES (?, ?, ?, ?)'
+
+
+
+
 SELECT_ALL:
   'SELECT {column_names} FROM {table}'
 
 SELECT_PK_FUNCTION:
   'SELECT Id FROM function WHERE function_name = "{function}"'
+
+SELECT_PK_USER:
+  'SELECT Id FROM user WHERE function_name = "{function}"'
