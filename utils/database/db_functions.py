@@ -16,8 +16,8 @@ def db_conn(db: str):
     Args:
         db (str): Path to the SQLite database file.
     """
-    con = sqlite3.connect(db)
 
+    con = sqlite3.connect(db)
     # ✔ Enable foreign key constraints (SQLite does NOT enable them by default)
     con.execute("PRAGMA foreign_keys = ON;")
 
@@ -37,7 +37,22 @@ def db_pull():
 
 
 def db_push(data: List[tuple], db: str, table: str, statements:dict, user_add: bool = False, user_id: int | None = None) -> None:
-    # Connect to questions database
+    """
+    Docstring!
+
+    Args:
+        data (List[tuple]):     ...
+        db (str):               ...
+        table (str):            ...
+        statements (dict):      ...
+        user_add (bool):        ...
+        user_id (int | None):   ...
+
+    Returns:
+        Goal of calling the function is altering specific tables there is no return value.
+
+    """
+
     placeholders = ','.join('?' for _ in range(len(data[0])))
     if db == os.getenv('DATA_DIR_QUESTIONS'):
         with db_conn(db) as (con, cur):
@@ -105,6 +120,7 @@ def check_entry(cur: sqlite3.Cursor, data: List[tuple], statements: dict,  col_n
         new data set without the entries already present in the current database/table.
 
     """
+
     # fetch all from table if None go for table == 'questions'
     exe_cmd = statements['SELECT_ALL'].format(column_names=col_names, table=table or 'questions')
     c_table = cur.execute(exe_cmd).fetchall()
@@ -124,6 +140,7 @@ def get_insert_columns(cur: sqlite3.Cursor, table: str) -> List[str]:
     Return the list of columns that should be provided for INSERT,
     skipping an autoincrement primary key named Id or question_id.
     """
+
     cur.execute(f"PRAGMA table_info({table})")
     rows = cur.fetchall()
     cols = [name for cid, name, col_type, notnull, dflt_value, pk in rows
@@ -146,6 +163,7 @@ def validate_rows_for_table_db(cur: sqlite3.Cursor, table: str, rows: Sequence[S
         List of column names for table of interest
 
     """
+
     columns = get_insert_columns(cur, table)
     expected = len(columns)
     errors = [f'Row {idx} has {len(row)} values, expected {expected}' for idx, row in enumerate(rows) if len(row) != expected]
@@ -176,6 +194,7 @@ def preview_db(db: str, pre_dir:str | None = None, limit: int = 20) -> None:
             - A list of all table names found in the database.
             - For each table, a pandas DataFrame showing up to `limit` rows.
         """
+
     con = sqlite3.connect(db)
     cur = con.cursor()
     cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
