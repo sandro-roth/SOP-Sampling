@@ -54,6 +54,8 @@ def main():
           f'{pk_user}')
 
     # CHECK PUSHING TO SURVEY.DB / ANNOTATIONS TABLE
+    a_data = [('the question?', 1, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, 2)]
+    db_push(data=a_data, db=db_path, table='annotations', statements=statements)
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 
