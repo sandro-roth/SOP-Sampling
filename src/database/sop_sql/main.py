@@ -42,19 +42,53 @@ def main():
     db_push(data=question_data, db=qdb_path, table='questions', statements=statements)
 
 
-    # CHECK PUSHING TO SURVEY.DB / USER AND FUNCTION TABLE
-    f_data = ['AI Specialist']
-    pk_function = db_push(data=f_data, db=db_path, table='function', statements=statements, user_add=True)
-    print(f'The primary_key for the function {f_data}:\n'
-          f'{pk_function}')
+    # CHECK PUSHING TO SURVEY.DB / USER AND FUNCTION TABLE --> can only add one entry at once
+    f_data, f1_data, f2_data = ['AI Specialist'], ['Wissenschaftlicher Mitarbeiter'], ['Test Engineer']
+    pk_function_1 = db_push(data=f_data, db=db_path, table='function', statements=statements, user_add=True)
+    pk_function_2 = db_push(data=f1_data, db=db_path, table='function', statements=statements, user_add=True)
+    pk_function_3 = db_push(data=f2_data, db=db_path, table='function', statements=statements, user_add=True)
+    pk_function_4 = db_push(data=f2_data, db=db_path, table='function', statements=statements, user_add=True)
+    if pk_function_3 == pk_function_4:
+        print('1. realized duplicates')
 
-    u_data = [('Daniel', 'Roth', pk_function, 1)]
-    pk_user = db_push(data=u_data, db=db_path, table='user', statements=statements, user_add=True)
-    print(f'The primary_key for the user {u_data}:\n'
-          f'{pk_user}')
 
-    # CHECK PUSHING TO SURVEY.DB / ANNOTATIONS TABLE
-    a_data = [('the question?', 1, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, 2)]
+    u_data, u1_data, u2_data = [('Daniel', 'Roth', pk_function_1, 1)], [('Mars', 'Nestle', pk_function_2, 1)], [('Snickers', 'Ovo', pk_function_3, 1)]
+    u3_data, u4_data, u5_data = [('Daniel', 'Roth', pk_function_2, 1)], [('Mars', 'Nestle', pk_function_3, 1)], [('Snickers', 'Ovo', pk_function_1, 1)]
+    pk_user_1 = db_push(data=u_data, db=db_path, table='user', statements=statements, user_add=True)
+    pk_user_2 = db_push(data=u1_data, db=db_path, table='user', statements=statements, user_add=True)
+    pk_user_3 = db_push(data=u2_data, db=db_path, table='user', statements=statements, user_add=True)
+    pk_user_4 = db_push(data=u3_data, db=db_path, table='user', statements=statements, user_add=True)
+    pk_user_5 = db_push(data=u4_data, db=db_path, table='user', statements=statements, user_add=True)
+    pk_user_6 = db_push(data=u5_data, db=db_path, table='user', statements=statements, user_add=True)
+    pk_user_7 = db_push(data=u5_data, db=db_path, table='user', statements=statements, user_add=True)
+    if pk_user_6 == pk_user_7:
+        print('2. realized duplicates')
+
+
+    # CHECK PUSHING TO SURVEY.DB / ANNOTATIONS TABLE --> can only add one entry at once
+    a_data = [('the question?', 1, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, pk_user_1)]
+    db_push(data=a_data, db=db_path, table='annotations', statements=statements)
+    a_data = [('the question?', 2, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, pk_user_1)]
+    db_push(data=a_data, db=db_path, table='annotations', statements=statements)
+    a_data = [('the question?', 3, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 3, 3, 4, pk_user_2)]
+    db_push(data=a_data, db=db_path, table='annotations', statements=statements)
+    a_data = [('the question?', 4, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, pk_user_2)]
+    db_push(data=a_data, db=db_path, table='annotations', statements=statements)
+    a_data = [('the question?', 1, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, pk_user_3)]
+    db_push(data=a_data, db=db_path, table='annotations', statements=statements)
+    a_data = [('the question?', 2, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, pk_user_3)]
+    db_push(data=a_data, db=db_path, table='annotations', statements=statements)
+    a_data = [('the question?', 3, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 3, 3, 4, pk_user_4)]
+    db_push(data=a_data, db=db_path, table='annotations', statements=statements)
+    a_data = [('the question?', 4, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, pk_user_4)]
+    db_push(data=a_data, db=db_path, table='annotations', statements=statements)
+    a_data = [('the question?', 1, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, pk_user_5)]
+    db_push(data=a_data, db=db_path, table='annotations', statements=statements)
+    a_data = [('the question?', 2, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, pk_user_5)]
+    db_push(data=a_data, db=db_path, table='annotations', statements=statements)
+    a_data = [('the question?', 3, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 3, 3, 4, pk_user_6)]
+    db_push(data=a_data, db=db_path, table='annotations', statements=statements)
+    a_data = [('the question?', 4, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, pk_user_6)]
     db_push(data=a_data, db=db_path, table='annotations', statements=statements)
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
