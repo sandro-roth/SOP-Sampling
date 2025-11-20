@@ -1,11 +1,12 @@
 import os
+from mailbox import FormatError
+from pipes import stepkinds
+
 import pandas as pd
 import sqlite3
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Sequence, List
-
-from pandas.io.sql import table_exists
 
 
 @contextmanager
@@ -90,8 +91,8 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                     exec_cmd = statements['SELECT_PK_FUNCTION'].format(function=data[0])
                     pk_function = cur.execute(exec_cmd).fetchone()[0]
                     return pk_function
-                except:
-                    pass
+                except FormatError as e:
+                    print(f'Function could not be added FormatError: {e}')
 
             if user_add and table == 'user':
                 try:
@@ -105,12 +106,25 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                     exec_cmd = statements['SELECT_PK_USER']
                     pk_user = cur.execute(exec_cmd, data[0]).fetchone()[0]
                     return pk_user
-                except:
-                    pass
+                except FormatError as e:
+                    print(f'User could not be added FormatError: {e}')
 
             elif not user_add and table == 'annotations':
-                # pust to Annotations table (only condition: FK == PK in User_tabel present!)
-                pass
+                try:
+                    # check if annotation already in annotations table
+                    names = ','.join(get_insert_columns(cur=cur, table=table))
+                    if not check_entry(cur=cur, data=data, statements=statements, col_names=names, table=table):
+                        print('this should never happen --> raise FollowupError')
+                        # Here has to go the raise Error statement
+                    else:
+                        print('getting here')
+                        # Insert into annotation table
+                        exec_cmd = statements['INSERT_IN_ANNOTATION']
+                        cur.execute(exec_cmd, data[0])
+                except FormatError as e:
+                    print(f'Annotation could not be added FormatError: {e}')
+
+                # another except statement!
 
 
 
@@ -128,7 +142,7 @@ def check_entry(cur: sqlite3.Cursor, data: List[tuple] | List[str], statements: 
         data (List[tuple]): Entry data set to be tested.
         statements (dict): Dictionary of possible SQLite statements from INSERT to SELECT.
         col_names (str): string of comma separated colum names of table.
-        table (str | None]: Table to connect to defaults to 'questions' - table if nothing specified.
+        table (str | None): Table to connect to defaults to 'questions' - table if nothing specified.
 
     Returns:
         new data set without the entries already present in the current database/table.
@@ -144,7 +158,7 @@ def check_entry(cur: sqlite3.Cursor, data: List[tuple] | List[str], statements: 
             return None
         return data
 
-    else:
+    elif isinstance(data[0], tuple):
         # for row in data check if in table
         rows_delete = [idx for idx, row in enumerate(data) if row in c_table]
         new_data = [row for idx, row in enumerate(data) if idx not in rows_delete]
@@ -152,6 +166,8 @@ def check_entry(cur: sqlite3.Cursor, data: List[tuple] | List[str], statements: 
         print(f'find_print_statement: /utils/database/db_functions/check_entry\n'
               f'duplicated rows: {rows_delete}')
         return new_data
+
+    raise FormatError(f'Entry could not be checked with check_entry() "{type(data)}" could not be processed')
 
 
 def get_insert_columns(cur: sqlite3.Cursor, table: str) -> List[str]:
