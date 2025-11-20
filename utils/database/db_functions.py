@@ -87,7 +87,8 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                         exec_cmd = statements['INSERT_IN_FUNCTION']
                         cur.execute(exec_cmd, data)
                         con.commit()
-
+                    else:
+                        print('function already present')
                     exec_cmd = statements['SELECT_PK_FUNCTION'].format(function=data[0])
                     pk_function = cur.execute(exec_cmd).fetchone()[0]
                     return pk_function
@@ -102,6 +103,8 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                         exec_cmd = statements['INSERT_IN_USER']
                         cur.execute(exec_cmd, data[0])
                         con.commit()
+                    else:
+                        print('user already present')
 
                     exec_cmd = statements['SELECT_PK_USER']
                     pk_user = cur.execute(exec_cmd, data[0]).fetchone()[0]
@@ -117,7 +120,6 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                         print('this should never happen --> raise FollowupError')
                         # Here has to go the raise Error statement
                     else:
-                        print('getting here')
                         # Insert into annotation table
                         exec_cmd = statements['INSERT_IN_ANNOTATION']
                         cur.execute(exec_cmd, data[0])
@@ -158,13 +160,11 @@ def check_entry(cur: sqlite3.Cursor, data: List[tuple] | List[str], statements: 
             return None
         return data
 
-    elif isinstance(data[0], tuple):
+    elif isinstance(data, list):
         # for row in data check if in table
         rows_delete = [idx for idx, row in enumerate(data) if row in c_table]
         new_data = [row for idx, row in enumerate(data) if idx not in rows_delete]
         # add to log indices with rows of not added entries which are already in tables
-        print(f'find_print_statement: /utils/database/db_functions/check_entry\n'
-              f'duplicated rows: {rows_delete}')
         return new_data
 
     raise FormatError(f'Entry could not be checked with check_entry() "{type(data)}" could not be processed')
@@ -244,6 +244,6 @@ def preview_db(db: str, pre_dir:str | None = None, limit: int | None = 20) -> No
                 df = pd.read_sql(f'SELECT * from {t}', con)
             else:
                 df = pd.read_sql(f'SELECT * FROM {t} LIMIT {limit}', con)
-            file.write(str(df))
+            df.to_string(buf=file, max_cols=None, index=False)
 
     con.close()
