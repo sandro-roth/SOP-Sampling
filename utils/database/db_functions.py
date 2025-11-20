@@ -117,17 +117,15 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                     # check if annotation already in annotations table
                     names = ','.join(get_insert_columns(cur=cur, table=table))
                     if not check_entry(cur=cur, data=data, statements=statements, col_names=names, table=table):
-                        print('this should never happen --> raise FollowupError')
-                        # Here has to go the raise Error statement
-                    else:
-                        # Insert into annotation table
-                        exec_cmd = statements['INSERT_IN_ANNOTATION']
-                        cur.execute(exec_cmd, data[0])
+                        raise RuntimeError('Logic error: entry check failed!')
+
+                    # Insert into annotation table
+                    exec_cmd = statements['INSERT_IN_ANNOTATION']
+                    cur.execute(exec_cmd, data[0])
                 except FormatError as e:
                     print(f'Annotation could not be added FormatError: {e}')
-
-                # another except statement!
-
+                except RuntimeError as e:
+                    print(f"Annotation could not be added RuntimeError: {e}")
 
 
 def tbl_row_delete():
