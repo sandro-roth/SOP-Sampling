@@ -1,6 +1,5 @@
 import os
-from mailbox import FormatError
-from pipes import stepkinds
+from random import randint
 
 import pandas as pd
 import sqlite3
@@ -32,7 +31,17 @@ def db_conn(db: str):
        con.close()
 
 
-def db_pull() -> List[tuple]:
+def db_pull(statements: dict) -> List[tuple]:
+    with db_conn(os.getenv('DATA_DIR_QUESTIONS')) as (con, cur):
+        pk_max = cur.execute(statements['SELECT_LENGTH']).fetchone()[0]
+        q_rand = cur.execute(statements['SELECT_QUESTION'], str(randint(1, pk_max))).fetchone()
+        q_rand_id = q_rand[0]
+
+    # if q_rand_id / function in joined tables more than $TWICE --> Drop this question from questions table and recurse to db_pull
+    # break out of recursion when no questions in questions table anymore
+    # else return question
+
+
 
     # randomly select question from question_db_original
     # if question already answered twice in same profession:
@@ -93,7 +102,7 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                     exec_cmd = statements['SELECT_PK_FUNCTION'].format(function=data[0])
                     pk_function = cur.execute(exec_cmd).fetchone()[0]
                     return pk_function
-                except FormatError as e:
+                except ValueError as e:
                     print(f'Function could not be added FormatError: {e}')
 
             if user_add and table == 'user':
@@ -110,7 +119,7 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                     exec_cmd = statements['SELECT_PK_USER']
                     pk_user = cur.execute(exec_cmd, data[0]).fetchone()[0]
                     return pk_user
-                except FormatError as e:
+                except ValueError as e:
                     print(f'User could not be added FormatError: {e}')
 
             elif not user_add and table == 'annotations':
@@ -123,7 +132,7 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                     # Insert into annotation table
                     exec_cmd = statements['INSERT_IN_ANNOTATION']
                     cur.execute(exec_cmd, data[0])
-                except FormatError as e:
+                except ValueError as e:
                     print(f'Annotation could not be added FormatError: {e}')
                 except RuntimeError as e:
                     print(f"Annotation could not be added RuntimeError: {e}")
@@ -166,7 +175,7 @@ def check_entry(cur: sqlite3.Cursor, data: List[tuple] | List[str], statements: 
         # add to log indices with rows of not added entries which are already in tables
         return new_data
 
-    raise FormatError(f'Entry could not be checked with check_entry() "{type(data)}" could not be processed')
+    raise ValueError(f'Entry could not be checked with check_entry() "{type(data)}" could not be processed')
 
 
 def get_insert_columns(cur: sqlite3.Cursor, table: str) -> List[str]:
