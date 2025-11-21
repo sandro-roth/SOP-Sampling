@@ -22,3 +22,9 @@ SELECT_PK_FUNCTION:
 
 SELECT_PK_USER:
   'SELECT Id FROM user WHERE First_name = ? AND Surname = ? AND function = ? AND years_in_the_function = ?'
+
+SELECT_LENGTH:
+  'SELECT MAX(question_id) FROM questions'
+
+SELECT_QUESTION:
+  'SELECT * FROM questions WHERE question_id = ?'
