@@ -32,7 +32,8 @@ def db_conn(db: str):
        con.close()
 
 
-def db_pull():
+def db_pull() -> List[tuple]:
+
     # randomly select question from question_db_original
     # if question already answered twice in same profession:
     #   tbl_row_delete(db= 'path/to/questions.db', table= 'questions')
