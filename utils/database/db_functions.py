@@ -37,7 +37,11 @@ def db_pull(statements: dict) -> List[tuple]:
         q_rand = cur.execute(statements['SELECT_QUESTION'], str(randint(1, pk_max))).fetchone()
         q_rand_id = q_rand[0]
 
-    # if q_rand_id / function in joined tables more than $TWICE --> Drop this question from questions table and recurse to db_pull
+
+        # if q_rand_id / function in joined tables more than $TWICE --> Drop this question from questions table and recurse to db_pull
+        with db_conn(os.getenv('DATA_DIR')) as (con2, cur2):
+            anno_answer = cur2.execute(statements['SELECT_JOIN'], str(q_rand_id)).fetchall()
+            print(anno_answer)
     # break out of recursion when no questions in questions table anymore
     # else return question
 
@@ -138,7 +142,7 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                     print(f"Annotation could not be added RuntimeError: {e}")
 
 
-def tbl_row_delete():
+def tbl_row_delete(col, row):
     # if question was asked 2 for same function delete question in original!
     pass
 
