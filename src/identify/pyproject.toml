@@ -1,0 +1,21 @@
+[build-system]
+requires = ['hatchling >= 1.26']
+build-backend = 'hatchling.build'
+
+[project]
+name = 'sop-mask'
+dynamic = ['version']
+description = 'Creation of sqLite Database'
+dependencies = []
+
+authors = [{name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}]
+maintainers = [{name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}]
+
+[tool.hatch.build.targets.wheel]
+packages = ['user_mask']
+
+[project.scripts]
+sop-sql = 'user_mask.app:main'
+
+[tool.hatch.version]
+path = 'user_mask/__init__.py'
