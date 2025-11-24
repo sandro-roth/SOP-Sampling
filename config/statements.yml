@@ -24,7 +24,7 @@ SELECT_PK_USER:
   'SELECT Id FROM user WHERE First_name = ? AND Surname = ? AND function = ? AND years_in_the_function = ?'
 
 SELECT_LENGTH:
-  'SELECT MAX(question_id) FROM questions'
+  'SELECT question_id FROM questions'
 
 SELECT_QUESTION:
   'SELECT * FROM questions WHERE question_id = ?'
@@ -34,3 +34,6 @@ SELECT_JOIN: >
   LEFT JOIN user as US ON AN.annotator = US.Id
   LEFT JOIN function as FC ON US.function = FC.Id
   WHERE AN.question_id = ?
+
+DELETE_ROW:
+  'DELETE FROM questions WHERE question_id = ?'
