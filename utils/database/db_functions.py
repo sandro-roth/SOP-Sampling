@@ -1,4 +1,5 @@
 import os
+import random
 from random import randint
 
 import pandas as pd
@@ -31,18 +32,36 @@ def db_conn(db: str):
        con.close()
 
 
-def db_pull(statements: dict) -> List[tuple]:
+def db_pull(statements: dict) -> List[tuple] | None:
+    dub_thr = int(os.getenv('DUP_THRESHOLD'))
     with db_conn(os.getenv('DATA_DIR_QUESTIONS')) as (con, cur):
-        pk_max = cur.execute(statements['SELECT_LENGTH']).fetchone()[0]
-        q_rand = cur.execute(statements['SELECT_QUESTION'], str(randint(1, pk_max))).fetchone()
-        q_rand_id = q_rand[0]
-
+        try:
+            pk_list = cur.execute(statements['SELECT_LENGTH']).fetchall()
+            q_rand_id = random.choice(pk_list)[0]
+        except IndexError as e:
+            print(f'All questions have been answered: {e}')
+            return None
 
         # if q_rand_id / function in joined tables more than $TWICE --> Drop this question from questions table and recurse to db_pull
         with db_conn(os.getenv('DATA_DIR')) as (con2, cur2):
-            anno_answer = cur2.execute(statements['SELECT_JOIN'], str(q_rand_id)).fetchall()
+            anno_answer = cur2.execute(statements['SELECT_JOIN'], [q_rand_id]).fetchall()
+            counts = {}
+            duplicate = []
+            for item in anno_answer:
+                counts[item] = counts.get(item, 0) + 1
+
+                if counts[item] > dub_thr:
+                    duplicate.append(item)
+
             print(anno_answer)
-    # break out of recursion when no questions in questions table anymore
+            #print(duplicate[0][0])
+        if duplicate:
+            tbl_row_delete(con=con, cur=cur, statements=statements, row=duplicate[0][0])
+            # call db_pull again for another question!
+
+        elif not anno_answer:
+            # not yet in annotations table so return question --> else statement should be enough!
+            pass
     # else return question
 
 
@@ -142,9 +161,9 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                     print(f"Annotation could not be added RuntimeError: {e}")
 
 
-def tbl_row_delete(col, row):
-    # if question was asked 2 for same function delete question in original!
-    pass
+def tbl_row_delete(con:sqlite3.Connection, cur: sqlite3.Cursor, statements:dict, row:int) -> None:
+    cur.execute(statements['DELETE_ROW'], [row])
+    con.commit()
 
 
 def check_entry(cur: sqlite3.Cursor, data: List[tuple] | List[str], statements: dict,  col_names: str, table: str | None = None) -> List[tuple] | None:
