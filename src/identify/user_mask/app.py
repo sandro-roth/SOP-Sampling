@@ -81,7 +81,25 @@ def create_app() -> Flask:
                     errors.append('Years in function must be an integer')
                 else:
                     form_data['years_in_function'] = str(years_int)
-                    
+
+            if not errors:
+                flask_log.info(f'Received user mask data: {form_data}')
+                success_message = "User data saved successfully."
+                # Reset it to empty values
+                form_data = {'first_name': '',
+                             'last_name': '',
+                             'function': '',
+                             'years_in_function': ''}
+
+
+        return render_template(
+            'user_mask.html',
+            functions=FUNCTION_CHOICES,
+            errors=errors,
+            success_message=success_message,
+            form_data=form_data,
+        )
+    return app
 
 
 def main() -> None:
