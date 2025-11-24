@@ -52,18 +52,36 @@ def create_app() -> Flask:
         # Set empty values to keep user input on validation errors
         form_data = {'first_name': '',
                      'last_name': '',
-                     'fuciton': '',
+                     'function': '',
                      'years_in_function': ''}
 
         if request.method == 'POST':
             # Read values
-            form_data["first_name"] = request.form.get("first_name", "").strip()
-            form_data["last_name"] = request.form.get("last_name", "").strip()
-            form_data["function"] = request.form.get("function", "").strip()
-            raw_years = request.form.get("years_in_function", "").strip()
+            form_data['first_name'] = request.form.get('first_name', '').strip()
+            form_data['last_name'] = request.form.get('last_name', '').strip()
+            form_data['function'] = request.form.get('function', '').strip()
+            raw_years = request.form.get('years_in_function', '').strip()
 
+            # Validate
+            if not form_data['first_name']:
+                errors.append('First name is required.')
+            if not form_data['last_name']:
+                errors.append('Last name is required.')
+            if not form_data['function']:
+                errors.append('Function is required.')
 
-
+            if not raw_years:
+                errors.append('Years in function is required')
+            else:
+                try:
+                    years_int = int(raw_years)
+                    if years_int < 0:
+                        errors.append('Years in function must be zero or positive')
+                except ValueError:
+                    errors.append('Years in function must be an integer')
+                else:
+                    form_data['years_in_function'] = str(years_int)
+                    
 
 
 def main() -> None:
