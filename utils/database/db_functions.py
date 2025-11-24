@@ -92,9 +92,11 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
     if db == os.getenv('DATA_DIR_QUESTIONS'):
         with db_conn(db) as (con, cur):
             try:
-                c_names = ','.join(validate_rows_for_table_db(cur, table=table, rows=data))
+                name_list = validate_rows_for_table_db(cur, table=table, rows=data)
+                c_names, no_q_id = ','.join(name_list), ','.join(name_list[1:])
+                no_q_id_data = [row[1:] for row in data]
                 # check if potential entry already in backup table (print and log!)
-                c_data = check_entry(cur=cur, data=data, statements=statements, col_names=c_names)
+                c_data = check_entry(cur=cur, data=no_q_id_data, statements=statements, col_names=no_q_id)
 
                 # if not add question to original and backup
                 exec_cmd = statements['INSERT_INTO'].format(table=table,
@@ -185,6 +187,8 @@ def check_entry(cur: sqlite3.Cursor, data: List[tuple] | List[str], statements: 
     # fetch all from table if None go for table == 'questions'
     exe_cmd = statements['SELECT_ALL'].format(column_names=col_names, table=table or 'questions')
     c_table = cur.execute(exe_cmd).fetchall()
+    print(c_table)
+    print('\n------------------------------------------------------\n')
 
     if isinstance(data[0], str):
         if any(row[0] == data[0] for row in c_table):
@@ -196,6 +200,7 @@ def check_entry(cur: sqlite3.Cursor, data: List[tuple] | List[str], statements: 
         rows_delete = [idx for idx, row in enumerate(data) if row in c_table]
         new_data = [row for idx, row in enumerate(data) if idx not in rows_delete]
         # add to log indices with rows of not added entries which are already in tables
+        print(new_data)
         return new_data
 
     raise ValueError(f'Entry could not be checked with check_entry() "{type(data)}" could not be processed')
@@ -240,7 +245,7 @@ def validate_rows_for_table_db(cur: sqlite3.Cursor, table: str, rows: Sequence[S
     return columns
 
 
-def preview_db(db: str, pre_dir:str | None = None, limit: int | None = 20) -> None:
+def preview_db(db: str, pre_dir:str | None = None, limit: int | None = 100) -> None:
     """
         Preview the contents of all tables in a SQLite database.
 
