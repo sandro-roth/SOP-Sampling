@@ -33,13 +33,15 @@ def main():
 # ---------------------------------------- All of Pushing, Pulling, Deleting -------------------------------------------
 # ------------------------------ which is tested here will be moved to src/main ----------------------------------------
     # CHECK PUSHING TO QUESTION.DB
-    # question_data = [
-    #     ('is it possible', 'yes it is', 'the passage this is from'),
-    #     ('does it look different', 'no it does not', 'no passage'),
-    #     ('is this the third time?', 'maybe it is ', 'passage one'),
-    #     ('....?', '....!', '....')
-    # ]
-    # db_push(data=question_data, db=qdb_path, table='questions', statements=statements)
+    question_data = [
+        ('is it possible', 'yes it is', 'the passage this is from'),
+        ('does it look different', 'no it does not', 'no passage'),
+        ('is this the third time?', 'maybe it is ', 'passage one'),
+        ('....?', '....!', '....'),
+        ('how is the weather like?', 'it is awesome ', 'weather report'),
+        ('is it still windy?', 'only a little', 'weather report')
+    ]
+    db_push(data=question_data, db=qdb_path, table='questions', statements=statements)
 
 
     # CHECK PUSHING TO SURVEY.DB / USER AND FUNCTION TABLE --> can only add one entry at once
