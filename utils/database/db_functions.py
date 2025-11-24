@@ -42,7 +42,11 @@ def db_pull(statements: dict) -> List[tuple] | None:
             print(f'All questions have been answered: {e}')
             return None
 
-        # if q_rand_id / function in joined tables more than $TWICE --> Drop this question from questions table and recurse to db_pull
+        # FOR NOW SHOULD BE UPDATED!! ---------------------------------------
+        # if q_rand_id / function in joined tables more than $TWICE
+        # --> Drop this question from questions table and recurse to db_pull
+        # FOR NOW SHOULD BE UPDATED!! ---------------------------------------
+
         with db_conn(os.getenv('DATA_DIR')) as (con2, cur2):
             anno_answer = cur2.execute(statements['SELECT_JOIN'], [q_rand_id]).fetchall()
             counts = {}
@@ -53,23 +57,15 @@ def db_pull(statements: dict) -> List[tuple] | None:
                 if counts[item] > dub_thr:
                     duplicate.append(item)
 
-            print(anno_answer)
-            #print(duplicate[0][0])
         if duplicate:
             tbl_row_delete(con=con, cur=cur, statements=statements, row=duplicate[0][0])
             # call db_pull again for another question!
 
-        elif not anno_answer:
-            # not yet in annotations table so return question --> else statement should be enough!
-            pass
-    # else return question
-
-
-
-    # randomly select question from question_db_original
-    # if question already answered twice in same profession:
-    #   tbl_row_delete(db= 'path/to/questions.db', table= 'questions')
-    pass
+        else:
+            rdm_entry = cur.execute(statements['SELECT_QUESTION'],[q_rand_id]).fetchone()
+            # questions table entry: (question_id, question, answer, passage)
+            # (6, 'is it still windy?', 'only a little', 'weather report')
+            return rdm_entry
 
 
 def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict, user_add: bool = False) -> int | None:
