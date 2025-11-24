@@ -55,7 +55,12 @@ def create_app() -> Flask:
                      'fuciton': '',
                      'years_in_function': ''}
 
-        
+        if request.method == 'POST':
+            # Read values
+            form_data["first_name"] = request.form.get("first_name", "").strip()
+            form_data["last_name"] = request.form.get("last_name", "").strip()
+            form_data["function"] = request.form.get("function", "").strip()
+            raw_years = request.form.get("years_in_function", "").strip()
 
 
 
