@@ -6,7 +6,10 @@ build-backend = 'hatchling.build'
 name = 'sop-mask'
 dynamic = ['version']
 description = 'Creation of sqLite Database'
-dependencies = []
+dependencies = [
+    "requests>=2.32",
+    "flask>=3.1.0"
+]
 
 authors = [{name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}]
 maintainers = [{name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}]
