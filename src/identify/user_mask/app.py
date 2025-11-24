@@ -44,9 +44,18 @@ def create_app() -> Flask:
 
 
     @app.route('/', methods=['GET', 'POST'])
-    def home():
-        # Load one question
-        flask_log.info('New Question loaded')
+    def user_mask():
+        flask_log.info('Mask init ...')
+        errors: list[str] = []
+        success_message = ""
+
+        # Set empty values to keep user input on validation errors
+        form_data = {'first_name': '',
+                     'last_name': '',
+                     'fuciton': '',
+                     'years_in_function': ''}
+
+        
 
 
 
