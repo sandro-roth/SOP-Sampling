@@ -84,7 +84,7 @@ def create_app() -> Flask:
     app.secret_key = os.getenv('FLASK_SECRET_KEY', 'dev-secret')
     flask_log = get_logger(__name__)
 
-    @app.routes('/', methods=['GET', 'POST'])
+    @app.route('/', methods=['GET', 'POST'])
     def upload_data():
         errors: list[str] = []
         preview_rows: list[tuple] = []
