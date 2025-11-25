@@ -33,16 +33,22 @@ def parse_file(file) -> list[tuple]:
     """
 
     filename = file.filename or ''
+    extension = filename.rsplit('.', 1)[-1].lower()
+
+    if extension not in ['.csv', '.txt' ]:
+        raise ValueError('Only .csv and .txt files are supported.')
+
     content = file.read().decode('utf-8', errors='replace')
     file.seek(0)
 
     rows: list[tuple] = []
-    if filename.lower().endswith('.csv'):
-        reader = csv.reader(StringIO(content))
-        for row in reader:
-            rows.append(tuple(cell.strip() for cell in row))
-    else:
-        pass
+    for line in content.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+
+        columns = (part.strip() for part in stripped.split(','))
+        rows.append(tuple(columns))
 
     return rows
 
