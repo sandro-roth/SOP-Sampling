@@ -3,7 +3,7 @@ import csv
 from pathlib import Path
 from io import StringIO
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 
 from utils import setup_logging, get_logger, __load_env
 
@@ -81,6 +81,7 @@ def create_app() -> Flask:
 
     app = Flask(__name__, template_folder=str(cwd.parent / 'templates'), static_folder=str(cwd.parent / 'static'))
     app.config['TEMPLATES_AUTO_RELOAD'] = True
+    app.secret_key = os.getenv('FLASK_SECRET_KEY', 'dev-secret')
     flask_log = get_logger(__name__)
 
     @app.routes('/', methods=['GET', 'POST'])
@@ -89,6 +90,7 @@ def create_app() -> Flask:
         preview_rows: list[tuple] = []
         file_name = ''
         manual_text = ''
+        action = request.form.get("action")
 
         if request.method == 'POST':
             uploaded_file = request.files.get('data_file')
@@ -98,32 +100,47 @@ def create_app() -> Flask:
             has_file = uploaded_file and uploaded_file.filename != ''
             has_manual = bool(manual_text)
 
-            if not has_file and not has_manual:
-                errors.append('Please upload a file or enter text manually')
+            if action == 'preview':
+                if not has_file and not has_manual:
+                    errors.append('Please upload a file or enter text manually')
 
-            if has_file and not allowed_file(uploaded_file.filenam):
-                errors.append('Only .csv and .txt files are allowed')
+                if has_file and not allowed_file(uploaded_file.filenam):
+                    errors.append('Only .csv and .txt files are allowed')
 
-            if not errors:
-                try:
+                if not errors:
                     rows: list[tuple] = []
-                    if has_file:
-                        file_name = uploaded_file.filename
-                        rows = parse_file(uploaded_file)
-                        flask_log.info(f'Parsed file {file_name} into {len(rows)} rows.')
+                    try:
+                        if has_file:
+                            file_name = uploaded_file.filename
+                            rows = parse_file(uploaded_file)
+                            flask_log.info(f'Parsed file {file_name} into {len(rows)} rows.')
 
-                    if has_manual:
-                        rows = parse(manual_text)
-                        flask_log.info(f'Parsed manual input into {len(rows)} rows.')
+                        if has_manual:
+                            rows = parse(manual_text)
+                            flask_log.info(f'Parsed manual input into {len(rows)} rows.')
 
-                    if not rows:
-                        errors.append('No data found to process')
+                        if not rows:
+                            errors.append('No data found to process')
 
-                    else:
-                        preview_rows = rows[:10]
+                        else:
+                            session['pending_rows'] = [list(r) for r in rows]
+                            session["has_preview"] = True
+                            preview_rows = rows[:10]
 
-                except Exception as e:
-                    errors.append(f'Error while processing data: {e}')
+                    except Exception as e:
+                        errors.append(f'Error while processing data: {e}')
+
+            elif action == 'submit':
+                rows: list[tuple] = []
+
+                # Use preview data if available
+                if session.get('has_preview') and 'pending_rows' in session:
+                    stored = session.get('pending_rows', [])
+                    rows = [tuple(r) for r in stored]
+                    flask_log.info(
+                        f'Submitting {len(rows)} rows from previous preview to database'
+                    )
+                
 
         preview_text = repr(preview_rows) if preview_rows else ""
         total_rows = len(preview_rows)
