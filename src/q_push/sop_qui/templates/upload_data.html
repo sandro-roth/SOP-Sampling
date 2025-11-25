@@ -56,6 +56,11 @@
     .full-width {
       grid-column: 1 / -1;
     }
+
+    .full-width small {
+      display: block;
+      margin-top: 0.3rem;
+    }
   </style>
 
 <h1>Data upload and preview</h1>
@@ -112,8 +117,9 @@
             placeholder="Question 1, Answer 1, Passage 1&#10;Question 2, Answer 2, Passage 2"
           >{{ manual_text }}</textarea><br>
           <small>
-            Each non empty line becomes one row, commas separate columns,
-            for example <code>question?, answer!, passage</code> becomes <code>('question?', 'answer!', 'passage')</code>.
+            Each non empty line becomes one row, commas separate columns.
+            If a field contains commas, wrap it in double quotes.
+            For example: <code>This is a question?, This is the answer!, 'This, passage'</code> becomes <code>('This is a question?', 'This is the answer!', 'This, passage')</code>.
           </small>
         </div>
       </div>
@@ -124,6 +130,9 @@
     </button>
     <button type="submit" name="action" value="submit">
       Submit to database
+    </button>
+    <button type="submit" name="action" value="clear">
+      Clear form and preview
     </button>
   </form>
 
