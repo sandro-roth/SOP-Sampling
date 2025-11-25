@@ -53,7 +53,7 @@ def create_app() -> Flask:
     @app.routes('/', methods=['GET', 'POST'])
     def upload_data():
         errors: list[str] = []
-        preview: list[tuple] = []
+        preview_rows: list[tuple] = []
         file_name = ''
         manual_text = ''
 
@@ -85,5 +85,21 @@ def create_app() -> Flask:
 
                     if not rows:
                         errors.append('No data found to process')
-                except:
-                    pass
+
+                    else:
+                        preview_rows = rows[:10]
+
+                except Exception as e:
+                    errors.append(f'Error while processing data: {e}')
+
+        preview_text = repr(preview_rows) if preview_rows else ""
+        total_rows = len(preview_rows)
+
+        return render_template('upload_data.html',
+                               errors=errors,
+                               preview_text=preview_text,
+                               preview_rows=preview_rows,
+                               file_name=file_name,
+                               manual_text=manual_text,
+                               total_rows=total_rows)
+    return app
