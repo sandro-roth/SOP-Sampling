@@ -64,7 +64,6 @@ def parse(text: str) -> list[tuple]:
 
     return rows
 
-
 def create_app() -> Flask:
     """
     Create and configure the Flask application
