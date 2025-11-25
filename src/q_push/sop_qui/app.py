@@ -43,24 +43,28 @@ def parse_file(file) -> list[tuple]:
 
 def parse(text: str) -> list[tuple]:
     """
-    Parse manual text input.
+    Parse text content (from file or manual input) into a list of tuples
 
     Behavior:
-        - each non empty line = one row
-        - comma split columns
+        - treat content as CSV
+        - each row is one CSV record
+        - commas separate columns
+        - commas inside fields are allowed if the field is quoted
         - whitespace around columns is stripped
+        - empty rows are ignored
 
     Args:
         text (str): Manual data entry into questions db.
     """
     rows: list[tuple] = []
-    for line in text.splitlines():
-        stripped = line.strip()
-        if not stripped:
+    reader = csv.reader(StringIO(text))
+    for row in reader:
+        # skip empty rows
+        if not row or all(not cell.strip() for cell in row):
             continue
 
-        columns = (part.strip() for part in stripped.split(','))
-        rows.append(tuple(columns))
+        cleaned = tuple(cell.strip() for cell in row)
+        rows.append(cleaned)
 
     return rows
 
