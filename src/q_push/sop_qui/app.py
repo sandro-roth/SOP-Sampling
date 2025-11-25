@@ -21,12 +21,11 @@ def parse_file(file) -> list[tuple]:
     """
     Parse the uploaded file into a list of tuples.
 
-    csv files:
-        use the csv module, comma separated
-        each row becomes a tuple of its fields
-
-    txt files:
-
+    CSV or TXT:
+        - treat both the same
+        - each line = one row
+        - comma-separated columns
+        - empty lines are ignored
 
     Return:
         List of tuples ready to insert into database
