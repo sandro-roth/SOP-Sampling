@@ -2,6 +2,7 @@ import os
 import csv
 from pathlib import Path
 from io import StringIO
+from typing import List, Tuple
 
 from flask import Flask, render_template, request
 
@@ -16,6 +17,18 @@ def allowed_file(filename: str) -> bool:
 
     """
     return "." in filename and filename.rsplit(".", 1)[1].lower() in {"csv", "txt"}
+
+def parse_file(file) -> List[Tuple]:
+    """
+
+    """
+    pass
+
+def parse_manual(text: str) -> List[Tuple]:
+    """
+
+    """
+    pass
 
 
 def create_app() -> Flask:
@@ -59,5 +72,18 @@ def create_app() -> Flask:
                 errors.append('Only .csv and .txt files are allowed')
 
             if not errors:
-                pass
-        
+                try:
+                    rows: List[Tuple] = []
+                    if has_file:
+                        file_name = uploaded_file.filename
+                        rows = parse_file(uploaded_file)
+                        flask_log.info(f'Parsed file {file_name} into {len(rows)} rows.')
+
+                    if has_manual:
+                        rows = parse_manual(manual_text)
+                        flask_log.info(f'Parsed manual input into {len(rows)} rows.')
+
+                    if not rows:
+                        errors.append('No data found to process')
+                except:
+                    pass
