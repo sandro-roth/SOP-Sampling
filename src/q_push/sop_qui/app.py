@@ -2,7 +2,6 @@ import os
 import csv
 from pathlib import Path
 from io import StringIO
-from typing import List, Tuple
 
 from flask import Flask, render_template, request
 
@@ -18,13 +17,37 @@ def allowed_file(filename: str) -> bool:
     """
     return "." in filename and filename.rsplit(".", 1)[1].lower() in {"csv", "txt"}
 
-def parse_file(file) -> List[Tuple]:
+def parse_file(file) -> list[tuple]:
+    """
+    Parse the uploaded file into a list of tuples.
+
+    csv files:
+        use the csv module, comma separated
+        each row becomes a tuple of its fields
+
+    txt files:
+
+
+    Return:
+        List of tuples ready to insert into database
     """
 
-    """
-    pass
+    filename = file.filename or ''
+    content = file.read().decode('utf-8', errors='replace')
+    file.seek(0)
 
-def parse_manual(text: str) -> List[Tuple]:
+    rows: list[tuple] = []
+    if filename.lower().endswith('.csv'):
+        reader = csv.reader(StringIO(content))
+        for row in reader:
+            rows.append(tuple(cell.strip() for cell in row))
+    else:
+        pass
+
+    return rows
+
+
+def parse_manual(text: str) -> list[tuple]:
     """
 
     """
@@ -73,7 +96,7 @@ def create_app() -> Flask:
 
             if not errors:
                 try:
-                    rows: List[Tuple] = []
+                    rows: list[tuple] = []
                     if has_file:
                         file_name = uploaded_file.filename
                         rows = parse_file(uploaded_file)
