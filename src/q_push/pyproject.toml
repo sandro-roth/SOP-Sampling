@@ -1,0 +1,27 @@
+[build-system]
+requires = ['hatchling >= 1.26']
+build-backend = 'hatchling.build'
+
+[project]
+name = 'sop-qui'
+dynamic = ['version']
+description = 'graphical user interface to push questions to question db'
+dependencies = [
+    "requests>=2.32",
+    "flask>=3.1.0"
+]
+
+authors = [{name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}]
+maintainers = [{name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}]
+
+[tool.hatch.build.targets.wheel]
+packages = ['sop_ui']
+
+[tool.hatch.build]
+include = ["sop_qui/templates/**/*", "sop_qui/static/**/*"]
+
+[project.scripts]
+sop-qui = 'sop_qui.app:main'
+
+[tool.hatch.version]
+path = 'sop_qui/__init__.py'
