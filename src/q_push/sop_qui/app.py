@@ -183,7 +183,6 @@ def create_app() -> Flask:
                     else:
                         # push everything to database
                         flask_log.info(f'Data entry into database:\n {rows}')
-                        print(rows)
 
                         # clear session preview data and form
                         manual_text, file_name, preview_rows = reset_all()
