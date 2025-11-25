@@ -2,6 +2,7 @@ import os
 import csv
 from pathlib import Path
 from io import StringIO
+import re
 
 from flask import Flask, render_template, request, session
 
@@ -57,7 +58,9 @@ def parse(text: str) -> list[tuple]:
         text (str): Manual data entry into questions db.
     """
     rows: list[tuple] = []
-    reader = csv.reader(StringIO(text))
+    # Normalize single quote to double quotes
+    text = re.sub(r"'([^']*)'", r'"\1"', text)
+    reader = csv.reader(StringIO(text), skipinitialspace=True)
     for row in reader:
         # skip empty rows
         if not row or all(not cell.strip() for cell in row):
