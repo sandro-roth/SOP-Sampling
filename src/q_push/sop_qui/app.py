@@ -114,7 +114,7 @@ def create_app() -> Flask:
                         flask_log.info(f'Parsed file {file_name} into {len(rows)} rows.')
 
                     if has_manual:
-                        rows = parse_manual(manual_text)
+                        rows = parse(manual_text)
                         flask_log.info(f'Parsed manual input into {len(rows)} rows.')
 
                     if not rows:
