@@ -140,7 +140,45 @@ def create_app() -> Flask:
                     flask_log.info(
                         f'Submitting {len(rows)} rows from previous preview to database'
                     )
-                
+                else:
+                    if not has_file and not has_manual:
+                        errors.append('Please upload a file or enter text manually')
+
+                    if has_file and not allowed_file(uploaded_file.filenam):
+                        errors.append('Only .csv and .txt files are allowed')
+
+                    if not errors:
+                        try:
+                            if has_file:
+                                file_name = uploaded_file.filename
+                                rows = parse_file(uploaded_file)
+                                flask_log.info(
+                                    f"Parsed file '{file_name}' into {len(rows)} rows"
+                                )
+                            else:
+                                rows = parse(manual_text)
+                                flask_log.info(
+                                    f'Parsed manual input into {len(rows)} rows'
+                                )
+                        except Exception as e:
+                            errors.append(f'Error while processing data: {e}')
+
+                if not errors:
+                    if not rows:
+                        errors.append("No data found to submit")
+                    else:
+                        # push everything to database
+                        print(rows)
+
+                        # clear session preview data
+                        session.pop("pending_rows", None)
+                        session.pop("has_preview", None)
+
+                        # clear form after success
+                        manual_text = ""
+                        file_name = ""
+                        preview_rows = []
+
 
         preview_text = repr(preview_rows) if preview_rows else ""
         total_rows = len(preview_rows)
