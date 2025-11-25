@@ -154,9 +154,8 @@ def create_app() -> Flask:
                 if session.get('has_preview') and 'pending_rows' in session:
                     stored = session.get('pending_rows', [])
                     rows = [tuple(r) for r in stored]
-                    flask_log.info(
-                        f'Submitting {len(rows)} rows from previous preview to database'
-                    )
+                    flask_log.info(f'Submitting {len(rows)} rows from previous preview to database')
+
                 else:
                     if not has_file and not has_manual:
                         errors.append('Please upload a file or enter text manually')
@@ -169,14 +168,12 @@ def create_app() -> Flask:
                             if has_file:
                                 file_name = uploaded_file.filename
                                 rows = parse_file(uploaded_file)
-                                flask_log.info(
-                                    f"Parsed file '{file_name}' into {len(rows)} rows"
-                                )
+                                flask_log.info(f"Parsed file '{file_name}' into {len(rows)} rows")
+
                             else:
                                 rows = parse(manual_text)
-                                flask_log.info(
-                                    f'Parsed manual input into {len(rows)} rows'
-                                )
+                                flask_log.info(f'Parsed manual input into {len(rows)} rows')
+
                         except Exception as e:
                             errors.append(f'Error while processing data: {e}')
 
@@ -185,6 +182,7 @@ def create_app() -> Flask:
                         errors.append("No data found to submit")
                     else:
                         # push everything to database
+                        flask_log.info(f'Data entry into database:\n {rows}')
                         print(rows)
 
                         # clear session preview data and form
