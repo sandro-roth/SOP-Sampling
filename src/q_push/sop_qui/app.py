@@ -112,7 +112,7 @@ def create_app() -> Flask:
             has_manual = bool(manual_text)
 
             if action == 'clear':
-                reset_all()
+                manual_text, file_name, preview_rows = reset_all()
 
             elif action == 'preview':
                 if not has_file and not has_manual:
@@ -185,7 +185,7 @@ def create_app() -> Flask:
                         print(rows)
 
                         # clear session preview data and form
-                        reset_all()
+                        manual_text, file_name, preview_rows = reset_all()
 
         preview_text = repr(preview_rows) if preview_rows else ""
         total_rows = len(preview_rows)
