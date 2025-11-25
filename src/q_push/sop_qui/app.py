@@ -179,7 +179,6 @@ def create_app() -> Flask:
                         file_name = ""
                         preview_rows = []
 
-
         preview_text = repr(preview_rows) if preview_rows else ""
         total_rows = len(preview_rows)
 
