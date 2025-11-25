@@ -17,3 +17,23 @@ def allowed_file(filename: str) -> bool:
     """
     return "." in filename and filename.rsplit(".", 1)[1].lower() in {"csv", "txt"}
 
+
+def create_app() -> Flask:
+    """
+    Create and configure the Flask application
+
+    This function initializes a Flask app instance, sets up basic configuration,
+    and defines routes for adding parameter Values to Database
+
+    Routes:
+        GET /                       – Show upload form
+        POST /                      – handle file upload, show preview, push to database placeholder
+
+    Returns:
+        ...
+    """
+
+    app = Flask(__name__, template_folder=str(cwd.parent / 'templates'), static_folder=str(cwd.parent / 'static'))
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
+    flask_log = get_logger(__name__)
+    
