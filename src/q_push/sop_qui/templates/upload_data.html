@@ -1,0 +1,81 @@
+  <h1>Data upload and preview</h1>
+
+  <!-- Error messages -->
+  {% if errors %}
+    <div class="error-list">
+      <ul>
+        {% for e in errors %}
+          <li>{{ e }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  {% if success_message %}
+    <div class="success-box">
+      {{ success_message }}
+    </div>
+  {% endif %}
+
+  <form method="post" enctype="multipart/form-data">
+    <div class="box-header">
+      <div class="box-title">Input options</div>
+
+      <p>
+        You can either upload a CSV or text file, or enter questions manually.
+        Files take priority if both are provided.
+      </p>
+
+      <div class="form-grid">
+        <!-- File input -->
+        <div>
+          <label for="data_file">CSV or text file</label>
+        </div>
+        <div>
+          <input
+            type="file"
+            id="data_file"
+            name="data_file"
+            accept=".csv,.txt"
+          >
+          <small>Allowed extensions: .csv and .txt</small>
+        </div>
+
+        <!-- Manual text -->
+        <div class="full-width">
+          <label for="manual_text">Manual input (comma separated columns per line)</label>
+          <textarea
+            id="manual_text"
+            name="manual_text"
+            rows="6"
+            style="width: 100%;"
+            placeholder="Question 1, Answer 1&#10;Question 2, Answer 2"
+          >{{ manual_text }}</textarea>
+          <small>
+            Each non empty line becomes one row, commas separate columns,
+            for example <code>a, b, c</code> becomes <code>('a', 'b', 'c')</code>.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" name="action" value="preview">
+      Preview (max 5 rows)
+    </button>
+    <button type="submit" name="action" value="submit">
+      Submit to database
+    </button>
+  </form>
+
+  <!-- Preview section -->
+  {% if preview_text %}
+    <h2 style="margin-top: 2rem;">Preview of stored data (max 5 rows)</h2>
+
+    {% if file_name %}
+      <p>File used: <strong>{{ file_name }}</strong></p>
+    {% endif %}
+
+    <div class="preview-box">
+      {{ preview_text }}
+    </div>
+  {% endif %}
