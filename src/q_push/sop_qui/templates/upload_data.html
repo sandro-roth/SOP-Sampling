@@ -57,6 +57,11 @@
       grid-column: 1 / -1;
     }
 
+    .example-gap {
+      display: block;
+      margin-top: 0.7rem;
+    }
+
     .full-width small {
       display: block;
       margin-top: 0.3rem;
@@ -108,31 +113,34 @@
 
         <!-- Manual text -->
         <div class="full-width">
-          <label for="manual_text">Manual input (comma separated columns per line)</label>
+          <label for="manual_text">Manual input (comma separated columns per line)</label><br>
           <textarea
             id="manual_text"
             name="manual_text"
             rows="6"
-            style="width: 100%;"
-            placeholder="Question 1, Answer 1, Passage 1&#10;Question 2, Answer 2, Passage 2"
+            style="width: 50%;"
+            placeholder='Question 1, Answer 1, "Passage, 1"&#10;Question 2, Answer 2, "Passage, 2"'
           >{{ manual_text }}</textarea><br>
           <small>
             Each non empty line becomes one row, commas separate columns.
             If a field contains commas, wrap it in double quotes.
-            For example: <code>This is a question?, This is the answer!, 'This, passage'</code> becomes <code>('This is a question?', 'This is the answer!', 'This, passage')</code>.
+            For example:<br>
+            <code class="example-gap">This is a question?, This is the answer!, 'This, passage'</code><br>
+            becomes<br>
+            <code class="example-gap">('This is a question?', 'This is the answer!', 'This, passage')</code>
           </small>
         </div>
       </div>
     </div>
 
     <button type="submit" name="action" value="preview">
-      Preview (max 5 rows)
+      Preview (max 10 rows)
     </button>
     <button type="submit" name="action" value="submit">
-      Submit to database
+      Submit
     </button>
     <button type="submit" name="action" value="clear">
-      Clear form and preview
+      Clear
     </button>
   </form>
 
