@@ -15,7 +15,7 @@ authors = [{name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}]
 maintainers = [{name = 'Sandro Roth', email = 'sandro.roth@usz.ch'}]
 
 [tool.hatch.build.targets.wheel]
-packages = ['sop_ui']
+packages = ['sop_qui']
 
 [tool.hatch.build]
 include = ["sop_qui/templates/**/*", "sop_qui/static/**/*"]
