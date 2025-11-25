@@ -103,3 +103,17 @@ def create_app() -> Flask:
                                manual_text=manual_text,
                                total_rows=total_rows)
     return app
+
+def main() -> None:
+    """
+
+    """
+
+    setup_logging(app_name='Q_Push_UI', log_dir=os.getenv('Q_PUSH_LOG_DIR'))
+    main_log = get_logger(__name__)
+
+    app = create_app()
+    port = int(os.getenv('SOP_QP_PORT', '8300'))
+    main_log.info(f".env loaded from: {loaded_from}")
+    main_log.info(f"SOP_QUI_PORT = {port}")
+    app.run(host="0.0.0.0", port=port, debug=False)
