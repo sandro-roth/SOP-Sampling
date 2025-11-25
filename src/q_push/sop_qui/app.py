@@ -68,6 +68,14 @@ def parse(text: str) -> list[tuple]:
 
     return rows
 
+def clear_state():
+    """Reset form data and preview session."""
+    session.pop("pending_rows", None)
+    session.pop("has_preview", None)
+
+def clear_form():
+    return "", "", []
+
 def create_app() -> Flask:
     """
     Create and configure the Flask application
@@ -104,7 +112,11 @@ def create_app() -> Flask:
             has_file = uploaded_file and uploaded_file.filename != ''
             has_manual = bool(manual_text)
 
-            if action == 'preview':
+            if action == 'clear':
+                clear_state()
+                manual_text, file_name, preview_rows = clear_form()
+
+            elif action == 'preview':
                 if not has_file and not has_manual:
                     errors.append('Please upload a file or enter text manually')
 
@@ -119,7 +131,7 @@ def create_app() -> Flask:
                             rows = parse_file(uploaded_file)
                             flask_log.info(f'Parsed file {file_name} into {len(rows)} rows.')
 
-                        if has_manual:
+                        elif has_manual:
                             rows = parse(manual_text)
                             flask_log.info(f'Parsed manual input into {len(rows)} rows.')
 
@@ -174,14 +186,9 @@ def create_app() -> Flask:
                         # push everything to database
                         print(rows)
 
-                        # clear session preview data
-                        session.pop("pending_rows", None)
-                        session.pop("has_preview", None)
-
-                        # clear form after success
-                        manual_text = ""
-                        file_name = ""
-                        preview_rows = []
+                        # clear session preview data and form
+                        clear_state()
+                        manual_text, file_name, preview_rows = clear_form()
 
         preview_text = repr(preview_rows) if preview_rows else ""
         total_rows = len(preview_rows)
