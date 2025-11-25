@@ -1,4 +1,64 @@
-  <h1>Data upload and preview</h1>
+  <style>
+    body.container {
+      max-width: 900px;
+      margin: 2rem auto;
+    }
+
+    .box-header {
+      border: 1px solid #ccc;
+      padding: 0.8rem 1rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      background: var(--pico-background-color);
+    }
+
+    .box-title {
+      font-weight: 600;
+      margin: 0 0 0.6rem 0;
+    }
+
+    .error-list {
+      border: 1px solid #c00;
+      background: #fdd;
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+
+    .success-box {
+      border: 1px solid #0a0;
+      background: #e7ffe7;
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+
+    .preview-box {
+      border: 1px solid #ccc;
+      padding: 0.8rem 1rem;
+      border-radius: 4px;
+      background: var(--pico-muted-border-color);
+      margin-top: 1rem;
+      white-space: pre;
+      font-family: monospace;
+      font-size: 0.9rem;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+  </style>
+
+<h1>Data upload and preview</h1>
 
   <!-- Error messages -->
   {% if errors %}
