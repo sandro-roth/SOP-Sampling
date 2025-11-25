@@ -68,13 +68,12 @@ def parse(text: str) -> list[tuple]:
 
     return rows
 
-def clear_state():
+def reset_all():
     """Reset form data and preview session."""
     session.pop("pending_rows", None)
     session.pop("has_preview", None)
-
-def clear_form():
     return "", "", []
+
 
 def create_app() -> Flask:
     """
@@ -113,8 +112,7 @@ def create_app() -> Flask:
             has_manual = bool(manual_text)
 
             if action == 'clear':
-                clear_state()
-                manual_text, file_name, preview_rows = clear_form()
+                reset_all()
 
             elif action == 'preview':
                 if not has_file and not has_manual:
@@ -187,8 +185,7 @@ def create_app() -> Flask:
                         print(rows)
 
                         # clear session preview data and form
-                        clear_state()
-                        manual_text, file_name, preview_rows = clear_form()
+                        reset_all()
 
         preview_text = repr(preview_rows) if preview_rows else ""
         total_rows = len(preview_rows)
