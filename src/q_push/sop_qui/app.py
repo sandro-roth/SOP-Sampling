@@ -39,9 +39,22 @@ def parse_file(file) -> list[tuple]:
 
     content = file.read().decode('utf-8', errors='replace')
     file.seek(0)
+    return parse(content)
 
+def parse(text: str) -> list[tuple]:
+    """
+    Parse manual text input.
+
+    Behavior:
+        - each non empty line = one row
+        - comma split columns
+        - whitespace around columns is stripped
+
+    Args:
+        text (str): Manual data entry into questions db.
+    """
     rows: list[tuple] = []
-    for line in content.splitlines():
+    for line in text.splitlines():
         stripped = line.strip()
         if not stripped:
             continue
@@ -50,13 +63,6 @@ def parse_file(file) -> list[tuple]:
         rows.append(tuple(columns))
 
     return rows
-
-
-def parse_manual(text: str) -> list[tuple]:
-    """
-
-    """
-    pass
 
 
 def create_app() -> Flask:
