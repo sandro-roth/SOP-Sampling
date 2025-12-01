@@ -39,10 +39,7 @@ def main():
     u3_data, u4_data, u5_data = [('Daniel', 'Roth', pk_function_2, 1)], [('Mars', 'Nestle', pk_function_3, 1)], [('Snickers', 'Ovo', pk_function_1, 1)]
     pk_user_1 = db_push(data=u_data, db=db_path, table='user', statements=statements, user_add=True)
     pk_user_2 = db_push(data=u1_data, db=db_path, table='user', statements=statements, user_add=True)
-    pk_user_3 = db_push(data=u2_data, db=db_path, table='user', statements=statements, user_add=True)
     pk_user_4 = db_push(data=u3_data, db=db_path, table='user', statements=statements, user_add=True)
-    pk_user_5 = db_push(data=u4_data, db=db_path, table='user', statements=statements, user_add=True)
-    pk_user_6 = db_push(data=u5_data, db=db_path, table='user', statements=statements, user_add=True)
 
 
     # CHECK PUSHING TO SURVEY.DB / ANNOTATIONS TABLE --> can only add one entry at once
@@ -60,7 +57,6 @@ def main():
 
 
     # CHECK SAMPLING FUNCTION
-    # db_pull(statements=statements)
     q_bank_path = Path(os.getenv('CONFIG_DIR')).resolve() / 'sop_questions_0_5.json'
     with open(q_bank_path, 'r', encoding='utf-8') as file:
         sampling(statements=statements, j_file=json.load(file))
