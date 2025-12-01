@@ -58,7 +58,13 @@ def main():
     # CHECK SAMPLING FUNCTION
     q_bank_path = Path(os.getenv('CONFIG_DIR')).resolve() / 'sop_questions_0_5.json'
     with open(q_bank_path, 'r', encoding='utf-8') as file:
-        sampling(statements=statements, j_file=json.load(file), usr_id=pk_user_1, fun_id=pk_function_2)
+        jason_file = json.load(file)
+
+    question = sampling(statements=statements, j_file=jason_file, usr_id=pk_user_1, fun_id=pk_function_2)
+
+    # Update question JSON file
+    with open(q_bank_path, 'w', encoding='utf-8') as file:
+        json.dump(jason_file, file, ensure_ascii=False, indent=2)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
