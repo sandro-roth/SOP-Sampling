@@ -31,41 +31,6 @@ def db_conn(db: str):
        con.close()
 
 
-def db_pull(statements: dict) -> List[tuple] | None:
-    dub_thr = int(os.getenv('DUP_THRESHOLD'))
-    with db_conn(os.getenv('DATA_DIR_QUESTIONS')) as (con, cur):
-        try:
-            pk_list = cur.execute(statements['SELECT_LENGTH']).fetchall()
-            q_rand_id = random.choice(pk_list)[0]
-        except IndexError as e:
-            print(f'All questions have been answered: {e}')
-            return None
-
-        # FOR NOW SHOULD BE UPDATED!! ---------------------------------------
-        # if q_rand_id / function in joined tables more than $TWICE
-        # --> Drop this question from questions table and recurse to db_pull
-        # FOR NOW SHOULD BE UPDATED!! ---------------------------------------
-
-        with db_conn(os.getenv('DATA_DIR')) as (con2, cur2):
-            anno_answer = cur2.execute(statements['SELECT_JOIN'], [q_rand_id]).fetchall()
-            counts = {}
-            duplicate = []
-            for item in anno_answer:
-                counts[item] = counts.get(item, 0) + 1
-
-                if counts[item] > dub_thr:
-                    duplicate.append(item)
-
-        if duplicate:
-            tbl_row_delete(con=con, cur=cur, statements=statements, row=duplicate[0][0])
-            # call db_pull again for another question!
-
-        else:
-            rdm_entry = cur.execute(statements['SELECT_QUESTION'],[q_rand_id]).fetchone()
-            # questions table entry: (question_id, question, answer, passage)
-            # (6, 'is it still windy?', 'only a little', 'weather report')
-            return rdm_entry
-
 def sampling(statements: dict, j_file: List[dict]) -> dict:
     #print(j_file[0].keys())
     question = random.choice(j_file)
