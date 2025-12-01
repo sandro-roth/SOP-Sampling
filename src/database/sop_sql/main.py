@@ -61,7 +61,7 @@ def main():
         jason_file = json.load(file)
 
     question = sampling(statements=statements, j_file=jason_file, usr_id=pk_user_1, fun_id=pk_function_2)
-    print(question)
+    print(question['q_id'], question['question'], question['answer'])
 
     # Update question JSON file
     with open(q_bank_path, 'w', encoding='utf-8') as file:
