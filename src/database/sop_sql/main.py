@@ -1,7 +1,8 @@
 import os
+import json
 from pathlib import Path
 
-from utils import setup_logging, get_logger, __load_env, db_conn, preview_db, db_push, load_yaml, db_pull
+from utils import setup_logging, get_logger, __load_env, db_conn, preview_db, sampling, load_yaml, db_pull
 from .function_table import CREATE_FUNCTION_TABLE
 from .user_table import CREATE_USER_TABLE
 from .annotations_table import CREATE_ANNOTATION_TABLE
@@ -33,15 +34,15 @@ def main():
 # ---------------------------------------- All of Pushing, Pulling, Deleting -------------------------------------------
 # ------------------------------ which is tested here will be moved to src/main ----------------------------------------
     # CHECK PUSHING TO QUESTION.DB
-    question_data = [
-        ('is it possible', 'yes it is', 'the passage this is from'),
-        ('does it look different', 'no it does not', 'no passage'),
-        ('is this the third time?', 'maybe it is ', 'passage one'),
-        ('....?', '....!', '....'),
-        ('how is the weather like?', 'it is awesome ', 'weather report'),
-        ('is it still windy?', 'only a little', 'weather report')
-    ]
-    db_push(data=question_data, db=qdb_path, table='questions', statements=statements)
+    # question_data = [
+    #     ('is it possible', 'yes it is', 'the passage this is from'),
+    #     ('does it look different', 'no it does not', 'no passage'),
+    #     ('is this the third time?', 'maybe it is ', 'passage one'),
+    #     ('....?', '....!', '....'),
+    #     ('how is the weather like?', 'it is awesome ', 'weather report'),
+    #     ('is it still windy?', 'only a little', 'weather report')
+    # ]
+    # db_push(data=question_data, db=qdb_path, table='questions', statements=statements)
 
 
     # CHECK PUSHING TO SURVEY.DB / USER AND FUNCTION TABLE --> can only add one entry at once
@@ -93,8 +94,12 @@ def main():
     # a_data = [('the question?', 4, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, pk_user_6)]
     # db_push(data=a_data, db=db_path, table='annotations', statements=statements)
 
-    # CHECK PULLING FUNCTION
-    db_pull(statements=statements)
+    # CHECK SAMPLING FUNCTION
+    # db_pull(statements=statements)
+    q_bank_path = Path(os.getenv('CONFIG_DIR')).resolve() / 'sop_questions_0_5.json'
+    with open(q_bank_path, 'r', encoding='utf-8') as file:
+        sampling(statements=statements, j_file=json.load(file))
+
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 
