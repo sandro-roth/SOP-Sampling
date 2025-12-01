@@ -56,7 +56,7 @@ def main():
 
 
     # CHECK SAMPLING FUNCTION
-    q_bank_path = Path(os.getenv('CONFIG_DIR')).resolve() / 'sop_questions_0_5.json'
+    q_bank_path = Path(os.getenv('DATA_DIR_QUESTIONS')).resolve()
     with open(q_bank_path, 'r', encoding='utf-8') as file:
         jason_file = json.load(file)
 
