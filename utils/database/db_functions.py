@@ -57,8 +57,8 @@ def sampling(statements: dict, j_file: List[dict], usr_id: int, fun_id: int) -> 
                 return sampling(statements=statements, j_file=j_file, usr_id=usr_id, fun_id=fun_id)
 
         elif len(anno_a) == 2:
-            log.info(f'Question_id: {q_rand_id}, has been used twice already so it will be deleted!')
-            log.info('Recursive call of function: sampling --- delete question')
+            log.warning(f'Question_id: {q_rand_id}, has been used twice already so it will be deleted!')
+            log.warning('Recursive call of function: sampling --- delete question')
             j_file.remove(question)
             return sampling(statements=statements, j_file=j_file, usr_id=usr_id, fun_id=fun_id)
 
@@ -103,7 +103,7 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                 con.commit()
 
             except ValueError as e:
-                log.warning(f'Your data structure is invalid ValueError {e}')
+                log.error(f'Your data structure is invalid ValueError {e}')
 
     elif db == os.getenv('DATA_DIR'):
         with db_conn(db) as (con, cur):
@@ -121,7 +121,7 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                     pk_function = cur.execute(exec_cmd).fetchone()[0]
                     return pk_function
                 except ValueError as e:
-                    log.warning(f'Function could not be added FormatError: {e}')
+                    log.error(f'Function could not be added FormatError: {e}')
 
             if user_add and table == 'user':
                 try:
@@ -138,7 +138,7 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                     pk_user = cur.execute(exec_cmd, data[0]).fetchone()[0]
                     return pk_user
                 except ValueError as e:
-                    log.warning(f'User could not be added FormatError: {e}')
+                    log.error(f'User could not be added FormatError: {e}')
 
             elif not user_add and table == 'annotations':
                 try:
@@ -151,9 +151,9 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                     exec_cmd = statements['INSERT_IN_ANNOTATION']
                     cur.execute(exec_cmd, data[0])
                 except ValueError as e:
-                    log.warning(f'Annotation could not be added FormatError: {e}')
+                    log.error(f'Annotation could not be added FormatError: {e}')
                 except RuntimeError as e:
-                    log.warning(f"Annotation could not be added RuntimeError: {e}")
+                    log.error(f"Annotation could not be added RuntimeError: {e}")
 
 
 def check_entry(cur: sqlite3.Cursor, data: List[tuple] | List[str], statements: dict,  col_names: str, table: str | None = None) -> List[tuple] | None:
