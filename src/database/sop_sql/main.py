@@ -2,7 +2,7 @@ import os
 import json
 from pathlib import Path
 
-from utils import setup_logging, get_logger, __load_env, db_conn, preview_db, sampling, load_yaml, db_pull, db_push
+from utils import setup_logging, get_logger, __load_env, db_conn, preview_db, sampling, load_yaml, db_push
 from .function_table import CREATE_FUNCTION_TABLE
 from .user_table import CREATE_USER_TABLE
 from .annotations_table import CREATE_ANNOTATION_TABLE
