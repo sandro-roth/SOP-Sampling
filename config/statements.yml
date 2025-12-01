@@ -30,7 +30,7 @@ SELECT_QUESTION:
   'SELECT * FROM questions WHERE question_id = ?'
 
 SELECT_JOIN: >
-  SELECT question_id, FC.function_name FROM annotations as AN
+  SELECT question_id, US.First_name, US.Surname, FC.function_name FROM annotations as AN
   LEFT JOIN user as US ON AN.annotator = US.Id
   LEFT JOIN function as FC ON US.function = FC.Id
   WHERE AN.question_id = ?
