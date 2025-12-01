@@ -31,27 +31,31 @@ def db_conn(db: str):
        con.close()
 
 
-def sampling(statements: dict, j_file: List[dict]) -> dict:
-    #print(j_file[0].keys())
+def sampling(statements: dict, j_file: List[dict], usr_id: int, fun_id: int) -> dict:
     question = random.choice(j_file)
     q_rand_id = question['q_id']
     with db_conn(os.getenv('DATA_DIR')) as (con, cur):
         anno_a = cur.execute(statements['SELECT_JOIN'], [q_rand_id]).fetchall()
         # If question not in annotation table:
         if len(anno_a) == 0:
-            print(type(question))
-            print(question)
+            print('question is not in annotation table yet!')
             return question
         # If question is annotated once
         elif len(anno_a) == 1:
             # If same function but different User annotate!
-            pass
-            # Else call sampling function again to get another question
+            annotator, ano_fun = anno_a[0][1], anno_a[0][4]
+            print(f'The question is already in the annotation table for\n'
+                  f'user_id: {annotator} ........... current_usr: {usr_id}\n'
+                  f'func_id: {ano_fun} ........... current_fun_id: {fun_id}')
+            if annotator != usr_id and ano_fun == fun_id:
+                print('Same function but different user')
+                return question
+            else:
+                return sampling(statements=statements, j_file=j_file, usr_id=usr_id, fun_id=fun_id)
 
         elif len(anno_a) == 2:
-            # drop question from JSON file
-            # call sampling function again to get another question
-            pass
+            j_file.remove(question)
+            return sampling(statements=statements, j_file=j_file, usr_id=usr_id, fun_id=fun_id)
 
         else:
             raise ValueError('Something went wrong. Questions can not annotated more than twice.')
