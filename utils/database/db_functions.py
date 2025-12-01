@@ -1,5 +1,6 @@
 import os
 import random
+import logging
 
 import pandas as pd
 import sqlite3
@@ -7,6 +8,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Sequence, List
 
+log = logging.getLogger(__name__)
 
 @contextmanager
 def db_conn(db: str):
@@ -21,7 +23,7 @@ def db_conn(db: str):
 
     con = sqlite3.connect(db)
     # ✔ Enable foreign key constraints (SQLite does NOT enable them by default)
-    con.execute("PRAGMA foreign_keys = ON;")
+    con.execute('PRAGMA foreign_keys = ON;')
 
     cur = con.cursor()
     try:
@@ -38,24 +40,25 @@ def sampling(statements: dict, j_file: List[dict], usr_id: int, fun_id: int) -> 
         anno_a = cur.execute(statements['SELECT_JOIN'], [q_rand_id]).fetchall()
         # If question not in annotation table:
         if len(anno_a) == 0:
-            print('question is not in annotation table yet!')
+            log.info('Question %s is not in annotation table yet', q_rand_id)
             return question
         # If question is annotated once
         elif len(anno_a) == 1:
             # If same function but different User annotate!
             annotator, ano_fun = anno_a[0][1], anno_a[0][4]
-            print(f'The question: {q_rand_id}, is already in the annotation table for\n'
-                  f'user_id: {annotator} ........... current_usr: {usr_id}\n'
-                  f'func_id: {ano_fun} ........... current_fun_id: {fun_id}')
+            log.info(
+                'Question id: %s already annotated:\n user_id=%s (current=%s), func_id=%s (current=%s)',
+                q_rand_id, annotator, usr_id, ano_fun, fun_id)
             if annotator != usr_id and ano_fun == fun_id:
-                print('Same function but different user')
+                log.info(' ---  SAME FUNCTION BUT DIFFERENT USER ---')
                 return question
             else:
-                print('In need of a new question')
+                log.info('Recursive call of function: sampling --- no delete question')
                 return sampling(statements=statements, j_file=j_file, usr_id=usr_id, fun_id=fun_id)
 
         elif len(anno_a) == 2:
-            print(f'question_id: {q_rand_id}, has been used twice already so it will be deleted!')
+            log.info(f'Question_id: {q_rand_id}, has been used twice already so it will be deleted!')
+            log.info('Recursive call of function: sampling --- delete question')
             j_file.remove(question)
             return sampling(statements=statements, j_file=j_file, usr_id=usr_id, fun_id=fun_id)
 
@@ -100,7 +103,7 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                 con.commit()
 
             except ValueError as e:
-                print(f'Your data structure is invalid ValueError {e}')
+                log.warning(f'Your data structure is invalid ValueError {e}')
 
     elif db == os.getenv('DATA_DIR'):
         with db_conn(db) as (con, cur):
@@ -113,12 +116,12 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                         cur.execute(exec_cmd, data)
                         con.commit()
                     else:
-                        print('function already present')
+                        log.info('function already present')
                     exec_cmd = statements['SELECT_PK_FUNCTION'].format(function=data[0])
                     pk_function = cur.execute(exec_cmd).fetchone()[0]
                     return pk_function
                 except ValueError as e:
-                    print(f'Function could not be added FormatError: {e}')
+                    log.warning(f'Function could not be added FormatError: {e}')
 
             if user_add and table == 'user':
                 try:
@@ -129,28 +132,28 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                         cur.execute(exec_cmd, data[0])
                         con.commit()
                     else:
-                        print('user already present')
+                        log.info('user already present')
 
                     exec_cmd = statements['SELECT_PK_USER']
                     pk_user = cur.execute(exec_cmd, data[0]).fetchone()[0]
                     return pk_user
                 except ValueError as e:
-                    print(f'User could not be added FormatError: {e}')
+                    log.warning(f'User could not be added FormatError: {e}')
 
             elif not user_add and table == 'annotations':
                 try:
                     # check if annotation already in annotations table
                     names = ','.join(get_insert_columns(cur=cur, table=table))
                     if not check_entry(cur=cur, data=data, statements=statements, col_names=names, table=table):
-                        raise RuntimeError('Logic error: entry check failed!')
+                        raise RuntimeError('Logic error: entry check failed since Annotation already in the table!')
 
                     # Insert into annotation table
                     exec_cmd = statements['INSERT_IN_ANNOTATION']
                     cur.execute(exec_cmd, data[0])
                 except ValueError as e:
-                    print(f'Annotation could not be added FormatError: {e}')
+                    log.warning(f'Annotation could not be added FormatError: {e}')
                 except RuntimeError as e:
-                    print(f"Annotation could not be added RuntimeError: {e}")
+                    log.warning(f"Annotation could not be added RuntimeError: {e}")
 
 
 def check_entry(cur: sqlite3.Cursor, data: List[tuple] | List[str], statements: dict,  col_names: str, table: str | None = None) -> List[tuple] | None:
