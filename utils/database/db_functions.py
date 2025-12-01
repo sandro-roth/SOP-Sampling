@@ -51,9 +51,11 @@ def sampling(statements: dict, j_file: List[dict], usr_id: int, fun_id: int) -> 
                 print('Same function but different user')
                 return question
             else:
+                print('In need of a new question')
                 return sampling(statements=statements, j_file=j_file, usr_id=usr_id, fun_id=fun_id)
 
         elif len(anno_a) == 2:
+            print(f'question_id: {q_rand_id}, has been used twice already so it will be deleted!')
             j_file.remove(question)
             return sampling(statements=statements, j_file=j_file, usr_id=usr_id, fun_id=fun_id)
 
