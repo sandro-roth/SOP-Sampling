@@ -29,30 +29,30 @@ def main():
 # ------------------------------ which is tested here will be moved to src/main ----------------------------------------
 
     # CHECK PUSHING TO SURVEY.DB / USER AND FUNCTION TABLE --> can only add one entry at once
-    f_data, f1_data, f2_data = ['AI Specialist'], ['Wissenschaftlicher Mitarbeiter'], ['Test Engineer']
-    pk_function_1 = db_push(data=f_data, db=db_path, table='function', statements=statements, user_add=True)
-    pk_function_2 = db_push(data=f1_data, db=db_path, table='function', statements=statements, user_add=True)
-    pk_function_3 = db_push(data=f2_data, db=db_path, table='function', statements=statements, user_add=True)
+    # f_data, f1_data, f2_data = ['AI Specialist'], ['Wissenschaftlicher Mitarbeiter'], ['Test Engineer']
+    # pk_function_1 = db_push(data=f_data, db=db_path, table='function', statements=statements, user_add=True)
+    # pk_function_2 = db_push(data=f1_data, db=db_path, table='function', statements=statements, user_add=True)
+    # pk_function_3 = db_push(data=f2_data, db=db_path, table='function', statements=statements, user_add=True)
 
 
-    u_data, u1_data, u2_data = [('Daniel', 'Roth', pk_function_1, 1)], [('Mars', 'Nestle', pk_function_2, 1)], [('Snickers', 'Ovo', pk_function_3, 1)]
-    u3_data, u4_data, u5_data = [('Daniel', 'Roth', pk_function_2, 1)], [('Mars', 'Nestle', pk_function_3, 1)], [('Snickers', 'Ovo', pk_function_1, 1)]
-    pk_user_1 = db_push(data=u_data, db=db_path, table='user', statements=statements, user_add=True)
-    pk_user_2 = db_push(data=u1_data, db=db_path, table='user', statements=statements, user_add=True)
-    pk_user_4 = db_push(data=u3_data, db=db_path, table='user', statements=statements, user_add=True)
+    # u_data, u1_data, u2_data = [('Daniel', 'Roth', pk_function_1, 1)], [('Mars', 'Nestle', pk_function_2, 1)], [('Snickers', 'Ovo', pk_function_3, 1)]
+    # u3_data, u4_data, u5_data = [('Daniel', 'Roth', pk_function_2, 1)], [('Mars', 'Nestle', pk_function_3, 1)], [('Snickers', 'Ovo', pk_function_1, 1)]
+    # pk_user_1 = db_push(data=u_data, db=db_path, table='user', statements=statements, user_add=True)
+    # pk_user_2 = db_push(data=u1_data, db=db_path, table='user', statements=statements, user_add=True)
+    # pk_user_4 = db_push(data=u3_data, db=db_path, table='user', statements=statements, user_add=True)
 
 
     # CHECK PUSHING TO SURVEY.DB / ANNOTATIONS TABLE --> can only add one entry at once
-    a_data = [('the question?', 1, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, pk_user_1)]
-    db_push(data=a_data, db=db_path, table='annotations', statements=statements)
-    a_data = [('the question?', 2, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, pk_user_1)]
-    db_push(data=a_data, db=db_path, table='annotations', statements=statements)
-    a_data = [('the question?', 3, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 3, 3, 4, pk_user_2)]
-    db_push(data=a_data, db=db_path, table='annotations', statements=statements)
-    a_data = [('the question?', 4, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, pk_user_2)]
-    db_push(data=a_data, db=db_path, table='annotations', statements=statements)
-    a_data = [('the question?', 4, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, pk_user_4)]
-    db_push(data=a_data, db=db_path, table='annotations', statements=statements)
+    # a_data = [('the question?', 1, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, pk_user_1)]
+    # db_push(data=a_data, db=db_path, table='annotations', statements=statements)
+    # a_data = [('the question?', 2, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, pk_user_1)]
+    # db_push(data=a_data, db=db_path, table='annotations', statements=statements)
+    # a_data = [('the question?', 3, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 3, 3, 4, pk_user_2)]
+    # db_push(data=a_data, db=db_path, table='annotations', statements=statements)
+    # a_data = [('the question?', 4, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, pk_user_2)]
+    # db_push(data=a_data, db=db_path, table='annotations', statements=statements)
+    # a_data = [('the question?', 4, 'NaN', 'passage', 'the answer', 'alternative answer', 1, 2, 3, 4, pk_user_4)]
+    # db_push(data=a_data, db=db_path, table='annotations', statements=statements)
 
 
     # CHECK SAMPLING FUNCTION
