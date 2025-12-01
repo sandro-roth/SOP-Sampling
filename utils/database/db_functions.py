@@ -57,9 +57,6 @@ def sampling(statements: dict, j_file: List[dict]) -> dict:
             raise ValueError('Something went wrong. Questions can not annotated more than twice.')
 
 
-
-
-
 def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict, user_add: bool = False) -> int | None:
     """
     Docstring!
