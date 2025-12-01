@@ -55,7 +55,6 @@ def main():
     db_push(data=a_data, db=db_path, table='annotations', statements=statements)
 
 
-
     # CHECK SAMPLING FUNCTION
     q_bank_path = Path(os.getenv('CONFIG_DIR')).resolve() / 'sop_questions_0_5.json'
     with open(q_bank_path, 'r', encoding='utf-8') as file:
