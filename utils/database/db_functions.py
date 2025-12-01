@@ -44,7 +44,7 @@ def sampling(statements: dict, j_file: List[dict], usr_id: int, fun_id: int) -> 
         elif len(anno_a) == 1:
             # If same function but different User annotate!
             annotator, ano_fun = anno_a[0][1], anno_a[0][4]
-            print(f'The question is already in the annotation table for\n'
+            print(f'The question: {q_rand_id}, is already in the annotation table for\n'
                   f'user_id: {annotator} ........... current_usr: {usr_id}\n'
                   f'func_id: {ano_fun} ........... current_fun_id: {fun_id}')
             if annotator != usr_id and ano_fun == fun_id:
@@ -151,11 +151,6 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                     print(f'Annotation could not be added FormatError: {e}')
                 except RuntimeError as e:
                     print(f"Annotation could not be added RuntimeError: {e}")
-
-
-def tbl_row_delete(con:sqlite3.Connection, cur: sqlite3.Cursor, statements:dict, row:int) -> None:
-    cur.execute(statements['DELETE_ROW'], [row])
-    con.commit()
 
 
 def check_entry(cur: sqlite3.Cursor, data: List[tuple] | List[str], statements: dict,  col_names: str, table: str | None = None) -> List[tuple] | None:
