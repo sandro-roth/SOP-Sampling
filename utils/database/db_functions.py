@@ -1,6 +1,5 @@
 import os
 import random
-from random import randint
 
 import pandas as pd
 import sqlite3
@@ -66,6 +65,34 @@ def db_pull(statements: dict) -> List[tuple] | None:
             # questions table entry: (question_id, question, answer, passage)
             # (6, 'is it still windy?', 'only a little', 'weather report')
             return rdm_entry
+
+def sampling(statements: dict, j_file: List[dict]) -> dict:
+    #print(j_file[0].keys())
+    question = random.choice(j_file)
+    q_rand_id = question['q_id']
+    with db_conn(os.getenv('DATA_DIR')) as (con, cur):
+        anno_a = cur.execute(statements['SELECT_JOIN'], [q_rand_id]).fetchall()
+        # If question not in annotation table:
+        if len(anno_a) == 0:
+            print(type(question))
+            print(question)
+            return question
+        # If question is annotated once
+        elif len(anno_a) == 1:
+            # If same function but different User annotate!
+            pass
+            # Else call sampling function again to get another question
+
+        elif len(anno_a) == 2:
+            # drop question from JSON file
+            # call sampling function again to get another question
+            pass
+
+        else:
+            raise ValueError('Something went wrong. Questions can not annotated more than twice.')
+
+
+
 
 
 def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict, user_add: bool = False) -> int | None:
