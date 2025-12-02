@@ -17,15 +17,20 @@
     .layout {
       display: flex;
       gap: 1.5rem;
-      align-items: flex-start;
+      align-items: flex-start;  /* NICHT stretch */
     }
+
 
     .left-column {
       flex: 2;
+      /* keine Flex-Column, linke Seite bleibt wie gehabt */
     }
 
     .right-column {
-      flex: 1;
+      flex: 1.5;
+      display: flex;
+      flex-direction: column;  /* Kontext-Titel + Box vertikal anordnen */
+      min-width: 400px;
     }
 
     .box-header {
@@ -88,6 +93,7 @@
       text-align: center;
       padding: 0.35rem 0.4rem;
     }
+
     /* Erste Spalte: Text + ? */
     .ratings-table th:first-child,
     .ratings-table td:first-child {
@@ -95,10 +101,11 @@
       width: 30%;
       font-weight: 500;
     }
+
     /* Spalte 2 → "1 (Nein)" : schmaler */
     .ratings-table th:nth-child(2),
     .ratings-table td:nth-child(2) {
-      width: 15%;     /* enger */
+      width: 15%;
     }
 
     /* Spalten 3, 4, 5 ("2", "3", "4"): etwas breiter */
@@ -132,18 +139,21 @@
 
     .passage-box {
       border: 1px solid #ccc;
-      padding: 0.4rem 0.6rem;
+      padding: 0.6rem;
       border-radius: 4px;
-      min-height: 465px;
+
+      width: 100%;
+      max-height: 500px;      /* hier stellst du ein, wie hoch sie maximal sein soll */
       background: var(--pico-muted-border-color);
-      overflow-y: auto;
+      overflow-y: auto;       /* Scrollbar wenn Text höher als 420px */
       font-size: 0.95rem;
-      white-space: pre-line;
+      white-space: pre-wrap;
     }
 
     .controls-row {
       margin-bottom: 0.8rem;
     }
+
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -179,6 +189,7 @@
       gap: 0.5rem;
       margin-top: 0.8rem;
     }
+
     .tooltip {
       display: inline-block;
       position: relative;
@@ -217,9 +228,9 @@
         <input type="hidden" name="question_id" value="{{ question_id }}">
 
         <!-- Question box (read-only) -->
-        <div class="box-header", id="questionBox">
+        <div class="box-header" id="questionBox">
           <div class="box-header-top">
-            <div class="box-title">Frage </div>
+            <div class="box-title">Frage</div>
           </div>
           <div class="box-content">{{ question_text | trim }}</div>
         </div>
@@ -227,7 +238,7 @@
         <!-- Answer box (read-only) -->
         <div class="box-header" id="answerBox">
           <div class="box-header-top">
-            <div class="box-title">Antwort </div>
+            <div class="box-title">Antwort</div>
           </div>
           <div class="box-content">{{ answer_text | trim }}</div>
         </div>
@@ -300,6 +311,7 @@
     </div>
 
   </div>
+
   <!-- Modal for alternative question and answer -->
   <div id="altModal" class="modal-backdrop" style="display: none;">
     <div class="modal-content">
@@ -322,64 +334,58 @@
       </div>
     </div>
   </div>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const form = document.querySelector('form');
 
-    const modal = document.getElementById('altModal');
-    const modalAltQ = document.getElementById('modalAlternativeQuestion');
-    const modalAltA = document.getElementById('modalAlternativeAnswer');
-    const hiddenAltQ = document.getElementById('alternative_question');
-    const hiddenAltA = document.getElementById('alternative_answer');
-    const skipBtn = document.getElementById('modalSkipBtn');
-    const confirmBtn = document.getElementById('modalConfirmBtn');
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.querySelector('form');
 
-    // Flag, damit wir nach dem Schließen des Modals normal submitten können
-    let allowSubmitWithoutCheck = false;
+      const modal = document.getElementById('altModal');
+      const modalAltQ = document.getElementById('modalAlternativeQuestion');
+      const modalAltA = document.getElementById('modalAlternativeAnswer');
+      const hiddenAltQ = document.getElementById('alternative_question');
+      const hiddenAltA = document.getElementById('alternative_answer');
+      const skipBtn = document.getElementById('modalSkipBtn');
+      const confirmBtn = document.getElementById('modalConfirmBtn');
 
-    form.addEventListener('submit', function (event) {
-      if (allowSubmitWithoutCheck) {
-        // Beim zweiten Durchlauf nicht erneut prüfen
-        return;
-      }
+      let allowSubmitWithoutCheck = false;
 
-      // Ratings lesen
-      const names = ['fluency', 'comprehensiveness', 'factuality'];
-      const values = names.map(function (name) {
-        const checked = form.querySelector('input[name="' + name + '"]:checked');
-        return checked ? parseInt(checked.value, 10) : 0;
+      form.addEventListener('submit', function (event) {
+        if (allowSubmitWithoutCheck) {
+          return;
+        }
+
+        const names = ['fluency', 'comprehensiveness', 'factuality'];
+        const values = names.map(function (name) {
+          const checked = form.querySelector('input[name="' + name + '"]:checked');
+          return checked ? parseInt(checked.value, 10) : 0;
+        });
+
+        const lowCount = values.filter(function (v) {
+          return v > 0 && v < 3;
+        }).length;
+
+        if (lowCount >= 2) {
+          event.preventDefault();
+          modal.style.display = 'flex';
+        }
       });
 
-      // Anzahl Bewertungen < 3 (aber > 0, zur Sicherheit)
-      const lowCount = values.filter(function (v) {
-        return v > 0 && v < 3;
-      }).length;
+      skipBtn.addEventListener('click', function () {
+        modal.style.display = 'none';
+        hiddenAltQ.value = '';
+        hiddenAltA.value = '';
+        allowSubmitWithoutCheck = true;
+        form.submit();
+      });
 
-      if (lowCount >= 2) {
-        // Submit abbrechen und Modal zeigen
-        event.preventDefault();
-        modal.style.display = 'flex';
-      }
+      confirmBtn.addEventListener('click', function () {
+        hiddenAltQ.value = modalAltQ.value.trim();
+        hiddenAltA.value = modalAltA.value.trim();
+        modal.style.display = 'none';
+        allowSubmitWithoutCheck = true;
+        form.submit();
+      });
     });
-
-    // Ohne Alternativen weiter
-    skipBtn.addEventListener('click', function () {
-      modal.style.display = 'none';
-      hiddenAltQ.value = '';
-      hiddenAltA.value = '';
-      allowSubmitWithoutCheck = true;
-      form.submit();
-    });
-
-    // Mit Alternativen absenden
-    confirmBtn.addEventListener('click', function () {
-      hiddenAltQ.value = modalAltQ.value.trim();
-      hiddenAltA.value = modalAltA.value.trim();
-      modal.style.display = 'none';
-      allowSubmitWithoutCheck = true;
-      form.submit();
-    });
-  });
-</script>
+  </script>
 </body>
 </html>
