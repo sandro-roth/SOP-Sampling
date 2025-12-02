@@ -76,17 +76,13 @@ def create_app() -> Flask:
         comprehensive = int(request.form['comprehensiveness'])
         factual = int(request.form['factuality'])
 
-        # Check if question is rejected!
-        rejected = request.form.get('reject_question', '0') == '1'
-        alternative_question = request.form.get('alternative_question', '').strip()
-        if not rejected:
-            alternative_question = None
+        # Optional alternatives from hidden fields
+        alternative_question = request.form.get('alternative_question', '').strip() or None
+        alternative_answer = request.form.get('alternative_answer', '').strip() or None
 
-        # Check if answer is rejected!
-        rejected_a = request.form.get('reject_answer', '0') == '1'
-        alternative_answer = request.form.get('alternative_answer', '').strip()
-        if not rejected_a:
-            alternative_answer = None
+        # Flags: rejected, wenn eine Alternative angegeben wurde
+        rejected_q = alternative_question is not None
+        rejected_a = alternative_answer is not None
 
         # Store in DB
         flask_log.info(f'\nQuestion_id: {question_id}\nFluency: {fluency}\nComprehensiveness: {comprehensive}\nFactual: {factual}')
@@ -94,7 +90,7 @@ def create_app() -> Flask:
         flask_log.info(f'Alternative Answer: {alternative_answer}')
         save_annotation_to_db(question_id=question_id, flu=fluency,
                               comp=comprehensive, fact=factual,
-                              rej_q=rejected, alt_q=alternative_question,
+                              rej_q=rejected_q, alt_q=alternative_question,
                               rej_a=rejected_a, alt_a=alternative_answer)
 
         # Load next question
