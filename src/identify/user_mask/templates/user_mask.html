@@ -56,7 +56,7 @@
 </head>
 <body class='container'>
 
-  <h1>User Mask</h1>
+  <h1>Registrierung</h1>
 
   <!-- Error messages -->
   {% if errors %}
@@ -78,12 +78,12 @@
 
   <form method='post' action="{{ url_for('user_mask') }}">
     <div class='box-header'>
-      <div class='box-title'>User information</div>
+      <div class='box-title'>Benutzer Informationen</div>
 
       <div class='form-grid'>
         <!-- First name -->
         <div>
-          <label for='first_name'>First name</label>
+          <label for='first_name'>Vorname</label>
           <input
             type='text'
             id='first_name'
@@ -95,7 +95,7 @@
 
         <!-- Last name -->
         <div>
-          <label for='last_name'>Last name</label>
+          <label for='last_name'>Nachname</label>
           <input
             type='text'
             id='last_name'
@@ -107,9 +107,9 @@
 
         <!-- Function dropdown -->
         <div class='full-width'>
-          <label for='function'>Function</label>
+          <label for='function'>Funktion</label>
           <select id='function' name='function' required>
-            <option value=''>Please select</option>
+            <option value=''>Bitte auswählen</option>
             {% for f in functions %}
               <option value="{{ f }}"
                 {% if form_data.function == f %}selected{% endif %}>
@@ -121,7 +121,7 @@
 
         <!-- Years in function -->
         <div class='full-width'>
-          <label for='years_in_function'>Years in function</label>
+          <label for='years_in_function'>Jahre in Funktion</label>
           <input
             type='number'
             id='years_in_function'
@@ -135,7 +135,7 @@
       </div>
     </div>
 
-    <button type='submit'>Save user</button>
+    <button type='submit'>Speichern</button>
   </form>
 
 </body>
