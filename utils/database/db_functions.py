@@ -82,30 +82,7 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
 
     """
 
-    placeholders = ','.join('?' for _ in range(len(data[0])))
-    if db == os.getenv('DATA_DIR_QUESTIONS'):
-        with db_conn(db) as (con, cur):
-            try:
-                name_list = validate_rows_for_table_db(cur, table=table, rows=data)
-                c_names = ','.join(name_list)
-                # check if potential entry already in backup table (print and log!)
-                c_data = check_entry(cur=cur, data=data, statements=statements, col_names=c_names)
-
-                # if not add question to original and backup
-                exec_cmd = statements['INSERT_INTO'].format(table=table,
-                                                            col_names=c_names,
-                                                            tuple_q_marks=placeholders)
-                exec_cmd_b = statements['INSERT_INTO'].format(table='backup',
-                                                            col_names=c_names,
-                                                            tuple_q_marks=placeholders)
-                cur.executemany(exec_cmd, c_data)
-                cur.executemany(exec_cmd_b, c_data)
-                con.commit()
-
-            except ValueError as e:
-                log.error(f'Your data structure is invalid ValueError {e}')
-
-    elif db == os.getenv('DATA_DIR'):
+    if db == os.getenv('DATA_DIR'):
         with db_conn(db) as (con, cur):
             if user_add and table == 'function':
                 try:
