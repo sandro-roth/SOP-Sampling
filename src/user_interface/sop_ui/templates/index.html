@@ -77,18 +77,44 @@
       margin-bottom: 1rem;
     }
 
+    .ratings-table td input[type="radio"] {
+      display: block;
+      margin: 0 auto;
+    }
+
     .ratings-table th,
     .ratings-table td {
       border: 1px solid #ccc;
       text-align: center;
       padding: 0.35rem 0.4rem;
     }
-
+    /* Erste Spalte: Text + ? */
     .ratings-table th:first-child,
     .ratings-table td:first-child {
       text-align: left;
-      width: 25%;
+      width: 30%;
       font-weight: 500;
+    }
+    /* Spalte 2 → "1 (Nein)" : schmaler */
+    .ratings-table th:nth-child(2),
+    .ratings-table td:nth-child(2) {
+      width: 15%;     /* enger */
+    }
+
+    /* Spalten 3, 4, 5 ("2", "3", "4"): etwas breiter */
+    .ratings-table th:nth-child(3),
+    .ratings-table td:nth-child(3),
+    .ratings-table th:nth-child(4),
+    .ratings-table td:nth-child(4),
+    .ratings-table th:nth-child(5),
+    .ratings-table td:nth-child(5) {
+      width: 10%;
+    }
+
+    /* Spalte 6 → "5 (Ja)" */
+    .ratings-table th:nth-child(6),
+    .ratings-table td:nth-child(6) {
+      width: 15%;
     }
 
     .ratings-table input[type="radio"] {
@@ -153,6 +179,28 @@
       gap: 0.5rem;
       margin-top: 0.8rem;
     }
+    .tooltip {
+      display: inline-block;
+      position: relative;
+      cursor: help;
+      margin-left: 0.25rem;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .tooltip:hover::after {
+      content: attr(data-tip);
+      position: absolute;
+      left: 0;
+      top: 1.4rem;
+      background: #333;
+      color: white;
+      padding: 0.4rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      z-index: 100;
+    }
 
   </style>
 </head>
@@ -199,7 +247,10 @@
           </thead>
           <tbody>
             <tr>
-              <td>Flüssig</td>
+              <td>
+                Flüssig
+                <span class="tooltip" data-tip="Wie gut lesbar und natürlich klingt die Antwort?">?</span>
+              </td>
               <td><input type="radio" name="fluency" value="1" required></td>
               <td><input type="radio" name="fluency" value="2"></td>
               <td><input type="radio" name="fluency" value="3"></td>
@@ -207,7 +258,10 @@
               <td><input type="radio" name="fluency" value="5"></td>
             </tr>
             <tr>
-              <td>Umfassend</td>
+              <td>
+                Umfassend
+                <span class="tooltip" data-tip="Wie vollständig und tiefgehend beantwortet die Antwort die Frage?">?</span>
+              </td>
               <td><input type="radio" name="comprehensiveness" value="1" required></td>
               <td><input type="radio" name="comprehensiveness" value="2"></td>
               <td><input type="radio" name="comprehensiveness" value="3"></td>
@@ -215,7 +269,10 @@
               <td><input type="radio" name="comprehensiveness" value="5"></td>
             </tr>
             <tr>
-              <td>Sachlich korrekt</td>
+              <td>
+                Sachlich korrekt
+                <span class="tooltip" data-tip="Sind alle enthaltenen Informationen korrekt und präzise?">?</span>
+              </td>
               <td><input type="radio" name="factuality" value="1" required></td>
               <td><input type="radio" name="factuality" value="2"></td>
               <td><input type="radio" name="factuality" value="3"></td>
