@@ -138,68 +138,41 @@
     <!-- LEFT COLUMN: question, answer, ratings, button -->
     <div class="left-column">
       <form method="post" action="{{ url_for('submit_annotation') }}">
-        <div class="controls-row">
-          <button type="button" id="rejectQuestionBtn">Reject Question</button>
-          <input type="hidden" name="reject_question" id="rejectQuestionInput" value="0">
-
-          <button type="button" id="rejectAnswerBtn" style="margin-left: 0.5rem;">Reject Answer</button>
-          <input type="hidden" name="reject_answer" id="rejectAnswerInput" value="0">
-        </div>
         <!-- Hidden ID so the backend knows which question this is -->
         <input type="hidden" name="question_id" value="{{ question_id }}">
 
         <!-- Question box (read-only) -->
         <div class="box-header", id="questionBox">
           <div class="box-header-top">
-            <div class="box-title">Question </div>
+            <div class="box-title">Frage </div>
           </div>
           <div class="box-content">{{ question_text | trim }}</div>
-        </div>
-
-        <!-- Alternative question box (shown only when question is rejected) -->
-        <div class="box-header" id="alternativeQuestionWrapper" style="display: none; margin-top: 0.5rem;">
-          <div class="box-header-top">
-            <div class="box-title">Alternative question</div>
-          </div>
-          <div class="box-content">
-            <textarea name="alternative_question" rows="3" style="width: 100%;"></textarea>
-          </div>
         </div>
 
         <!-- Answer box (read-only) -->
         <div class="box-header" id="answerBox">
           <div class="box-header-top">
-            <div class="box-title">Answer </div>
+            <div class="box-title">Antwort </div>
           </div>
           <div class="box-content">{{ answer_text | trim }}</div>
         </div>
 
-        <!-- Alternative answer box (shown only when answer is rejected) -->
-        <div class="box-header" id="alternativeAnswerWrapper" style="display: none; margin-top: 0.5rem;">
-          <div class="box-header-top">
-            <div class="box-title">Alternative answer</div>
-          </div>
-          <div class="box-content">
-            <textarea name="alternative_answer" rows="4" style="width: 100%;"></textarea>
-          </div>
-        </div>
-
         <!-- Ratings -->
-        <p class="ratings-heading">The Answer is</p>
+        <p class="ratings-heading">Die Antwort ist</p>
         <table class="ratings-table">
           <thead>
             <tr>
               <th></th>
-              <th>1 (no)</th>
+              <th>1 (Nein)</th>
               <th>2</th>
               <th>3</th>
               <th>4</th>
-              <th>5 (yes)</th>
+              <th>5 (Ja)</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Fluent</td>
+              <td>Flüssig</td>
               <td><input type="radio" name="fluency" value="1" required></td>
               <td><input type="radio" name="fluency" value="2"></td>
               <td><input type="radio" name="fluency" value="3"></td>
@@ -207,7 +180,7 @@
               <td><input type="radio" name="fluency" value="5"></td>
             </tr>
             <tr>
-              <td>Comprehensive</td>
+              <td>Umfassend</td>
               <td><input type="radio" name="comprehensiveness" value="1" required></td>
               <td><input type="radio" name="comprehensiveness" value="2"></td>
               <td><input type="radio" name="comprehensiveness" value="3"></td>
@@ -215,7 +188,7 @@
               <td><input type="radio" name="comprehensiveness" value="5"></td>
             </tr>
             <tr>
-              <td>Factual</td>
+              <td>Sachlich korrekt</td>
               <td><input type="radio" name="factuality" value="1" required></td>
               <td><input type="radio" name="factuality" value="2"></td>
               <td><input type="radio" name="factuality" value="3"></td>
@@ -227,80 +200,17 @@
 
         <!-- Submit button -->
         <div class="submit-row">
-          <button type="submit">Submit and Next Question</button>
+          <button type="submit">Absenden und nächste Frage</button>
         </div>
       </form>
     </div>
 
     <!-- RIGHT COLUMN: passage (read-only) -->
     <div class="right-column">
-      <div class="passage-title">Passage</div>
+      <div class="passage-title">Kontext</div>
       <div class="passage-box">{{ passage_text | trim }}</div>
     </div>
 
   </div>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Question reject
-    const qBtn = document.getElementById('rejectQuestionBtn');
-    const qHidden = document.getElementById('rejectQuestionInput');
-    const questionBox = document.getElementById('questionBox');
-    const altQWrapper = document.getElementById('alternativeQuestionWrapper');
-
-    qBtn.addEventListener('click', function () {
-      const isActive = qHidden.value === '1';
-
-      if (isActive) {
-        qHidden.value = '0';
-        qBtn.textContent = 'Reject question';
-        if (questionBox) {
-          questionBox.classList.remove('box-rejected');
-        }
-        if (altQWrapper) {
-          altQWrapper.style.display = 'none';
-        }
-      } else {
-        qHidden.value = '1';
-        qBtn.textContent = 'Undo reject';
-        if (questionBox) {
-          questionBox.classList.add('box-rejected');
-        }
-        if (altQWrapper) {
-          altQWrapper.style.display = 'block';
-        }
-      }
-    });
-
-    // Answer reject
-    const aBtn = document.getElementById('rejectAnswerBtn');
-    const aHidden = document.getElementById('rejectAnswerInput');
-    const answerBox = document.getElementById('answerBox');
-    const altAWrapper = document.getElementById('alternativeAnswerWrapper');
-
-    aBtn.addEventListener('click', function () {
-      const isActive = aHidden.value === '1';
-
-      if (isActive) {
-        aHidden.value = '0';
-        aBtn.textContent = 'Reject answer';
-        if (answerBox) {
-          answerBox.classList.remove('box-rejected');
-        }
-        if (altAWrapper) {
-          altAWrapper.style.display = 'none';
-        }
-      } else {
-        aHidden.value = '1';
-        aBtn.textContent = 'Undo reject';
-        if (answerBox) {
-          answerBox.classList.add('box-rejected');
-        }
-        if (altAWrapper) {
-          altAWrapper.style.display = 'block';
-        }
-      }
-    });
-  });
-</script>
 </body>
 </html>
