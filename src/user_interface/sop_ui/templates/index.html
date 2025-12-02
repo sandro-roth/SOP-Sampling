@@ -118,15 +118,42 @@
     .controls-row {
       margin-bottom: 0.8rem;
     }
-
-    .box-rejected {
-      opacity: 0.6;
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1000;
     }
 
-    .box-rejected .box-title,
-    .box-rejected .box-content {
-      text-decoration: line-through;
+    .modal-content {
+      background: var(--pico-background-color);
+      padding: 1rem 1.2rem;
+      border-radius: 6px;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
+
+    .modal-content h2 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-content p {
+      margin-top: 0;
+      margin-bottom: 0.8rem;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+    }
+
   </style>
 </head>
 <body class="container">
@@ -216,5 +243,86 @@
     </div>
 
   </div>
+  <!-- Modal for alternative question and answer -->
+  <div id="altModal" class="modal-backdrop" style="display: none;">
+    <div class="modal-content">
+      <h2>Alternative Frage und Antwort</h2>
+      <p>
+        Mindestens zwei Kriterien wurden niedrig bewertet.
+        Sie können eine alternative Frage und eine alternative Antwort vorschlagen,
+        wenn Sie möchten.
+      </p>
+
+      <label for="modalAlternativeQuestion"><strong>Alternative Frage (optional)</strong></label>
+      <textarea id="modalAlternativeQuestion" rows="3" style="width: 100%;"></textarea>
+
+      <label for="modalAlternativeAnswer" style="margin-top: 0.5rem;"><strong>Alternative Antwort (optional)</strong></label>
+      <textarea id="modalAlternativeAnswer" rows="4" style="width: 100%;"></textarea>
+
+      <div class="modal-buttons">
+        <button type="button" id="modalSkipBtn">Ohne Alternativen weiter</button>
+        <button type="button" id="modalConfirmBtn">Mit Alternativen absenden</button>
+      </div>
+    </div>
+  </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+
+    const modal = document.getElementById('altModal');
+    const modalAltQ = document.getElementById('modalAlternativeQuestion');
+    const modalAltA = document.getElementById('modalAlternativeAnswer');
+    const hiddenAltQ = document.getElementById('alternative_question');
+    const hiddenAltA = document.getElementById('alternative_answer');
+    const skipBtn = document.getElementById('modalSkipBtn');
+    const confirmBtn = document.getElementById('modalConfirmBtn');
+
+    // Flag, damit wir nach dem Schließen des Modals normal submitten können
+    let allowSubmitWithoutCheck = false;
+
+    form.addEventListener('submit', function (event) {
+      if (allowSubmitWithoutCheck) {
+        // Beim zweiten Durchlauf nicht erneut prüfen
+        return;
+      }
+
+      // Ratings lesen
+      const names = ['fluency', 'comprehensiveness', 'factuality'];
+      const values = names.map(function (name) {
+        const checked = form.querySelector('input[name="' + name + '"]:checked');
+        return checked ? parseInt(checked.value, 10) : 0;
+      });
+
+      // Anzahl Bewertungen < 3 (aber > 0, zur Sicherheit)
+      const lowCount = values.filter(function (v) {
+        return v > 0 && v < 3;
+      }).length;
+
+      if (lowCount >= 2) {
+        // Submit abbrechen und Modal zeigen
+        event.preventDefault();
+        modal.style.display = 'flex';
+      }
+    });
+
+    // Ohne Alternativen weiter
+    skipBtn.addEventListener('click', function () {
+      modal.style.display = 'none';
+      hiddenAltQ.value = '';
+      hiddenAltA.value = '';
+      allowSubmitWithoutCheck = true;
+      form.submit();
+    });
+
+    // Mit Alternativen absenden
+    confirmBtn.addEventListener('click', function () {
+      hiddenAltQ.value = modalAltQ.value.trim();
+      hiddenAltA.value = modalAltA.value.trim();
+      modal.style.display = 'none';
+      allowSubmitWithoutCheck = true;
+      form.submit();
+    });
+  });
+</script>
 </body>
 </html>
