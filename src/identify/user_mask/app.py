@@ -13,11 +13,9 @@ loaded_from = __load_env(cwd=cwd)
 
 # Example function choices for the dropdown
 FUNCTION_CHOICES = [
-    "Physician",
-    "Nurse",
-    "Researcher",
+    "Arzt / Ärztin",
+    "Pflegekraft",
     "Student",
-    "Technician",
     "Other"
 ]
 
