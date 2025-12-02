@@ -77,10 +77,16 @@ def create_app() -> Flask:
     def home():
         # Load one question
         flask_log.info('New Question loaded')
-        question_id, question_text, answer_text, passage_text = get_next_example_from_db(usr_pk=1, fun_pk=2)
-        return render_template('index.html', question_id=question_id,
-                               question_text=question_text.strip(), answer_text=answer_text.strip(),
-                               passage_text=passage_text.strip())
+
+        try:
+            question_id, question_text, answer_text, passage_text = get_next_example_from_db(usr_pk=1, fun_pk=2)
+        except RuntimeError as e:
+            flask_log.info("No more questions for this user/function: %s", e)
+            return render_template('index.html', no_questions=True)
+
+        return render_template('index.html', no_question=False,
+                               question_id=question_id, question_text=question_text.strip(),
+                               answer_text=answer_text.strip(), passage_text=passage_text.strip())
 
     @app.post('/submit_annotation')
     def submit_annotation():

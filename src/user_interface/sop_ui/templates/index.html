@@ -219,99 +219,109 @@
 
   <h1>SOP Annotation</h1>
 
-  <div class="layout">
-
-    <!-- LEFT COLUMN: question, answer, ratings, button -->
-    <div class="left-column">
-      <form method="post" action="{{ url_for('submit_annotation') }}">
-        <!-- Hidden ID so the backend knows which question this is -->
-        <input type="hidden" name="question_id" value="{{ question_id }}">
-
-        <!-- Question box (read-only) -->
-        <div class="box-header" id="questionBox">
-          <div class="box-header-top">
-            <div class="box-title">Frage</div>
-          </div>
-          <div class="box-content">{{ question_text | trim }}</div>
-        </div>
-
-        <!-- Answer box (read-only) -->
-        <div class="box-header" id="answerBox">
-          <div class="box-header-top">
-            <div class="box-title">Antwort</div>
-          </div>
-          <div class="box-content">{{ answer_text | trim }}</div>
-        </div>
-
-        <!-- Ratings -->
-        <p class="ratings-heading">Die Antwort ist</p>
-        <table class="ratings-table">
-          <thead>
-            <tr>
-              <th></th>
-              <th>1 (Nein)</th>
-              <th>2</th>
-              <th>3</th>
-              <th>4</th>
-              <th>5 (Ja)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                Flüssig
-                <span class="tooltip" data-tip="Wie gut lesbar und natürlich klingt die Antwort?">?</span>
-              </td>
-              <td><input type="radio" name="fluency" value="1" required></td>
-              <td><input type="radio" name="fluency" value="2"></td>
-              <td><input type="radio" name="fluency" value="3"></td>
-              <td><input type="radio" name="fluency" value="4"></td>
-              <td><input type="radio" name="fluency" value="5"></td>
-            </tr>
-            <tr>
-              <td>
-                Umfassend
-                <span class="tooltip" data-tip="Wie vollständig und tiefgehend beantwortet die Antwort die Frage?">?</span>
-              </td>
-              <td><input type="radio" name="comprehensiveness" value="1" required></td>
-              <td><input type="radio" name="comprehensiveness" value="2"></td>
-              <td><input type="radio" name="comprehensiveness" value="3"></td>
-              <td><input type="radio" name="comprehensiveness" value="4"></td>
-              <td><input type="radio" name="comprehensiveness" value="5"></td>
-            </tr>
-            <tr>
-              <td>
-                Sachlich korrekt
-                <span class="tooltip" data-tip="Sind alle enthaltenen Informationen korrekt und präzise?">?</span>
-              </td>
-              <td><input type="radio" name="factuality" value="1" required></td>
-              <td><input type="radio" name="factuality" value="2"></td>
-              <td><input type="radio" name="factuality" value="3"></td>
-              <td><input type="radio" name="factuality" value="4"></td>
-              <td><input type="radio" name="factuality" value="5"></td>
-            </tr>
-          </tbody>
-        </table>
-
-        <!-- Hidden fields for optional alternatives -->
-        <input type="hidden" name="alternative_question" id="alternative_question">
-        <input type="hidden" name="alternative_answer" id="alternative_answer">
-
-        <!-- Submit button -->
-        <div class="submit-row">
-          <button type="submit">Absenden und nächste Frage</button>
-        </div>
-      </form>
+  {% if no_questions %}
+    <div class="box-header">
+      <div class="box-header-top">
+        <div class="box-title">Keine Fragen mehr verfügbar</div>
+      </div>
+      <p class="box-content">
+        Für diese Funktion sind derzeit keine weiteren Fragen für Sie vorhanden.
+      </p>
     </div>
+  {% else %}
+    <div class="layout">
 
-    <!-- RIGHT COLUMN: passage (read-only) -->
-    <div class="right-column">
-      <div class="passage-title">Kontext</div>
-      <div class="passage-box">{{ passage_text | trim }}</div>
+      <!-- LEFT COLUMN: question, answer, ratings, button -->
+      <div class="left-column">
+        <form method="post" action="{{ url_for('submit_annotation') }}">
+          <!-- Hidden ID so the backend knows which question this is -->
+          <input type="hidden" name="question_id" value="{{ question_id }}">
+
+          <!-- Question box (read-only) -->
+          <div class="box-header" id="questionBox">
+            <div class="box-header-top">
+              <div class="box-title">Frage</div>
+            </div>
+            <div class="box-content">{{ question_text | trim }}</div>
+          </div>
+
+          <!-- Answer box (read-only) -->
+          <div class="box-header" id="answerBox">
+            <div class="box-header-top">
+              <div class="box-title">Antwort</div>
+            </div>
+            <div class="box-content">{{ answer_text | trim }}</div>
+          </div>
+
+          <!-- Ratings -->
+          <p class="ratings-heading">Die Antwort ist</p>
+          <table class="ratings-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>1 (Nein)</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5 (Ja)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  Flüssig
+                  <span class="tooltip" data-tip="Wie gut lesbar und natürlich klingt die Antwort?">?</span>
+                </td>
+                <td><input type="radio" name="fluency" value="1" required></td>
+                <td><input type="radio" name="fluency" value="2"></td>
+                <td><input type="radio" name="fluency" value="3"></td>
+                <td><input type="radio" name="fluency" value="4"></td>
+                <td><input type="radio" name="fluency" value="5"></td>
+              </tr>
+              <tr>
+                <td>
+                  Umfassend
+                  <span class="tooltip" data-tip="Wie vollständig und tiefgehend beantwortet die Antwort die Frage?">?</span>
+                </td>
+                <td><input type="radio" name="comprehensiveness" value="1" required></td>
+                <td><input type="radio" name="comprehensiveness" value="2"></td>
+                <td><input type="radio" name="comprehensiveness" value="3"></td>
+                <td><input type="radio" name="comprehensiveness" value="4"></td>
+                <td><input type="radio" name="comprehensiveness" value="5"></td>
+              </tr>
+              <tr>
+                <td>
+                  Sachlich korrekt
+                  <span class="tooltip" data-tip="Sind alle enthaltenen Informationen korrekt und präzise?">?</span>
+                </td>
+                <td><input type="radio" name="factuality" value="1" required></td>
+                <td><input type="radio" name="factuality" value="2"></td>
+                <td><input type="radio" name="factuality" value="3"></td>
+                <td><input type="radio" name="factuality" value="4"></td>
+                <td><input type="radio" name="factuality" value="5"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Hidden fields for optional alternatives -->
+          <input type="hidden" name="alternative_question" id="alternative_question">
+          <input type="hidden" name="alternative_answer" id="alternative_answer">
+
+          <!-- Submit button -->
+          <div class="submit-row">
+            <button type="submit">Absenden und nächste Frage</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- RIGHT COLUMN: passage (read-only) -->
+      <div class="right-column">
+        <div class="passage-title">Kontext</div>
+        <div class="passage-box">{{ passage_text | trim }}</div>
+      </div>
+
     </div>
-
-  </div>
-
+  {% endif %}
   <!-- Modal for alternative question and answer -->
   <div id="altModal" class="modal-backdrop" style="display: none;">
     <div class="modal-content">
