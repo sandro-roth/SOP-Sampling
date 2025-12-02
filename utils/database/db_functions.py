@@ -34,14 +34,31 @@ def db_conn(db: str):
 
 
 def sampling(statements: dict, j_file: List[dict], usr_id: int, fun_id: int) -> dict:
-    question = random.choice(j_file)
-    q_rand_id = question['q_id']
-    with db_conn(os.getenv('DATA_DIR')) as (con, cur):
-        anno_a = cur.execute(statements['SELECT_JOIN'], [q_rand_id]).fetchall()
+    """
+
+    :param statements:
+    :param j_file:
+    :param usr_id:
+    :param fun_id:
+    :return:
+    """
+
+    max_attempts = len(j_file) * 2
+    for _ in range (max_attempts):
+        if not j_file:
+            raise RuntimeError('No questions left in j_file.')
+
+        question = random.choice(j_file)
+        q_rand_id = question['q_id']
+
+        with db_conn(os.getenv('DATA_DIR')) as (con, cur):
+            anno_a = cur.execute(statements['SELECT_JOIN'], [q_rand_id]).fetchall()
+
         # If question not in annotation table:
         if len(anno_a) == 0:
             log.info('Question %s is not in annotation table yet', q_rand_id)
             return question
+
         # If question is annotated once
         elif len(anno_a) == 1:
             # If same function but different User annotate!
@@ -52,18 +69,15 @@ def sampling(statements: dict, j_file: List[dict], usr_id: int, fun_id: int) -> 
             if annotator != usr_id and ano_fun == fun_id:
                 log.info(' ---  SAME FUNCTION BUT DIFFERENT USER ---')
                 return question
-            else:
-                log.info('Recursive call of function: sampling --- no delete question')
-                return sampling(statements=statements, j_file=j_file, usr_id=usr_id, fun_id=fun_id)
 
         elif len(anno_a) == 2:
             log.warning(f'Question_id: {q_rand_id}, has been used twice already so it will be deleted!')
-            log.warning('Recursive call of function: sampling --- delete question')
             j_file.remove(question)
-            return sampling(statements=statements, j_file=j_file, usr_id=usr_id, fun_id=fun_id)
 
         else:
             raise ValueError('Something went wrong. Questions can not annotated more than twice.')
+
+    raise RuntimeError('Could not find a suitable question after several attempts.')
 
 
 def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict, user_add: bool = False) -> int | None:
