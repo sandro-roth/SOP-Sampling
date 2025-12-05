@@ -1,15 +1,16 @@
 import os
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from pathlib import Path
 
-from utils import setup_logging, get_logger, __load_env
-
-
+from utils import setup_logging, get_logger, __load_env, load_yaml, db_push
 
 # Setup
 cwd = Path(__file__).resolve()
 loaded_from = __load_env(cwd=cwd)
+statements = load_yaml()
+db_path = os.getenv('DATA_DIR')
+Port = os.getenv('SOP_UI_PORT')
 
 # Example function choices for the dropdown
 FUNCTION_CHOICES = [
@@ -82,13 +83,15 @@ def create_app() -> Flask:
 
             if not errors:
                 flask_log.info(f'Received user mask data: {form_data}')
-                success_message = "User data saved successfully."
-                # Reset it to empty values
-                form_data = {'first_name': '',
-                             'last_name': '',
-                             'function': '',
-                             'years_in_function': ''}
 
+                pk_func = db_push(data=[form_data['function']], db=db_path, table='function', statements=statements, user_add=True)
+                usr_data = [(form_data['first_name'], form_data['last_name'], pk_func, form_data['years_in_function'])]
+                pk_usr = db_push(data=usr_data, db=db_path, table='user', statements=statements, user_add=True)
+
+                # redirect to question container
+                target_url = (f'http://localhost:{Port}/'
+                              f'?user_pk={pk_usr}&func_pk={pk_func}')
+                #return redirect(target_url)
 
         return render_template(
             'user_mask.html',
