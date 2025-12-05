@@ -85,7 +85,7 @@ def create_app() -> Flask:
                 flask_log.info(f'Received user mask data: {form_data}')
 
                 pk_func = db_push(data=[form_data['function']], db=db_path, table='function', statements=statements, user_add=True)
-                usr_data = [(form_data['first_name'], form_data['last_name'], pk_func, form_data['years_in_function'])]
+                usr_data = [(form_data['first_name'], form_data['last_name'], pk_func, int(form_data['years_in_function']))]
                 pk_usr = db_push(data=usr_data, db=db_path, table='user', statements=statements, user_add=True)
 
                 # redirect to question container
