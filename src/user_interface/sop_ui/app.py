@@ -2,7 +2,7 @@ import os
 import json
 
 from pathlib import Path
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 
 from utils import setup_logging, get_logger, __load_env, sampling, db_push, load_yaml
 
@@ -14,9 +14,6 @@ statements = load_yaml()
 q_bank_path = Path(os.getenv('DATA_DIR_QUESTIONS')).resolve()
 q_bank = None
 db_path = os.getenv('DATA_DIR')
-
-USR_PK = 1
-FUN_PK = 2
 
 
 def load_q_bank():
@@ -36,7 +33,7 @@ def get_next_example_from_db(usr_pk: int, fun_pk: int) -> tuple[int, str, str, s
 
     jason_file = load_q_bank()
     question = sampling(statements=statements, j_file=jason_file, usr_id=usr_pk, fun_id=fun_pk)
-    log_loc.info(f'{question['q_id']}, {question['question']}, {question['answer']}')
+    log_loc.info(f"{question['q_id']}, {question['question']}, {question['answer']}")
 
     with open(q_bank_path, 'w', encoding='utf-8') as file:
         json.dump(jason_file, file, ensure_ascii=False, indent=2)
@@ -99,14 +96,30 @@ def create_app() -> Flask:
     """
     app = Flask(__name__, template_folder=str(cwd.parent / 'templates'))
     app.config['TEMPLATES_AUTO_RELOAD'] = True
+    app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret-change-me")
     flask_log = get_logger(__name__)
 
     @app.get('/')
     def home():
-        # Load one question
-        flask_log.info('New Question loaded')
+        user_pk = session.get("user_pk")
+        func_pk = session.get("func_pk")
+
+        # If not in session yet, this is probably the first request after redirect
+        if user_pk is None or func_pk is None:
+            user_pk = request.args.get("user_pk", type=int)
+            func_pk = request.args.get("func_pk", type=int)
+
+            if user_pk is None or func_pk is None:
+                flask_log.error("Missing user_pk or func_pk in query parameters and session")
+                return "Missing user id or function id", 400
+
+            # Store in session for all future requests
+            session["user_pk"] = user_pk
+            session["func_pk"] = func_pk
+
+        flask_log.info("New question loaded for user_pk=%s func_pk=%s", user_pk, func_pk)
         try:
-            question_id, question_text, answer_text, passage_text = get_next_example_from_db(usr_pk=USR_PK, fun_pk=FUN_PK)
+            question_id, question_text, answer_text, passage_text = get_next_example_from_db(usr_pk=user_pk, fun_pk=func_pk)
         except RuntimeError as e:
             flask_log.info("No more questions for this user/function: %s", e)
             return render_template('index.html', no_questions=True)
@@ -118,6 +131,7 @@ def create_app() -> Flask:
     @app.post('/submit_annotation')
     def submit_annotation():
         # Read values from UI
+        user_pk = session.get("user_pk")
         question_id = int(request.form['question_id'])
         fluency = int(request.form['fluency'])
         comprehensive = int(request.form['comprehensiveness'])
@@ -140,7 +154,7 @@ def create_app() -> Flask:
         flask_log.info(f'Alternative Answer: {alt_ans}')
 
         save_annotation_to_db(qstn=question_text, q_id=question_id, alt_q=alt_quest, passg=passage_text, ansr=answer_text,
-                              alt_a=alt_ans, flu=fluency, comp=comprehensive, fact=factual, ann_id=USR_PK, q_acc=True)
+                              alt_a=alt_ans, flu=fluency, comp=comprehensive, fact=factual, ann_id=user_pk, q_acc=True)
 
         # Load next question
         return redirect(url_for('home'))
