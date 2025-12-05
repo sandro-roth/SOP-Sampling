@@ -1,8 +1,7 @@
 import os
-import json
 from pathlib import Path
 
-from utils import setup_logging, get_logger, __load_env, db_conn, preview_db, sampling, load_yaml, db_push
+from utils import setup_logging, get_logger, __load_env, db_conn, preview_db
 from .function_table import CREATE_FUNCTION_TABLE
 from .user_table import CREATE_USER_TABLE
 from .annotations_table import CREATE_ANNOTATION_TABLE
@@ -10,7 +9,6 @@ from .annotations_table import CREATE_ANNOTATION_TABLE
 def main():
     cwd = Path(__file__).resolve()
     loaded_from = __load_env(cwd=cwd)
-    statements = load_yaml()
 
     setup_logging(app_name='database', log_dir=os.getenv('DB_LOG_DIR'), to_stdout=False)
     db_log = get_logger(__name__)
