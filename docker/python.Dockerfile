@@ -15,9 +15,17 @@ ENV NO_PROXY=${NO_PROXY}
 
 WORKDIR /app
 
+# tini, ca-certificates, curl
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends build-essential curl \
+    && apt-get install -y --no-install-recommends tini ca-certificates curl \
     && rm -rf /var/lib/apt/lists/*
+
+
+
+
+
+
+
 
 # 1) install shared utils as "my-utils"
 COPY pyproject.toml ./pyproject.toml
