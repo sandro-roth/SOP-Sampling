@@ -20,7 +20,12 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends tini ca-certificates curl \
     && rm -rf /var/lib/apt/lists/*
 
+ENTRYPOINT ["/usr/bin/tini","-g","--"]
 
+# copy your CA bundle and register it
+# usz-bundle.crt is in SOP-Sampling/certs
+COPY certs/usz-bundle.crt /usr/local/share/ca-certificates/usz-bundle.crt
+RUN update-ca-certificates
 
 
 
