@@ -23,11 +23,18 @@ RUN apt-get update \
 ENTRYPOINT ["/usr/bin/tini","-g","--"]
 
 # copy your CA bundle and register it
-# usz-bundle.crt is in SOP-Sampling/certs
 COPY certs/usz-bundle.crt /usr/local/share/ca-certificates/usz-bundle.crt
 RUN update-ca-certificates
 
-
+# pip config, add proxy only if USE_PROXY=true
+RUN set -eux; \
+    printf "[global]\ntrusted-host = pypi.org\n    files.pythonhosted.org\n" > /etc/pip.conf; \
+    if [ "$USE_PROXY" = "true" ]; then \
+        printf "proxy = %s\n" "$HTTP_PROXY" >> /etc/pip.conf; \
+        echo "pip will use proxy"; \
+    else \
+        echo "pip without proxy"; \
+    fi
 
 
 
