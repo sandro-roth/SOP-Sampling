@@ -1,3 +1,53 @@
+FROM python:3.12-slim
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
+
+WORKDIR /app
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends build-essential curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# 1) install shared utils as "my-utils"
+COPY pyproject.toml ./pyproject.toml
+COPY utils ./utils
+RUN pip install --upgrade pip \
+    && pip install .
+
+# 2) install database service (sop-sql or similar)
+COPY src/database/pyproject.toml ./src/database/pyproject.toml
+COPY src/database/sop_sql ./src/database/sop_sql
+WORKDIR /app/src/database
+RUN pip install .
+
+# 3) install identify service (user-mask or similar)
+COPY src/identify/pyproject.toml ./src/identify/pyproject.toml
+COPY src/identify/user_mask ./src/identify/user_mask
+WORKDIR /app/src/identify
+RUN pip install .
+
+# 4) install UI service (sop-ui)
+COPY src/user_interface/pyproject.toml ./src/user_interface/pyproject.toml
+COPY src/user_interface/sop_ui ./src/user_interface/sop_ui
+WORKDIR /app/src/user_interface
+RUN pip install .
+
+# 5) copy scripts and go back to /app
+WORKDIR /app
+COPY scripts ./scripts
+RUN chmod +x scripts/*.sh
+
+# create dirs that you will mount
+RUN mkdir -p /data /logs /config /certs
+
+# default command, docker compose will override anyway
+CMD ["bash"]
+
+
+
+
+
 
 # get rid of warning use for production environment
 # CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:8000", "sop_ui.app:app"]
