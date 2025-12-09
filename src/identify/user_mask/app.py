@@ -1,6 +1,7 @@
 import os
+import requests
 
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for, Response
 from pathlib import Path
 
 from utils import setup_logging, get_logger, __load_env, load_yaml, db_push
@@ -10,7 +11,8 @@ cwd = Path(__file__).resolve()
 loaded_from = __load_env(cwd=cwd)
 statements = load_yaml()
 db_path = os.getenv('DATA_DIR')
-Port = os.getenv('SOP_UI_PORT')
+UI_HOST = os.getenv('SOP_UI_HOST', 'ui')  # Service name from docker compose
+UI_PORT = os.getenv('SOP_UI_PORT', '8000')
 
 # Example function choices for the dropdown
 FUNCTION_CHOICES = [
@@ -88,10 +90,12 @@ def create_app() -> Flask:
                 usr_data = [(form_data['first_name'], form_data['last_name'], pk_func, int(form_data['years_in_function']))]
                 pk_usr = db_push(data=usr_data, db=db_path, table='user', statements=statements, user_add=True)
 
-                # redirect to question container
-                target_url = (f'http://localhost:{Port}/'
-                              f'?user_pk={pk_usr}&func_pk={pk_func}')
-                #return redirect(target_url)
+                # redirect intern auf Proxy Route /annotate
+                return redirect(url_for(
+                    'annotate',
+                    user_pk=pk_usr,
+                    func_pk=pk_func
+                ))
 
         return render_template(
             'user_mask.html',
@@ -100,6 +104,40 @@ def create_app() -> Flask:
             success_message=success_message,
             form_data=form_data,
         )
+
+    @app.route('/annotate', methods=['GET'])
+    def annotate():
+        user_pk = request.args.get("user_pk")
+        func_pk = request.args.get("func_pk")
+
+        ui_url = f"http://{UI_HOST}:{UI_PORT}/"
+
+        params = {}
+        if user_pk and func_pk:
+            params = {"user_pk": user_pk, "func_pk": func_pk}
+
+        try:
+            ui_resp = requests.get(
+                ui_url,
+                params=params or None,
+                cookies=request.cookies,
+                timeout=5,
+            )
+        except requests.RequestException as e:
+            flask_log.error("Error contacting UI service: %s", e)
+            return "UI service unavailable", 502
+
+        excluded_headers = {
+            "content-encoding", "content-length",
+            "transfer-encoding", "connection"
+        }
+        headers = [
+            (name, value)
+            for name, value in ui_resp.headers.items()
+            if name.lower() not in excluded_headers
+        ]
+        return Response(ui_resp.content, ui_resp.status_code, headers)
+
     return app
 
 
