@@ -177,7 +177,7 @@ def create_app() -> Flask:
 
     @app.route("/api/db-preview", methods=["GET"])
     def db_preview():
-        """Preview all DB tables as echtes JSON für pandas."""
+        """Preview all DB tables as JSON für pandas."""
         flask_log.info("DB preview requested")
 
         import sqlite3
@@ -202,7 +202,6 @@ def create_app() -> Flask:
                 df = pd.read_sql(f"SELECT * FROM {t}", con)
             else:
                 df = pd.read_sql(f"SELECT * FROM {t} LIMIT {limit}", con)
-            # jede Zeile als dict, perfekt für pandas auf Clientseite
             result[t] = df.to_dict(orient="records")
 
         con.close()
