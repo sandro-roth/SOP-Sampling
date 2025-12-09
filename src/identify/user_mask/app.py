@@ -1,10 +1,10 @@
 import os
 import requests
 
-from flask import Flask, render_template, request, redirect, url_for, Response
+from flask import Flask, render_template, request, redirect, url_for, Response, jsonify
 from pathlib import Path
 
-from utils import setup_logging, get_logger, __load_env, load_yaml, db_push
+from utils import setup_logging, get_logger, __load_env, load_yaml, db_push, preview_db
 
 # Setup
 cwd = Path(__file__).resolve()
@@ -174,6 +174,39 @@ def create_app() -> Flask:
             if name.lower() not in excluded_headers
         ]
         return Response(ui_resp.content, ui_resp.status_code, headers)
+
+    @app.route("/api/db-preview", methods=["GET"])
+    def db_preview():
+        """Preview all DB tables as text, returned as JSON."""
+        flask_log.info("DB preview requested")
+
+        db_file = db_path
+        preview_dir = os.getenv("PREVIEW_DIR")
+        limit = request.args.get("limit", default=100, type=int)
+
+        if not db_file:
+            flask_log.error("DATA_DIR is not set")
+            return jsonify({"error": "DATA_DIR is not set"}), 500
+
+        if not preview_dir:
+            flask_log.error("PREVIEW_DIR is not set")
+            return jsonify({"error": "PREVIEW_DIR is not set"}), 500
+
+        # create preview of data
+        preview_db(db=db_file, pre_dir=preview_dir, limit=limit)
+
+        # Content of txt data
+        pre_path = Path(preview_dir)
+        result: dict[str, str] = {}
+
+        for txt_file in pre_path.glob("*.txt"):
+            try:
+                with txt_file.open("r", encoding="utf-8") as f:
+                    result[txt_file.stem] = f.read()
+            except OSError as e:
+                flask_log.error("Could not read preview file %s: %s", txt_file, e)
+
+        return jsonify(result)
 
     return app
 
