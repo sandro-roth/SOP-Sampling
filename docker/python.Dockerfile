@@ -37,6 +37,22 @@ RUN set -eux; \
     fi
 
 
+# ---------- Shared utils stage (my-utils) ----------
+FROM base AS utils-base
+
+# install shared utils from root pyproject and utils/
+COPY pyproject.toml ./pyproject.toml
+COPY utils ./utils
+
+RUN python -m pip install --upgrade pip \
+    && pip install .
+
+# create common dirs used by all services
+RUN mkdir -p /data /logs /config
+
+
+
+
 
 
 # 1) install shared utils as "my-utils"
@@ -73,7 +89,6 @@ RUN mkdir -p /data /logs /config /certs
 
 # default command, docker compose will override anyway
 CMD ["bash"]
-
 
 
 
