@@ -13,6 +13,12 @@ services:
     working_dir: /app
     env_file:
       - .env
+    environment:
+      CONFIG_DIR: /config
+      LOG_DIR: /logs
+      DATA_DIR: /data/survey.db
+      DATA_DIR_QUESTIONS: /config/sop_questions_0_5.json
+      PREVIEW_DIR: /data/previews/
     volumes:
       - ./config:/config
       - ./data:/data
@@ -33,6 +39,12 @@ services:
     working_dir: /app
     env_file:
       - .env
+    environment:
+      CONFIG_DIR: /config
+      LOG_DIR: /logs
+      DATA_DIR: /data/survey.db
+      DATA_DIR_QUESTIONS: /config/sop_questions_0_5.json
+      PREVIEW_DIR: /data/previews/
     volumes:
       - ./config:/config
       - ./data:/data
@@ -58,6 +70,12 @@ services:
     working_dir: /app
     env_file:
       - .env
+    environment:
+      CONFIG_DIR: /config
+      LOG_DIR: /logs
+      DATA_DIR: /data/survey.db
+      DATA_DIR_QUESTIONS: /config/sop_questions_0_5.json
+      PREVIEW_DIR: /data/previews/
     volumes:
       - ./config:/config
       - ./data:/data
