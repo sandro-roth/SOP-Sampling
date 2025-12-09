@@ -104,18 +104,25 @@ def create_app() -> Flask:
         user_pk = session.get("user_pk")
         func_pk = session.get("func_pk")
 
-        # If not in session yet, this is probably the first request after redirect
-        if user_pk is None or func_pk is None:
-            user_pk = request.args.get("user_pk", type=int)
-            func_pk = request.args.get("func_pk", type=int)
+        # Values from URL
+        user_pk_arg = request.args.get("user_pk", type=int)
+        func_pk_arg = request.args.get("func_pk", type=int)
 
-            if user_pk is None or func_pk is None:
-                flask_log.error("Missing user_pk or func_pk in query parameters and session")
+        # If user and function in URL, always take this
+        if user_pk_arg is not None or func_pk_arg is not None:
+            if user_pk_arg is None or func_pk_arg is None:
+                flask_log.error("Missing user_pk or func_pk in query parameters")
                 return "Missing user id or function id", 400
 
-            # Store in session for all future requests
+            user_pk = user_pk_arg
+            func_pk = func_pk_arg
             session["user_pk"] = user_pk
             session["func_pk"] = func_pk
+
+        # If still nothing --> Error
+        if user_pk is None or func_pk is None:
+            flask_log.error("Missing user_pk or func_pk in query parameters and session")
+            return "Missing user id or function id", 400
 
         flask_log.info("New question loaded for user_pk=%s func_pk=%s", user_pk, func_pk)
         try:
