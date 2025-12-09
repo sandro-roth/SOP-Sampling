@@ -191,3 +191,7 @@ def main() -> None:
     log.info(f".env loaded from: {loaded_from}")
     log.info(f"SOP_UUI_PORT = {port}")
     app.run(host='0.0.0.0', port=port, debug=False)
+
+
+if __name__ == '__main__':
+    main()
