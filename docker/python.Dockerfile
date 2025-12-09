@@ -66,6 +66,20 @@ RUN chmod +x scripts/*.sh
 
 CMD ["./scripts/start-database.sh"]
 
+# ---------- Service image: identify (sop-mask) ----------
+FROM utils-base AS identify
+
+COPY src/identify/pyproject.toml /app/src/identify/pyproject.toml
+COPY src/identify/user_mask /app/src/identify/user_mask
+
+WORKDIR /app/src/identify
+RUN pip install .
+
+WORKDIR /app
+COPY scripts ./scripts
+RUN chmod +x scripts/*.sh
+
+CMD ["./scripts/start-identify.sh"]
 
 
 
