@@ -177,34 +177,35 @@ def create_app() -> Flask:
 
     @app.route("/api/db-preview", methods=["GET"])
     def db_preview():
-        """Preview all DB tables as JSON für pandas."""
+        """Preview all DB tables as text, returned as JSON."""
         flask_log.info("DB preview requested")
 
-        import sqlite3
-        import pandas as pd
-
         db_file = db_path
+        preview_dir = os.getenv("PREVIEW_DIR")
         limit = request.args.get("limit", default=100, type=int)
 
         if not db_file:
             flask_log.error("DATA_DIR is not set")
             return jsonify({"error": "DATA_DIR is not set"}), 500
 
-        con = sqlite3.connect(db_file)
-        cur = con.cursor()
-        cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
-        tables = [row[0] for row in cur.fetchall()]
+        if not preview_dir:
+            flask_log.error("PREVIEW_DIR is not set")
+            return jsonify({"error": "PREVIEW_DIR is not set"}), 500
 
-        result: dict[str, list[dict]] = {}
+        # create preview of data
+        preview_db(db=db_file, pre_dir=preview_dir, limit=limit)
 
-        for t in tables:
-            if limit is None:
-                df = pd.read_sql(f"SELECT * FROM {t}", con)
-            else:
-                df = pd.read_sql(f"SELECT * FROM {t} LIMIT {limit}", con)
-            result[t] = df.to_dict(orient="records")
+        # Content of txt data
+        pre_path = Path(preview_dir)
+        result: dict[str, str] = {}
 
-        con.close()
+        for txt_file in pre_path.glob("*.txt"):
+            try:
+                with txt_file.open("r", encoding="utf-8") as f:
+                    result[txt_file.stem] = f.read()
+            except OSError as e:
+                flask_log.error("Could not read preview file %s: %s", txt_file, e)
+
         return jsonify(result)
 
     return app
