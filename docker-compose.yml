@@ -1,0 +1,65 @@
+services:
+  database:
+    build:
+      context: .
+      dockerfile: docker/python.Dockerfile
+      target: database
+      args:
+        USE_PROXY: "${USE_PROXY:-false}"
+        HTTP_PROXY: "${HTTP_PROXY:-}"
+        HTTPS_PROXY: "${HTTPS_PROXY:-}"
+        NO_PROXY: "${NO_PROXY:-}"
+    container_name: sop-database
+    working_dir: /app
+    env_file:
+      - .env
+    volumes:
+      - ./config:/config
+      - ./data:/data
+      - ./logs:/logs
+    restart: unless-stopped
+
+  identify:
+    build:
+      context: .
+      dockerfile: docker/python.Dockerfile
+      target: identify
+      args:
+        USE_PROXY: "${USE_PROXY:-false}"
+        HTTP_PROXY: "${HTTP_PROXY:-}"
+        HTTPS_PROXY: "${HTTPS_PROXY:-}"
+        NO_PROXY: "${NO_PROXY:-}"
+    container_name: sop-identify
+    working_dir: /app
+    env_file:
+      - .env
+    volumes:
+      - ./config:/config
+      - ./data:/data
+      - ./logs:/logs
+    depends_on:
+      - database
+    restart: unless-stopped
+
+  ui:
+    build:
+      context: .
+      dockerfile: docker/python.Dockerfile
+      target: ui
+      args:
+        USE_PROXY: "${USE_PROXY:-false}"
+        HTTP_PROXY: "${HTTP_PROXY:-}"
+        HTTPS_PROXY: "${HTTPS_PROXY:-}"
+        NO_PROXY: "${NO_PROXY:-}"
+    container_name: sop-ui
+    working_dir: /app
+    env_file:
+      - .env
+    volumes:
+      - ./config:/config
+      - ./data:/data
+      - ./logs:/logs
+    depends_on:
+      - database
+      - identify
+    restart: unless-stopped
