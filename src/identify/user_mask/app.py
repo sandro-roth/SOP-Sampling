@@ -138,6 +138,43 @@ def create_app() -> Flask:
         ]
         return Response(ui_resp.content, ui_resp.status_code, headers)
 
+    @app.route('/submit_annotation', methods=['POST'])
+    def proxy_submit_annotation():
+        ui_url = f"http://{UI_HOST}:{UI_PORT}/submit_annotation"
+
+        try:
+            ui_resp = requests.post(
+                ui_url,
+                data=request.form,
+                cookies=request.cookies,
+                timeout=5,
+                allow_redirects=False,
+            )
+        except requests.RequestException as e:
+            flask_log.error("Error contacting UI service (submit): %s", e)
+            return "UI service unavailable", 502
+
+        # sop_ui answers with redirect to '/'
+        if ui_resp.status_code in (301, 302, 303, 307, 308):
+            location = ui_resp.headers.get("Location", "/")
+            if location == "/":
+                # home in sop_ui, here it is /annotate
+                return redirect(url_for("annotate"))
+            else:
+                # other redirects get passed
+                return redirect(location)
+
+        excluded_headers = {
+            "content-encoding", "content-length",
+            "transfer-encoding", "connection"
+        }
+        headers = [
+            (name, value)
+            for name, value in ui_resp.headers.items()
+            if name.lower() not in excluded_headers
+        ]
+        return Response(ui_resp.content, ui_resp.status_code, headers)
+
     return app
 
 
