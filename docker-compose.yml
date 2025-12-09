@@ -37,8 +37,11 @@ services:
       - ./config:/config
       - ./data:/data
       - ./logs:/logs
+    ports:
+      - "${SOP_UUI_PORT}:${SOP_UUI_PORT}"
     depends_on:
       - database
+      - ui
     restart: unless-stopped
 
   ui:
@@ -59,7 +62,8 @@ services:
       - ./config:/config
       - ./data:/data
       - ./logs:/logs
+    expose:
+      - "${SOP_UI_PORT}"
     depends_on:
       - database
-      - identify
     restart: unless-stopped
