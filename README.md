@@ -32,6 +32,18 @@
 </div>
 
 
+### Database Preview
+You can inspect the contents of all SQLite tables through the build-in preview endpoint.
+The Identify service exposes the API internally within the USZ network (or via 'localhost' when running directly on the server)
+
+### **Terminal (CLI)**
+```bash
+    curl "http//sv10155:8522/api/db-preview"
+```
+Optionally limit the number of rows per table (default: 100)
+```bash
+    curl "http//sv10155:8522/api/db-preview?limit=20"
+```
 
 
 
