@@ -36,7 +36,6 @@ RUN set -eux; \
         echo "pip without proxy"; \
     fi
 
-
 # ---------- Shared utils stage (my-utils) ----------
 FROM base AS utils-base
 
@@ -50,7 +49,22 @@ RUN python -m pip install --upgrade pip \
 # create common dirs used by all services
 RUN mkdir -p /data /logs /config
 
+# ---------- Service image: database (sop-sql) ----------
+FROM utils-base AS database
 
+# copy and install database package
+COPY src/database/pyproject.toml /app/src/database/pyproject.toml
+COPY src/database/sop_sql /app/src/database/sop_sql
+
+WORKDIR /app/src/database
+RUN pip install .
+
+# copy scripts and use the start script
+WORKDIR /app
+COPY scripts ./scripts
+RUN chmod +x scripts/*.sh
+
+CMD ["./scripts/start-database.sh"]
 
 
 
