@@ -146,6 +146,23 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
                 except RuntimeError as e:
                     log.error(f"Annotation could not be added RuntimeError: {e}")
 
+def get_user_pk_and_func_by_username(statements: dict, username: str) -> tuple[int, int] | None:
+    """
+    Looks up a user by username and returns (user_pk, func_pk) or None if not found.
+    """
+    username = (username or "").strip().lower()
+    if not username:
+        return None
+
+    with db_conn(os.getenv('DATA_DIR')) as (con, cur):
+        row = cur.execute(statements['SELECT_USER_BY_USERNAME'], (username,)).fetchone()
+
+    if not row:
+        return None
+
+    user_pk, func_pk = int(row[0]), int(row[1])
+    return user_pk, func_pk
+
 
 def check_entry(cur: sqlite3.Cursor, data: List[tuple] | List[str], statements: dict,  col_names: str, table: str | None = None) -> List[tuple] | None:
     """
