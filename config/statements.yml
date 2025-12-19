@@ -23,6 +23,9 @@ SELECT_PK_FUNCTION:
 SELECT_PK_USER:
   'SELECT Id FROM user WHERE First_name = ? AND Surname = ? AND function = ? AND years_in_the_function = ? AND username = ?'
 
+SELECT_USER_BY_USERNAME:
+  'SELECT Id, function FROM user WHERE username = ?'
+
 SELECT_LENGTH:
   'SELECT question_id FROM questions'
 
@@ -34,6 +37,9 @@ SELECT_JOIN: >
   LEFT JOIN user as US ON AN.annotator = US.Id
   LEFT JOIN function as FC ON US.function = FC.Id
   WHERE AN.question_id = ?
+
+
+
 
 DELETE_ROW:
   'DELETE FROM questions WHERE question_id = ?'
