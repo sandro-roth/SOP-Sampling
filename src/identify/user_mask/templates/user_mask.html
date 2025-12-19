@@ -4,7 +4,6 @@
   <meta charset='utf-8'>
   <title>Registrierung</title>
 
-  <!-- Pico CSS and HTMX from your static folder -->
   <link rel='stylesheet' href="{{ url_for('static', filename='pico.min.css') }}">
   <script src="{{ url_for('static', filename='htmx.min.js') }}"></script>
 
@@ -54,11 +53,11 @@
     }
   </style>
 </head>
+
 <body class='container'>
 
   <h1>Registrierung</h1>
 
-  <!-- Error messages -->
   {% if errors %}
     <div class='error-list'>
       <ul>
@@ -69,7 +68,6 @@
     </div>
   {% endif %}
 
-  <!-- Success message -->
   {% if success_message %}
     <div class='success-box'>
       {{ success_message }}
@@ -101,6 +99,18 @@
             id='last_name'
             name='last_name'
             value="{{ form_data.last_name }}"
+            required
+          >
+        </div>
+
+        <!-- Username -->
+        <div class='full-width'>
+          <label for='user_name'>USZ-Benutzername</label>
+          <input
+            type='text'
+            id='user_name'
+            name='user_name'
+            value="{{ form_data.user_name }}"
             required
           >
         </div>
