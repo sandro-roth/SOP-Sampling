@@ -43,6 +43,9 @@ def create_app() -> Flask:
     app.config['TEMPLATES_AUTO_RELOAD'] = True
     flask_log = get_logger(__name__)
 
+    @app.route('/', methods=['GET'])
+    def identify_mask():
+        return render_template('identify_mask.html')
 
     @app.route('/register', methods=['GET', 'POST'])
     def user_mask():
