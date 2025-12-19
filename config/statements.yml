@@ -6,7 +6,7 @@ INSERT_IN_FUNCTION:
   'INSERT INTO function (function_name) VALUES (?)'
 
 INSERT_IN_USER:
-  'INSERT INTO user (First_name, Surname, function, years_in_the_function) VALUES (?, ?, ?, ?)'
+  'INSERT INTO user (First_name, Surname, function, years_in_the_function, username) VALUES (?, ?, ?, ?)'
 
 INSERT_IN_ANNOTATION: >
   INSERT INTO annotations (question, question_id, alt_question, passage, 
@@ -21,7 +21,7 @@ SELECT_PK_FUNCTION:
   'SELECT Id FROM function WHERE function_name = "{function}"'
 
 SELECT_PK_USER:
-  'SELECT Id FROM user WHERE First_name = ? AND Surname = ? AND function = ? AND years_in_the_function = ?'
+  'SELECT Id FROM user WHERE First_name = ? AND Surname = ? AND function = ? AND years_in_the_function = ? AND username = ?'
 
 SELECT_LENGTH:
   'SELECT question_id FROM questions'
