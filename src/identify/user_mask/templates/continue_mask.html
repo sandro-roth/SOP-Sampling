@@ -1,10 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang='ge'>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+  <meta charset='utf-8'>
+  <title>Weitermachen</title>
 
+  <link rel='stylesheet' href="{{ url_for('static', filename='pico.min.css') }}">
+
+  <style>
+    body.container { max-width: 800px; margin: 2rem auto; }
+    .error-list {
+      border: 1px solid #c00;
+      background: #fdd;
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+
+<body class='container'>
+  <h1>Weitermachen</h1>
+
+  {% if errors %}
+    <div class='error-list'>
+      <ul>
+        {% for e in errors %}
+          <li>{{ e }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <form method='post' action="{{ url_for('continue_mask') }}">
+    <label for='user_name'>USZ Benutzername</label>
+    <input
+      type='text'
+      id='user_name'
+      name='user_name'
+      value="{{ form_data.user_name }}"
+      required
+    >
+
+    <button type='submit'>Weiter</button>
+  </form>
+
+  <p style="margin-top: 1rem;">
+    <a href="{{ url_for('identify_mask') }}">Zurück</a>
+  </p>
 </body>
 </html>
