@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang='ge'>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+  <meta charset='utf-8'>
+  <title>Start</title>
 
+  <link rel='stylesheet' href="{{ url_for('static', filename='pico.min.css') }}">
+
+  <style>
+    body.container { max-width: 800px; margin: 2rem auto; }
+    .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-row form { margin: 0; }
+  </style>
+</head>
+
+<body class='container'>
+  <h1>Start</h1>
+
+  <div class='btn-row'>
+    <form method='get' action="{{ url_for('user_mask') }}">
+      <button type='submit'>Registrieren</button>
+    </form>
+
+    <form method='get' action="{{ url_for('continue_mask') }}">
+      <button type='submit'>Weitermachen</button>
+    </form>
+  </div>
 </body>
 </html>
