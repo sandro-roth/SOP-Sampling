@@ -113,6 +113,30 @@ def create_app() -> Flask:
             form_data=form_data,
         )
 
+    @app.route('/continue', methods=['GET', 'POST'])
+    def continue_mask():
+        errors: list[str] = []
+        form_data = {'user_name': ''}
+
+        if request.method == 'POST':
+            form_data['user_name'] = request.form.get('user_name', '').strip().lower()
+
+            if not form_data['user_name']:
+                errors.append('USZ Benutzername ist erforderlich.')
+            else:
+                result = get_user_pk_and_func_by_username(statements=statements, username=form_data['user_name'])
+                if not result:
+                    errors.append('User nicht bekannt.')
+                else:
+                    user_pk, func_pk = result
+                    return redirect(url_for('annotate', user_pk=user_pk, func_pk=func_pk))
+
+        return render_template(
+            'continue_mask.html',
+            errors=errors,
+            form_data=form_data
+        )
+
     @app.route('/annotate', methods=['GET'])
     def annotate():
         user_pk = request.args.get("user_pk")
