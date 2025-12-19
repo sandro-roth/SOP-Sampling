@@ -38,11 +38,11 @@ The Identify service exposes the API internally within the USZ network (or via '
 
 ### **Terminal (CLI)**
 ```bash
-    curl "http//sv10155:8522/api/db-preview"
+    curl "http://sv10155:8522/api/db-preview"
 ```
 Optionally limit the number of rows per table (default: 100)
 ```bash
-    curl "http//sv10155:8522/api/db-preview?limit=20"
+    curl "http://sv10155:8522/api/db-preview?limit=20"
 ```
 
 
