@@ -44,7 +44,7 @@ def create_app() -> Flask:
     flask_log = get_logger(__name__)
 
 
-    @app.route('/', methods=['GET', 'POST'])
+    @app.route('/register', methods=['GET', 'POST'])
     def user_mask():
         flask_log.info('Mask init ...')
         errors: list[str] = []
