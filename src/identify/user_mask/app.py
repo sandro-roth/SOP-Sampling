@@ -54,14 +54,17 @@ def create_app() -> Flask:
         form_data = {'first_name': '',
                      'last_name': '',
                      'function': '',
-                     'years_in_function': ''}
+                     'years_in_function': '',
+                     'user_name': ''}
 
         if request.method == 'POST':
             # Read values
             form_data['first_name'] = request.form.get('first_name', '').strip().lower()
             form_data['last_name'] = request.form.get('last_name', '').strip().lower()
             form_data['function'] = request.form.get('function', '').strip()
+            form_data['user_name'] = request.form.get('user_name', '').strip().lower()
             raw_years = request.form.get('years_in_function', '').strip()
+
 
             # Validate
             if not form_data['first_name']:
@@ -70,6 +73,8 @@ def create_app() -> Flask:
                 errors.append('Last name is required.')
             if not form_data['function']:
                 errors.append('Function is required.')
+            if not form_data['user_name']:
+                errors.append('User name is required.')
 
             if not raw_years:
                 errors.append('Years in function is required')
@@ -87,7 +92,7 @@ def create_app() -> Flask:
                 flask_log.info(f'Received user mask data: {form_data}')
 
                 pk_func = db_push(data=[form_data['function']], db=db_path, table='function', statements=statements, user_add=True)
-                usr_data = [(form_data['first_name'], form_data['last_name'], pk_func, int(form_data['years_in_function']))]
+                usr_data = [(form_data['first_name'], form_data['last_name'], pk_func, int(form_data['years_in_function']), form_data['user_name'])]
                 pk_usr = db_push(data=usr_data, db=db_path, table='user', statements=statements, user_add=True)
 
                 # redirect intern auf Proxy Route /annotate
