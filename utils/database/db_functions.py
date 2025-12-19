@@ -163,8 +163,8 @@ def check_entry(cur: sqlite3.Cursor, data: List[tuple] | List[str], statements: 
 
     """
 
-    # fetch all from table if None go for table == 'questions'
-    exe_cmd = statements['SELECT_ALL'].format(column_names=col_names, table=table or 'backup')
+    # fetch all from table
+    exe_cmd = statements['SELECT_ALL'].format(column_names=col_names, table=table)
     c_table = cur.execute(exe_cmd).fetchall()
 
     if isinstance(data[0], str):
