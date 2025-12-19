@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS user (
     Surname TEXT NOT NULL,
     function INTEGER NOT NULL,
     years_in_the_function INTEGER,
+    username TEXT NOT NULL,
     FOREIGN KEY (function) REFERENCES function(Id)
 );
 """
