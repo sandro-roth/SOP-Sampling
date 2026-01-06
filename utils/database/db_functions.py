@@ -13,12 +13,20 @@ log = logging.getLogger(__name__)
 @contextmanager
 def db_conn(db: str):
     """
-    Open a SQLite database connection with foreign key
-    enforcement enabled, and return both the connection
-    and a cursor object.
+    Context manager for a SQLite database connection with foreign key support enabled.
+
+    This helper opens a connection to the given SQLite database, explicitly enables
+    foreign key constraint enforcement, and yields both the connection and a cursor.
+    On normal exit, the transaction is committed. The connection is always closed,
+    even if an exception occurs inside the context.
 
     Args:
         db (str): Path to the SQLite database file.
+
+    Raises:
+        sqlite3.Error:
+            Propagates any SQLite errors that occur during connection setup
+            or execution inside the context block.
     """
 
     con = sqlite3.connect(db)
