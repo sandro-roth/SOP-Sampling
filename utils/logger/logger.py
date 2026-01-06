@@ -10,12 +10,26 @@ class _ServiceFilter(logging.Filter):
     This allows log messages to include the service name (e.g. "flask-ui" or "backend"),
     making it easier to identify the source of log entries when multiple services
     write to the same log file.
+
+    Args:
+        service (str): Logical name of the service or application
     """
     def __init__(self, service: str):
         super().__init__()
         self.service = service
 
     def filter(self, record: logging.LogRecord) -> bool:
+        """
+        Enrich a log record with the service name
+
+        Called automatically by the logging framework for each record handled. The service name is injected as 'record.service'
+
+        Args:
+            record (logging.Record): The log record being processed.
+
+        Returns:
+            bool: Always 'True' so that the record is not filtered out.
+        """
         record.service = self.service
         return True
 
