@@ -275,8 +275,17 @@ def check_entry(cur: sqlite3.Cursor, data: List[tuple] | List[str], statements: 
 
 def get_insert_columns(cur: sqlite3.Cursor, table: str) -> List[str]:
     """
-    Return the list of columns that should be provided for INSERT,
-    skipping an autoincrement primary key named Id or question_id.
+    Get insertable column names for a table, excluding autoincrement primary keys.
+
+    The function inspects the table schema and returns all column names except a pk key
+    column named 'id' or 'question_id'.
+
+    Args:
+        cur (sqlite3.Cursor):   Active SQLite cursor.
+        table (str):            Table name to inspect.
+
+    Returns:
+        List[str]: Column names that should be provided in an INSERT statement.
     """
 
     cur.execute(f"PRAGMA table_info({table})")
