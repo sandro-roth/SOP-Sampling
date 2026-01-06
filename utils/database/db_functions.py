@@ -35,15 +35,40 @@ def db_conn(db: str):
 
 def sampling(statements: dict, j_file: List[dict], usr_id: int, fun_id: int) -> dict:
     """
+    Select a suitable question from 'j_file' for annotation.
 
-    :param statements:
-    :param j_file:
-    :param usr_id:
-    :param fun_id:
-    :return:
+    The function randomly samples questions and checks the annotations table to ensure:
+    -   Questions with 0 annotations are allowed
+    -   Questions with 1 annotation are allowed only if it was annotated by a different user
+        but for the same function (func_id).
+    -   Questions with 2 annotations are removed from 'j_file'
+
+    It retries up to 'len(j_file) * 3' attempts and raises an error if no suitable question can be found.
+
+    Args:
+        statements (dict):
+            SQL statement mapping. Must include at least 'SELECT_JOIN' which returns annotation rows
+            for a given question id.
+        j_file (List[dict]):
+            List of question dictionaries. Each dict must contain a 'q_id' key.
+            The list may be modified in-place (questions removed when already used twice).
+        usr_id (int):
+            Primary key of the current user (annotator).
+        fun_id (int):
+            Primary key of the current function/task the user is annotating for.
+
+    Returns:
+        dict:
+            The selected question dictionary from 'j_file'.
+
+    Raises:
+        RuntimeError:
+            If 'j_file' becomes empty, or if no suitable question is found after serveral attempts.
+        ValueError:
+            If a question has more than 2 annotations (unexpected database state).
     """
 
-    max_attempts = len(j_file) * 2
+    max_attempts = len(j_file) * 3
     for _ in range (max_attempts):
         if not j_file:
             raise RuntimeError('No questions left in j_file.')
