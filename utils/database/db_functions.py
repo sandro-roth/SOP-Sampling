@@ -58,8 +58,7 @@ def sampling(statements: dict, j_file: List[dict], usr_id: int, fun_id: int) -> 
             Primary key of the current function/task the user is annotating for.
 
     Returns:
-        dict:
-            The selected question dictionary from 'j_file'.
+        dict: The selected question dictionary from 'j_file'.
 
     Raises:
         RuntimeError:
@@ -107,18 +106,39 @@ def sampling(statements: dict, j_file: List[dict], usr_id: int, fun_id: int) -> 
 
 def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict, user_add: bool = False) -> int | None:
     """
-    Docstring!
+    Insert data into a SQLite database table with duplicate protection.
+
+    This function is a central insert helper for three scenarios:
+    -   Adding a new function into 'function' table (user_add = True, table = 'function')
+        and returning the function primary key.
+    -   Adding a new user into 'user' table (user_add = True, table = 'user')
+        and returning the user primary key.
+    -   Adding an annotation into the 'annotations' table (user_add = False, table = 'annotations')
+        no pk is returned
+
+    Duplicate checks are performed via func: check_entry before inserts.
+
+    Notes:
+        - Only runs when "db == os.getenv('DATA_DIR')"
+        - The function commits inside the context manager when inserts happen.
+        - Errors are logged!
 
     Args:
-        data (List[tuple]):     ...
-        db (str):               ...
-        table (str):            ...
-        statements (dict):      ...
-        user_add (bool):        ...
+        data (List[tuple] | List [str]):
+            Payload to insert.
+        db (str):
+            Path to the SQLite database file.
+        table (str):
+            Target table name. ('function', 'user' or 'annotations')
+        statements (dict):
+            SQL statement mapping from /config/statements.yml
+        user_add (bool):
+            Controls whether this is a user/function insert (True) or annotation insert (False).
 
     Returns:
-        Goal of calling the function is altering specific tables there is no return value.
-
+        int | None:
+            - Returns the primary key for inserted or existing 'user' or 'function' rows.
+            - Returns 'None' for annotation inserts or when the function does not hit any branch.
     """
 
     if db == os.getenv('DATA_DIR'):
