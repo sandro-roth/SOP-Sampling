@@ -327,24 +327,19 @@ def validate_rows_for_table_db(cur: sqlite3.Cursor, table: str, rows: Sequence[S
 
 def preview_db(db: str, pre_dir:str | None = None, limit: int | None = 100) -> None:
     """
-        Preview the contents of all tables in a SQLite database.
+    Write text previews of all tables in a SQLite database to disk.
 
-        This function connects to the given SQLite file, lists all tables,
-        and prints the first few rows of each table using pandas for easy viewing.
+    The function finds all tables in the SQLite database, reads up to 'limit' rows from each
+    table into a pandas DataFrame, and writes the table content into a '.txt' file per table
 
-        Args:
-            db (str):
-                Path to the SQLite `.db` file.
-            pre_dir (str | None):
-                Path to previews directory. Defaults to $PREVIEW_DIR if not specified.
-            limit (int, optional):
-                Maximum number of rows to display per table.
-                Defaults to 5.
+    Args:
+        db (str):               Path to the SQLite database file.
+        pre_dir (str | None):   Output directory for preview files. Uses '$PREVIEW_DIR' if not provided.
+        limit (int | None):     Maximum number of rows to export per table. If 'None', exports all rows.
 
-        Prints:
-            - A list of all table names found in the database.
-            - For each table, a pandas DataFrame showing up to `limit` rows.
-        """
+    Returns:
+        None
+    """
 
     con = sqlite3.connect(db)
     cur = con.cursor()
