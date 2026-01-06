@@ -59,7 +59,7 @@ def setup_logging(app_name: str = 'app', log_dir: str | None = None, retention: 
     Returns:
         logging.Logger: The configured root logger instance.
     """
-    
+
     base_log_dir = Path(log_dir or os.getenv('LOG_DIR', Path(__file__).resolve().parents[2] / 'logs'))
     service_log_dir = base_log_dir / app_name
     service_log_dir.mkdir(parents=True, exist_ok=True)
@@ -100,13 +100,13 @@ def setup_logging(app_name: str = 'app', log_dir: str | None = None, retention: 
 
 def get_logger(app_name: str | None = None) -> logging.Logger:
     """
-    Retrieve a logger by name, inheriting the configuration from the root logger.
+    Return a logger instance with the given name.
 
-    This is a convenience function to obtain a logger instance anywhere in the code
-    after `setup_logging()` has initialized the logging system.
+    This is a small convenience wrapper intended to be used after function call 'setup_logging'.
+    The returned logger inherits handlers, formatters, and filters from the root logger.
 
     Args:
-        app_name (str | None): Optional name for the logger. If None, returns the root logger.
+        app_name (str | None): Optional name for the logger. If 'None', returns the root logger.
 
     Returns:
         logging.Logger: The requested logger instance.
