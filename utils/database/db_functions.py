@@ -298,16 +298,21 @@ def get_insert_columns(cur: sqlite3.Cursor, table: str) -> List[str]:
 
 def validate_rows_for_table_db(cur: sqlite3.Cursor, table: str, rows: Sequence[Sequence]) -> List[str]:
     """
-    Validate rows by checking length against columns from the database.
-    Returns number of rows in the input data
+    Validate that each row has the correct number of values for inserting into a table.
+
+    The expected number of values is derived from the function get_insert_columns. If any
+    row has a mismatching length, a ValueError is raised listing the offending row indices.
 
     Args:
-        cur (sqlite3.Cursor): Sqlite DB connection cursor.
-        table (str): table name of sqlite DB to connect to.
-        rows (Sequence[Sequence]): Data entries, added to the table.
+        cur (sqlite3.Cursor):       Active SQLite cursor.
+        table (str):                Target table name whose insertable columns define the expected row length.
+        rows (Sequence[Sequence]):  Iterable of rows to validate. Each row is a sequence of values.
 
     Returns:
-        List of column names for table of interest
+        List[str]: The insertable column names for the table
+
+    Raises:
+        ValueError: If one or more rows do not match the expected length.
     """
 
     columns = get_insert_columns(cur, table)
