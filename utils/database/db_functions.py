@@ -225,18 +225,33 @@ def get_user_pk_and_func_by_username(statements: dict, username: str) -> tuple[i
 
 def check_entry(cur: sqlite3.Cursor, data: List[tuple] | List[str], statements: dict,  col_names: str, table: str | None = None) -> List[tuple] | None:
     """
-    Checking data entry into DB. Assures no duplication entries into connected database.
+    Check whether given entries already exist in a table and filter duplicates.
+
+    The function loads all rows from the given table and compares them against the provided 'data'
+
+    Behavior depends on the 'data' input shape:
+    -   If 'data[0]' is a 'str':
+        Treats it as a single value to compare against the first column of each row.
+        Returns 'None' if it already exists, otherwise returns 'data' unchanged.
+    -   If 'data' is a list of tuples:
+        Removes rows that are already present in the table and returns remaining rows.
+        If all rows are duplicates, an empty list is returned.
 
     Args:
-        cur (sqlite3.Cursor): Sqlite DB connection cursor.
-        data (List[tuple]): Entry data set to be tested.
-        statements (dict): Dictionary of possible SQLite statements from INSERT to SELECT.
-        col_names (str): string of comma separated colum names of table.
-        table (str | None): Table to connect to defaults to 'questions' - table if nothing specified.
+        cur (sqlite3.Cursor):               Active SQLite cursor.
+        data (List[tuple] | List[str]):     Entry Data to check.
+        statements (dict):                  SQL statement mapping from /config/statements.yml
+        col_names (str):                    Comma-separated column names to fetch from the table for the dup. check.
+        table (str | None):                 Table name to query. If 'None' SQL template handles it.
 
     Returns:
-        new data set without the entries already present in the current database/table.
+        List[tuple] | None:
+            - 'None' if a single string entry already exists.
+            - Otherwise, a filtered list containing only entries not yet present.
 
+    Raises:
+        ValueError:
+            If the function cannot interpret the provided 'data' type/shape.
     """
 
     # fetch all from table
@@ -284,7 +299,6 @@ def validate_rows_for_table_db(cur: sqlite3.Cursor, table: str, rows: Sequence[S
 
     Returns:
         List of column names for table of interest
-
     """
 
     columns = get_insert_columns(cur, table)
