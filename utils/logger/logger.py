@@ -50,15 +50,16 @@ def setup_logging(app_name: str = 'app', log_dir: str | None = None, retention: 
         5. Applies the custom _ServiceFilter to include the service name in each log record.
 
     Args:
-        app_name (str): Name of the application or service (used in log directory and record filter).
-        log_dir (str | None): Base directory for log files. Defaults to current working directory/logs.
-        retention (int): Number of daily log files to retain before old ones are deleted.
-        level (int): Logging level (e.g. logging.INFO, logging.DEBUG).
-        to_stdout (bool): If True, logs are also printed to the console.
+        app_name (str):         Name of the application or service (used in log directory and record filter).
+        log_dir (str | None):   Base directory for log files. Defaults to current working directory/logs.
+        retention (int):        Number of daily log files to retain before old ones are deleted.
+        level (int):            Logging level (e.g. logging.INFO, logging.DEBUG).
+        to_stdout (bool):       If True, logs are also printed to the console.
 
     Returns:
         logging.Logger: The configured root logger instance.
     """
+    
     base_log_dir = Path(log_dir or os.getenv('LOG_DIR', Path(__file__).resolve().parents[2] / 'logs'))
     service_log_dir = base_log_dir / app_name
     service_log_dir.mkdir(parents=True, exist_ok=True)
