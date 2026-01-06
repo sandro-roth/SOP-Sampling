@@ -193,8 +193,22 @@ def db_push(data: List[tuple] | List[str], db: str, table: str, statements:dict,
 
 def get_user_pk_and_func_by_username(statements: dict, username: str) -> tuple[int, int] | None:
     """
-    Looks up a user by username and returns (user_pk, func_pk) or None if not found.
+    Look up a user by username and return the user and function primary keys.
+
+    The username is normalized by stripping whitespace and converting to lowercase.
+    If the normalized username is empty or not found in the database, 'None' is returned.
+
+    Args:
+        statements (dict):
+            SQL statement mapping from /config/statements.yml
+        username (str):
+            Username to search for.
+
+    Returns:
+        tuple[int, int] | None:
+            (user_pk, func_pk) if user exists, otherwise 'None'
     """
+
     username = (username or "").strip().lower()
     if not username:
         return None
