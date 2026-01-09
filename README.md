@@ -32,19 +32,18 @@
 </div>
 
 ---
+
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#project-overview">Project Overview</a></li>
     <li><a href="#system-architecture">System Architecture</a></li>
-    <li><a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
+    <li><a href="#runtime-environment">Runtime Environment</a></li>
+    <li><a href="#configuration-env-file">Configuration (.env file)</a></li>
+    <li><a href="#data-flow--persistence">Data Flow & Persistence</a></li>
     <li><a href="#database--api">Database & API</a></li>
+    <li><a href="#resetting-the-project-state">Resetting the Project State</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -92,6 +91,22 @@ The application follows a modular, containerized architecture.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
+
+## Runtime Environment
+
+This project is **not intended to be installed manually on arbitrary systems**.
+
+- The code runs on a predefined server environment  
+- Docker and Docker Compose are assumed to be available  
+- All services are started via `docker compose`  
+- No interactive installation steps are required  
+
+The README focuses on **configuration, data handling, and operation**, not on local setup.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
 
 ### Database Preview
 You can inspect the contents of all SQLite tables through the build-in preview endpoint.
