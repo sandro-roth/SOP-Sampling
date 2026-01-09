@@ -107,6 +107,25 @@ The README focuses on **configuration, data handling, and operation**, not on lo
 
 ---
 
+## Configuration (.env file)
+
+The project is configured almost entirely via a `.env` file.
+
+This file defines, among other things:
+
+- Proxy settings  
+- Docker container configuration  
+- Service ports  
+- Application-specific runtime flags  
+- Environment-specific behavior  
+
+This design allows the project to be **portable to other environments** without changing the source code.
+
+> The `.env` file is required for running the services and is not committed to the repository.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
 
 ### Database Preview
 You can inspect the contents of all SQLite tables through the build-in preview endpoint.
