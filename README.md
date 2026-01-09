@@ -136,6 +136,20 @@ Initial questions are loaded from:
 
 This file serves as the **source of truth** for the initial question set.
 
+### Database Storage
+
+- Data is stored in an SQLite database  
+- The database file is created automatically during `docker compose` startup  
+- If the database already exists, it will be reused  
+- No manual database initialization is required  
+
+The database file is stored inside the `/data` directory.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+
 ### Database Preview
 You can inspect the contents of all SQLite tables through the build-in preview endpoint.
 The Identify service exposes the API internally within the USZ network (or via 'localhost' when running directly on the server)
