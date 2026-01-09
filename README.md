@@ -149,12 +149,13 @@ The database file is stored inside the `/data` directory.
 
 ---
 
+## Database & API
 
-### Database Preview
-You can inspect the contents of all SQLite tables through the build-in preview endpoint.
-The Identify service exposes the API internally within the USZ network (or via 'localhost' when running directly on the server)
+### Database Preview Endpoint
 
-### **Terminal (CLI)**
+An internal API endpoint is available for inspecting the database contents.
+
+**Show all tables**
 ```bash
     curl "http://sv10155:8522/api/db-preview"
 ```
