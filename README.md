@@ -71,6 +71,28 @@ The application is primarily intended for **clinical and research-oriented usage
 
 ---
 
+## System Architecture
+
+The application follows a modular, containerized architecture.
+
+**Core components**
+
+- Web UI for data entry and annotation  
+- Backend service handling business logic  
+- SQLite database for persistent storage  
+- Internal API endpoints for debugging and data inspection  
+
+**Technology stack**
+
+- Python  
+- Flask  
+- SQLite  
+- Docker & Docker Compose  
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
 ### Database Preview
 You can inspect the contents of all SQLite tables through the build-in preview endpoint.
 The Identify service exposes the API internally within the USZ network (or via 'localhost' when running directly on the server)
