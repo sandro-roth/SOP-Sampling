@@ -147,8 +147,6 @@ The database file is stored inside the `/data` directory.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
----
-
 ## Database & API
 
 ### Database Preview Endpoint
@@ -184,8 +182,6 @@ To fully reset the application state:
    - Reload the initial question set
    - Remove all previously annotated data
 
----
-
 ## Roadmap
 
 - [X] Web UI for SOP annotation
@@ -196,19 +192,34 @@ To fully reset the application state:
 - [ ] Dataset export functionality
 - [ ] Integration of external SOP repositories
 
+<!-- CONTRIBUTING -->
+## 🤝 Beiträge (Contributing)
 
+Contributions are welcome.
 
+How to contribute:
 
+1. Fork the repository  
+2. Create a feature branch  
+3. Commit your changes  
+4. Open a pull request
 
+You may also open issues for bugs or feature requests.
 
+## License
 
+This project is distributed under the project license.  
+See the `LICENSE.txt` file for more information.
 
+## Contact
 
+Sandro Roth  
+Email: sandro.roth@usz.ch  
 
+Project link:  
+https://github.com/sandro-roth/SOP-Sampling
 
-
-
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
