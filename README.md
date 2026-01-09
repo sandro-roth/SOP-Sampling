@@ -145,8 +145,6 @@ This file serves as the **source of truth** for the initial question set.
 
 The database file is stored inside the `/data` directory.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## Database & API
 
 ### Database Preview Endpoint
@@ -161,6 +159,8 @@ Optionally limit the number of rows per table (default: 100)
 ```bash
     curl "http://sv10155:8522/api/db-preview?limit=20"
 ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
 
@@ -192,7 +192,6 @@ To fully reset the application state:
 - [ ] Dataset export functionality
 - [ ] Integration of external SOP repositories
 
-<!-- CONTRIBUTING -->
 ## 🤝 Beiträge (Contributing)
 
 Contributions are welcome.
