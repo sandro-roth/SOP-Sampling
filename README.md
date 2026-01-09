@@ -54,7 +54,22 @@
 
 ---
 
+## Project Overview
 
+This project focuses on building a **structured SOP annotation platform** through a web-based user interface.
+
+Core objectives include:
+
+- Annotation of SOP-related questions and answers  
+- Validation of automatically generated content  
+- Traceable linking of quotations to SOP documents  
+- Creation of reproducible datasets for downstream evaluation and research  
+
+The application is primarily intended for **clinical and research-oriented usage** within the USZ network.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
 
 ### Database Preview
 You can inspect the contents of all SQLite tables through the build-in preview endpoint.
