@@ -164,6 +164,41 @@ Optionally limit the number of rows per table (default: 100)
     curl "http://sv10155:8522/api/db-preview?limit=20"
 ```
 
+---
+
+## Resetting the Project State
+
+To fully reset the application state:
+
+1. Remove the data directory:
+   ```bash
+   rm -rf data/
+   ```
+2. Restore the original question file:
+    ```bash
+   cp sop_questions_0_5_backup.json sop_questions_0_5.json
+   ```
+3. Restart the services using Docker Compose.
+    This will:
+   - Recreate the SQLite database
+   - Reload the initial question set
+   - Remove all previously annotated data
+
+---
+
+## Roadmap
+
+- [X] Web UI for SOP annotation
+- [X] SQLite-based persistent storage
+- [X] Internal database preview endpoint
+- [ ] User and role management
+- [ ] Extended validation workflows
+- [ ] Dataset export functionality
+- [ ] Integration of external SOP repositories
+
+
+
+
 
 
 
