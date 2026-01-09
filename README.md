@@ -127,6 +127,15 @@ This design allows the project to be **portable to other environments** without 
 
 ---
 
+## Data Flow & Persistence
+
+### Source of Questions
+
+Initial questions are loaded from:
+> sop_questions_0_5.json
+
+This file serves as the **source of truth** for the initial question set.
+
 ### Database Preview
 You can inspect the contents of all SQLite tables through the build-in preview endpoint.
 The Identify service exposes the API internally within the USZ network (or via 'localhost' when running directly on the server)
