@@ -36,23 +36,25 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#projektübersicht">Projektübersicht</a></li>
-    <li><a href="#systemarchitektur">Systemarchitektur</a></li>
-    <li><a href="#erste-schritte">Erste Schritte</a>
+    <li><a href="#project-overview">Project Overview</a></li>
+    <li><a href="#system-architecture">System Architecture</a></li>
+    <li><a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#voraussetzungen">Voraussetzungen</a></li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#datenbank--api">Datenbank & API</a></li>
+    <li><a href="#database--api">Database & API</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#lizenz">Lizenz</a></li>
-    <li><a href="#kontakt">Kontakt</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
 
 ---
+
+
 
 ### Database Preview
 You can inspect the contents of all SQLite tables through the build-in preview endpoint.
