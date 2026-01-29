@@ -45,6 +45,7 @@ def create_app() -> Flask:
                 template_folder=str(cwd.parent / 'templates'),
                 static_folder=str(cwd.parent / 'static'))
     app.config['TEMPLATES_AUTO_RELOAD'] = True
+    app.config["SESSION_COOKIE_NAME"] = "gui2_session"
     secret = os.getenv("FLASK_SECRET_KEY")
     if not secret:
         raise RuntimeError('FLASK_SECRET_KEY is not set')
