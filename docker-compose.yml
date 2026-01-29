@@ -86,3 +86,23 @@ services:
     depends_on:
       - database
     restart: unless-stopped
+
+  reset:
+    build:
+      context: .
+      dockerfile: docker/python.Dockerfile
+      target: database
+      args:
+        USE_PROXY: "${USE_PROXY:-false}"
+        HTTP_PROXY: "${HTTP_PROXY:-}"
+        HTTPS_PROXY: "${HTTPS_PROXY:-}"
+        NO_PROXY: "${NO_PROXY:-}"
+    working_dir: /app
+    env_file:
+      - .env
+    command: ["./scripts/reset_all.sh"]
+    volumes:
+      - ./config:/config
+      - ./data:/data
+      - ./logs:/logs
+    profiles: ["tools"]
