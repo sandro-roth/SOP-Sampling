@@ -45,6 +45,10 @@ def create_app() -> Flask:
                 template_folder=str(cwd.parent / 'templates'),
                 static_folder=str(cwd.parent / 'static'))
     app.config['TEMPLATES_AUTO_RELOAD'] = True
+    secret = os.getenv("FLASK_SECRET_KEY")
+    if not secret:
+        raise RuntimeError('FLASK_SECRET_KEY is not set')
+    app.secret_key = secret
     flask_log = get_logger(__name__)
 
     @app.route('/', methods=['GET'])
