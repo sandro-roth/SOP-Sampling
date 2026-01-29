@@ -16,7 +16,11 @@ UI_PORT = os.getenv('SOP_UI_PORT', '8000')
 
 # Example function choices for the dropdown
 FUNCTION_CHOICES = [
-    "Arzt / Ärztin",
+    "Assistenzarzt",
+    "Oberasistenzarzt / Stellvertretender Oberarzt",
+    "Oberarzt",
+    "Spitalarzt / Leitener Arzt",
+    "Chefarzt",
     "Pflegekraft",
     "Student",
     "Other"
