@@ -96,7 +96,10 @@ def create_app() -> Flask:
     """
     app = Flask(__name__, template_folder=str(cwd.parent / 'templates'))
     app.config['TEMPLATES_AUTO_RELOAD'] = True
-    app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret-change-me")
+    secret = os.getenv("FLASK_SECRET_KEY")
+    if not secret:
+        raise RuntimeError('FLASK_SECRET_KEY is not set')
+    app.secret_key = secret
     flask_log = get_logger(__name__)
 
     @app.get('/')
