@@ -20,7 +20,7 @@ services:
       DATA_DIR_QUESTIONS: /config/sop_questions_0_5.json
       PREVIEW_DIR: /data/previews/
     volumes:
-      - ./config:/config
+      - ./config:/config:ro
       - ./data:/data
       - ./logs:/logs
     restart: "no"
@@ -48,7 +48,7 @@ services:
       SOP_UI_HOST: ui
       SOP_UI_PORT: "${SOP_UI_PORT}"
     volumes:
-      - ./config:/config
+      - ./config:/config:ro
       - ./data:/data
       - ./logs:/logs
     ports:
@@ -79,7 +79,7 @@ services:
       DATA_DIR_QUESTIONS: /config/sop_questions_0_5.json
       PREVIEW_DIR: /data/previews/
     volumes:
-      - ./config:/config
+      - ./config:/config:ro
       - ./data:/data
       - ./logs:/logs
     expose:
@@ -103,7 +103,7 @@ services:
       - .env
     command: ["./scripts/reset_all.sh"]
     volumes:
-      - ./config:/config
+      - ./config:/config:ro
       - ./data:/data
       - ./logs:/logs
     profiles: ["tools"]
