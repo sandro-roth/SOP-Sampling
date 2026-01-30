@@ -123,6 +123,53 @@ This design allows the project to be **portable to other environments** without 
 
 > The `.env` file is required for running the services and is not committed to the repository.
 
+### What the `.env` file controls
+
+- Proxy configuration (optional)
+- Service ports and hostnames
+- Paths for data, configuration, logs, and previews
+- Flask session security
+- Runtime behavior of the UI, database, and user mask services
+
+---
+
+### Example `.env` file (sanitized)
+
+The following example shows the **structure** of the required `.env` file.
+All values are placeholders and must be adapted to the target environment.
+
+```env
+# ----------------------------------------------------------------------------------------------------------------------
+# Proxy settings
+USE_PROXY=true
+HTTP_PROXY=http://weblink-placeholder:port
+HTTPS_PROXY=http://weblink-placeholder:port
+NO_PROXY=domain_names,localhost,127.0.0.1
+
+# ----------------------------------------------------------------------------------------------------------------------
+# General setup
+LOG_DIR=/path/to/logs
+CONFIG_DIR=/path/to/config
+FLASK_SECRET_KEY=placeholder_for_secret_key
+
+# ----------------------------------------------------------------------------------------------------------------------
+# UI (Flask frontend)
+SOP_UI_PORT=8000
+SOP_UI_HOST=ui
+# GUI_LOG_DIR=/path/to/ui/logs
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Database and data handling
+DATA_DIR=/data/survey.db
+PREVIEW_DIR=/data/previews
+DATA_DIR_QUESTIONS=/config/sop_questions_0_5.json
+# DB_LOG_DIR=/path/to/db/logs
+
+# ----------------------------------------------------------------------------------------------------------------------
+# User mask service
+SOP_UUI_PORT=8001
+# UUI_LOG_DIR=/path/to/uui/logs
+```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
