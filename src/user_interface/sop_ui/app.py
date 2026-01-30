@@ -31,8 +31,8 @@ def get_next_example_from_db(usr_pk: int, fun_pk: int) -> tuple[int, str, str, s
          (question_id, question_text, answer_text, passage_text)
     """
 
-    jason_file = load_q_bank()
-    question = sampling(statements=statements, j_file=jason_file, usr_id=usr_pk, fun_id=fun_pk)
+    json_file = load_q_bank()
+    question = sampling(statements=statements, j_file=json_file, usr_id=usr_pk, fun_id=fun_pk)
     log_loc.info(f"{question['q_id']}, {question['question']}, {question['answer']}")
 
     return question['q_id'], question['question'], question['answer'], question['context']
