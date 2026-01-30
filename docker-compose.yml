@@ -103,7 +103,7 @@ services:
       - .env
     command: ["./scripts/reset_all.sh"]
     volumes:
-      - ./config:/config:ro
+      - ./config:/config
       - ./data:/data
       - ./logs:/logs
     profiles: ["tools"]
