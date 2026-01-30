@@ -168,19 +168,20 @@ Optionally limit the number of rows per table (default: 100)
 
 To fully reset the application state:
 
-1. Remove the data directory:
-   ```bash
-   rm -rf data/
-   ```
-2. Restore the original question file:
-    ```bash
-   cp sop_questions_0_5_backup.json sop_questions_0_5.json
-   ```
-3. Restart the services using Docker Compose.
-    This will:
-   - Recreate the SQLite database
-   - Reload the initial question set
-   - Remove all previously annotated data
+To fully reset the application state, use the provided Makefile command:
+
+```bash
+  make reset
+```
+This command performs the following steps automatically:
+- Deletes all persisted application in ./data
+- Restores the original question file from `config/sop_questoins_0_5_backup.json` to `config/sop_questions_0_5.json`
+- Reinitializes the SQLite database (survey.db)
+- Recreates all database tables
+- Regenerates table preview files
+- Restarts all application services via Docker Compose
+
+This is the recommended and safest way to reset the project, as it ensures that all services start from a clean and consistent state.
 
 ## Roadmap
 
