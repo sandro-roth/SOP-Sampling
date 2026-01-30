@@ -35,9 +35,6 @@ def get_next_example_from_db(usr_pk: int, fun_pk: int) -> tuple[int, str, str, s
     question = sampling(statements=statements, j_file=jason_file, usr_id=usr_pk, fun_id=fun_pk)
     log_loc.info(f"{question['q_id']}, {question['question']}, {question['answer']}")
 
-    with open(q_bank_path, 'w', encoding='utf-8') as file:
-        json.dump(jason_file, file, ensure_ascii=False, indent=2)
-
     return question['q_id'], question['question'], question['answer'], question['context']
 
 def get_example_by_id(q_id: int) -> tuple[int, str, str, str]:
