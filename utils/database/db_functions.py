@@ -103,8 +103,8 @@ def sampling(statements: dict, j_file: List[dict], usr_id: int, fun_id: int) -> 
                 return question
 
         elif len(anno_a) == 2:
-            log.warning(f'Question_id: {q_rand_id}, has been used twice already so it will be deleted!')
-            j_file.remove(question)
+            log.warning(f'Question_id: {q_rand_id}, has been used twice already')
+            continue
 
         else:
             raise ValueError('Something went wrong. Questions can not annotated more than twice.')
