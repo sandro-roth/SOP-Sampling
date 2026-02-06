@@ -79,7 +79,7 @@ services:
       DATA_DIR_QUESTIONS: /config/sop_questions_0_5.json
       PREVIEW_DIR: /data/previews/
     volumes:
-      - ./config:/config:ro
+      - ./config:/config
       - ./data:/data
       - ./logs:/logs
     expose:
