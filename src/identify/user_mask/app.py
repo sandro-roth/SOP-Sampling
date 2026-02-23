@@ -15,16 +15,7 @@ UI_HOST = os.getenv('SOP_UI_HOST', 'ui')  # Service name from docker compose
 UI_PORT = os.getenv('SOP_UI_PORT', '8000')
 
 # Example function choices for the dropdown
-FUNCTION_CHOICES = [
-    "Assistenzarzt",
-    "Oberasistenzarzt / Stellvertretender Oberarzt",
-    "Oberarzt",
-    "Spitalarzt / Leitener Arzt",
-    "Chefarzt",
-    "Pflegekraft",
-    "Student",
-    "Other"
-]
+FUNCTION_CHOICES = os.getenv('FUNCTION_CHOICES')
 
 def create_app() -> Flask:
     """
