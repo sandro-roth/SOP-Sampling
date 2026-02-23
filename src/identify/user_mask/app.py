@@ -1,4 +1,5 @@
 import os
+import json
 import requests
 
 from flask import Flask, render_template, request, redirect, url_for, Response, jsonify
@@ -15,7 +16,7 @@ UI_HOST = os.getenv('SOP_UI_HOST', 'ui')  # Service name from docker compose
 UI_PORT = os.getenv('SOP_UI_PORT', '8000')
 
 # Example function choices for the dropdown
-FUNCTION_CHOICES = os.getenv('FUNCTION_CHOICES')
+FUNCTION_CHOICES = json.loads(os.getenv('FUNCTION_CHOICES', "[]"))
 
 def create_app() -> Flask:
     """
