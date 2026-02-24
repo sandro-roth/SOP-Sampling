@@ -171,6 +171,40 @@ def create_app() -> Flask:
         ]
         return Response(ui_resp.content, ui_resp.status_code, headers)
 
+    @app.route('/skip_question', methods=['GET'])
+    def proxy_skip_question():
+        ui_url = f"http://{UI_HOST}:{UI_PORT}/skip_question"
+
+        try:
+            ui_resp = requests.get(
+                ui_url,
+                params=request.args,          # question_id wird durchgereicht
+                cookies=request.cookies,
+                timeout=5,
+                allow_redirects=False,
+            )
+        except requests.RequestException as e:
+            flask_log.error("Error contacting UI service (skip): %s", e)
+            return "UI service unavailable", 502
+
+        # Redirects von UI sauber auf identify mappen
+        if ui_resp.status_code in (301, 302, 303, 307, 308):
+            location = ui_resp.headers.get("Location", "/")
+            if location == "/":
+                return redirect(url_for("annotate"))  # UI home entspricht hier annotate
+            return redirect(location)
+
+        excluded_headers = {
+            "content-encoding", "content-length",
+            "transfer-encoding", "connection"
+        }
+        headers = [
+            (name, value)
+            for name, value in ui_resp.headers.items()
+            if name.lower() not in excluded_headers
+        ]
+        return Response(ui_resp.content, ui_resp.status_code, headers)
+
     @app.route('/submit_annotation', methods=['POST'])
     def proxy_submit_annotation():
         ui_url = f"http://{UI_HOST}:{UI_PORT}/submit_annotation"
