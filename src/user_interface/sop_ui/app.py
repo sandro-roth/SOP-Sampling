@@ -136,6 +136,24 @@ def create_app() -> Flask:
                                question_id=question_id, question_text=question_text.strip(),
                                answer_text=answer_text.strip(), passage_text=passage_text.strip())
 
+    @app.get('/skip_question')
+    def skip_question():
+        user_pk = session.get('user_pk')
+        func_pk = session.get('func_pk')
+
+        if user_pk is None or func_pk is None:
+            flask_log.error('Skip called without session user_pk or func_pk')
+            return 'Missing user id or function id', 400
+
+        qid = request.args.get('question_id', type=int)
+        if qid is not None:
+            skipped = session.get('skipped_question_ids', [])
+            if qid not in skipped:
+                skipped.append(qid)
+            session['skipped_question_ids'] = skipped
+        
+        return redirect(url_for('home'))
+
     @app.post('/submit_annotation')
     def submit_annotation():
         # Read values from UI
