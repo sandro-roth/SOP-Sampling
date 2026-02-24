@@ -307,9 +307,14 @@
           <input type="hidden" name="alternative_question" id="alternative_question">
           <input type="hidden" name="alternative_answer" id="alternative_answer">
 
-          <!-- Submit button -->
-          <div class="submit-row">
+          <!-- Submit and skip buttons-->
+          <div class="submit-row" style="display: flex; gap: 0.6rem; align-items: center;">
             <button type="submit">Absenden und nächste Frage</button>
+
+            <button type="button" class="secondary"
+                    onclick="window.location.href='{{ url_for('skip_question') }}?question_id={{ question_id }}'">
+                    Frage überspringen
+            </button>
           </div>
         </form>
       </div>
@@ -399,3 +404,4 @@
   </script>
 </body>
 </html>
+< test Tue Feb 24 10:23:58 PM CET 2026 -->
