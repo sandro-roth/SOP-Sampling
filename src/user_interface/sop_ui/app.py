@@ -126,8 +126,26 @@ def create_app() -> Flask:
             return "Missing user id or function id", 400
 
         flask_log.info("New question loaded for user_pk=%s func_pk=%s", user_pk, func_pk)
+
+        skipped = set(session.get("skipped_question_ids", []))
+
         try:
-            question_id, question_text, answer_text, passage_text = get_next_example_from_db(usr_pk=user_pk, fun_pk=func_pk)
+            # Try a few times to avoid immediately repeating a skipped question
+            for _ in range(15):
+                question_id, question_text, answer_text, passage_text = get_next_example_from_db(
+                    usr_pk=user_pk,
+                    fun_pk=func_pk
+                )
+                if question_id not in skipped:
+                    break
+            else:
+                # If we only find skipped ones, clear skip list and take whatever we get next
+                session["skipped_question_ids"] = []
+                question_id, question_text, answer_text, passage_text = get_next_example_from_db(
+                    usr_pk=user_pk,
+                    fun_pk=func_pk
+                )
+
         except RuntimeError as e:
             flask_log.info("No more questions for this user/function: %s", e)
             return render_template('index.html', no_questions=True)
@@ -151,7 +169,7 @@ def create_app() -> Flask:
             if qid not in skipped:
                 skipped.append(qid)
             session['skipped_question_ids'] = skipped
-        
+
         return redirect(url_for('home'))
 
     @app.post('/submit_annotation')
