@@ -151,6 +151,10 @@ NO_PROXY=domain_names,localhost,127.0.0.1
 LOG_DIR=/path/to/logs
 CONFIG_DIR=/path/to/config
 FLASK_SECRET_KEY=placeholder_for_secret_key
+FUNCTION_CHOICES='[
+    "Function_name_1",
+    "Function_name_2"
+]'
 
 # ----------------------------------------------------------------------------------------------------------------------
 # UI (Flask frontend)
