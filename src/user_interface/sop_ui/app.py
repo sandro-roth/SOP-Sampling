@@ -200,7 +200,8 @@ def create_app() -> Flask:
         save_annotation_to_db(qstn=question_text, q_id=question_id, alt_q=alt_quest, passg=passage_text, ansr=answer_text,
                               alt_a=alt_ans, flu=fluency, comp=comprehensive, fact=factual, ann_id=user_pk, q_acc=True)
 
-        # Load next question
+        # Clear skipped questions and load next question
+        session.pop("skipped_question_ids", None)
         return redirect(url_for('home'))
     return app
 
