@@ -62,7 +62,7 @@ Core objectives include:
 - Annotation of SOP-related questions and answers  
 - Validation of automatically generated content  
 - Traceable linking of quotations to SOP documents  
-- Creation of reproducible datasets for downstream evaluation and research  
+- Creation of reproducible dataset for downstream evaluation and research  
 
 The application is primarily intended for **clinical and research-oriented usage** within the USZ network.
 
