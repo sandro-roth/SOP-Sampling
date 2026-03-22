@@ -245,6 +245,56 @@
             <div class="box-content">{{ question_text | trim }}</div>
           </div>
 
+          <!-- Question ratings -->
+          <p class="ratings-heading">Die Frage ist</p>
+          <table class="ratings-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>1 (Nein)</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5 (Ja)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  Klar formuliert
+                  <span class="tooltip" data-tip="Ist die Frage verständlich und eindeutig formuliert?">?</span>
+                </td>
+                <td><input type="radio" name="question_clarity" value="1" required></td>
+                <td><input type="radio" name="question_clarity" value="2"></td>
+                <td><input type="radio" name="question_clarity" value="3"></td>
+                <td><input type="radio" name="question_clarity" value="4"></td>
+                <td><input type="radio" name="question_clarity" value="5"></td>
+              </tr>
+              <tr>
+                <td>
+                  Relevant
+                  <span class="tooltip" data-tip="Ist die Frage inhaltlich sinnvoll und relevant zum Kontext?">?</span>
+                </td>
+                <td><input type="radio" name="question_relevance" value="1" required></td>
+                <td><input type="radio" name="question_relevance" value="2"></td>
+                <td><input type="radio" name="question_relevance" value="3"></td>
+                <td><input type="radio" name="question_relevance" value="4"></td>
+                <td><input type="radio" name="question_relevance" value="5"></td>
+              </tr>
+              <tr>
+                <td>
+                  Kontextgetreu
+                  <span class="tooltip" data-tip="Passt die Frage gut zum angezeigten Kontext?">?</span>
+                </td>
+                <td><input type="radio" name="question_context_fit" value="1" required></td>
+                <td><input type="radio" name="question_context_fit" value="2"></td>
+                <td><input type="radio" name="question_context_fit" value="3"></td>
+                <td><input type="radio" name="question_context_fit" value="4"></td>
+                <td><input type="radio" name="question_context_fit" value="5"></td>
+              </tr>
+            </tbody>
+          </table>
+
           <!-- Answer box (read-only) -->
           <div class="box-header" id="answerBox">
             <div class="box-header-top">
@@ -369,7 +419,7 @@
           return;
         }
 
-        const names = ['fluency', 'comprehensiveness', 'factuality'];
+        const names = ['question_clarity', question_relevance', 'question_context_fit','fluency', 'comprehensiveness', 'factuality'];
         const values = names.map(function (name) {
           const checked = form.querySelector('input[name="' + name + '"]:checked');
           return checked ? parseInt(checked.value, 10) : 0;
