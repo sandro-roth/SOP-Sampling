@@ -10,8 +10,8 @@ INSERT_IN_USER:
 
 INSERT_IN_ANNOTATION: >
   INSERT INTO annotations (question, question_id, alt_question, passage, 
-  answer, alt_answer, question_accepted, fluent, comprehensive, factual, annotator) 
-  VALUES (?,?,?,?,?,?,?,?,?,?,?)
+  answer, alt_answer, question_accepted,question_clarity, question_relevance, question_context_fit fluent, comprehensive, factual, annotator) 
+  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 
 
 SELECT_ALL:
