@@ -1,0 +1,1115 @@
+[
+  {
+    "q_id": 1,
+    "file_name": "High-Flow-Therapie-Addendum-SOP-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Wie hängt der PEEP-Effekt bei HFNC vom Fluss und der Mundöffnung ab?",
+    "answer": "Der PEEP-Effekt ist fluss- und Mundöffnungs-abhängig. Bei höherem Fluss und geschlossenen Lippen ist der PEEP-Effekt stärker."
+  },
+  {
+    "q_id": 2,
+    "file_name": "High-Flow-Therapie-Addendum-SOP-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Welche physiologischen Effekte hat HFNC im Vergleich zu Standardbeatmung, wenn das Tidalvolumen gleich bleibt?",
+    "answer": "HFNC führt zu einem Anstieg des endexpiratorischen Lungenvolumens, was die dynamische Compliance erhöht, die Driving Pressure senkt und eine homogenere Verteilung der Ventilation ermöglicht."
+  },
+  {
+    "q_id": 3,
+    "file_name": "High-Flow-Therapie-Addendum-SOP-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Was zeigt die FLORALI-Studie bezüglich der Wirksamkeit von HFNC im Vergleich zu NIV und Standardsauerstoff?",
+    "answer": "Die FLORALI-Studie zeigte, dass HFNC bei hypoxischem respiratorischem Versagen bei der Intubationsrate nicht signifikant überlegen ist, aber einen Mortalitätsvorteil bietet. In der Subgruppe mit Horowitz < 200 mmHg war die Intubationsrate unter HFNC signifikant niedriger."
+  },
+  {
+    "q_id": 4,
+    "file_name": "High-Flow-Therapie-Addendum-SOP-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Was ergab die spanische Multizenterstudie bezüglich HFNC bei Extubationspatienten mit unterschiedlichem Reintubationsrisiko?",
+    "answer": "Die spanische Studie zeigte, dass HFNC bei Extubationen mit hohem Reintubationsrisiko nicht unterlegen war. Bei Patienten mit niedrigem Risiko war die Reintubationsrate unter HFNC niedriger als unter konventioneller Sauerstofftherapie."
+  },
+  {
+    "q_id": 5,
+    "file_name": "High-Flow-Therapie-Addendum-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Wann ist eine NIV-Therapie im Vergleich zur HFNC-Therapie indiziert?",
+    "answer": "Die NIV-Therapie kommt bei mittelschwerer Hypoxämie *mit* Hyperkapnie zur Anwendung, während die HFNC bei moderater Hypoxämie *ohne* relevante Hyperkapnie indiziert ist."
+  },
+  {
+    "q_id": 6,
+    "file_name": "Doppellumentubus-DLT-IFI_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "Wie verhält sich das Atemgeräusch links apikal und basal, wenn nur das tracheale Lumen eines linksendobronchialen DLT in korrekter Lage beatmet wird?",
+    "answer": "Links apikal und basal ist das Atemgeräusch negativ (–), also kein Atemgeräusch vorhanden."
+  },
+  {
+    "q_id": 7,
+    "file_name": "Doppellumentubus-DLT-IFI_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "Was passiert mit dem Atemgeräusch rechts apikal und basal bei einem rechtsendobronchialen DLT, wenn beide Lumina in korrekter Lage beatmet werden?",
+    "answer": "Rechts apikal und basal sind regelrechte Atemgeräusche (+)."
+  },
+  {
+    "q_id": 8,
+    "file_name": "Doppellumentubus-DLT-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Wie unterscheiden sich die erforderlichen Luftvolumina für den trachealen und bronchialen Cuff, um den gleichen Druck zu erreichen?",
+    "answer": "Der bronchiale Cuff benötigt weniger Luftvolumen (etwa 0,5–2 ml) als der tracheale Cuff, um den gleichen Druck zu erreichen."
+  },
+  {
+    "q_id": 9,
+    "file_name": "Doppellumentubus-DLT-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Welchen Druckbereich sollte man bei beiden Cuffs des DLT einhalten und warum ist besondere Vorsicht beim bronchialen Cuff geboten?",
+    "answer": "Bei beiden Cuffs sollte ein Druck zwischen 18 und 30 cm H2O eingehalten werden. Der bronchiale Cuff lässt sich schlecht kontrollieren, da kein „Danebenpfeifen“ auftritt, wodurch die Gefahr einer stillen Aspiration von einem Lungenflügel zum nächsten besteht."
+  },
+  {
+    "q_id": 10,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Was passiert, wenn der Herz-Lungen-Interaktionsindex (HLI) einen Wert von über 15 % Atemvariabilität anzeigt?",
+    "answer": "Wenn der HLI einen Wert von über 15 % Atemvariabilität anzeigt, wird PEEP nicht weiter erhöht und eine ungenügende SpO2 nur mit FiO2-Erhöhung beantwortet."
+  },
+  {
+    "q_id": 11,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 9",
+    "question": "Warum wird im Intellivent-ASV-Modus die Druckunterstützung nicht vollständig auf 0 mbar reduziert?",
+    "answer": "Bei abruptem Wegfall der Druckunterstützung könnte es bei schwierigem Weaning (z. B. COPD, Critical-Illness-Polyneuropathie) zu Extubationsproblematiken führen. Eine stufenweise Reduktion ist daher sinnvoller."
+  },
+  {
+    "q_id": 12,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 10",
+    "question": "In welchen Fällen gibt es Ausnahmen von der Standard-Intellivent-ASV-Beatmung?",
+    "answer": "Ausnahmen gelten bei instabilem intrazerebralem Druck und Blutfluss, ECMO-Therapie, Herztransplantation, Left Ventricular Assist Device (LVAD), veränderter Thoraxwand-Compliance (Open-Chest-Treatment, Flail Chest, zirkuläre Verbrennung), reduziertem Lungenvolumen (Status nach Lobektomie, Pneumonektomie) sowie während Patiententransporten."
+  },
+  {
+    "q_id": 13,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 10",
+    "question": "Was ist das Ziel bei instabilem intrazerebralem Druck und Blutfluss (ICP/CBF) bezüglich des CO2-Wertes?",
+    "answer": "Bei instabilen ICP/CBF-Verhältnissen ist ein konstanter CO2-Wert in engen Grenzen anzustreben; Zielwerte werden gemäss internen Richtlinien ärztlich festgelegt."
+  },
+  {
+    "q_id": 14,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 11",
+    "question": "Wie erfolgt die CO2-Elimination während einer ECMO-Therapie und welche Auswirkungen hat dies auf die Beatmungsstrategie?",
+    "answer": "Die CO2-Elimination erfolgt überwiegend über den Oxygenator, wodurch die Intellivent-ASV-Regelung nicht greift und auf konventionelle Beatmung gemäss SOP ECMO umgestellt wird."
+  },
+  {
+    "q_id": 15,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 11",
+    "question": "Warum wird nach Herztransplantation oder LVAD-Implantation eine druckkontrollierte Beatmung (Hamilton DuoPAP) mit tiefen PEEP- und Pcontrol-Werten bevorzugt?",
+    "answer": "Nach Herztransplantation bzw. LVAD-Implantation ist die Funktion des rechten Ventrikels besonders fragil und outcome-relevant, weshalb eine druckkontrollierte Beatmung mit tiefen PEEP- und Pcontrol-Werten gewählt wird."
+  },
+  {
+    "q_id": 16,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 11",
+    "question": "In welchen Situationen sind die ASV-Algorithmen ungeeignet und wann wird stattdessen eine druckkontrollierte Beatmung (Hamilton DuoPAP) gewählt?",
+    "answer": "Die ASV-Algorithmen sind ungeeignet bei veränderter Thoraxwand-Compliance (Open-Chest, Flail Chest, zirkuläre Verbrennung) oder reduziertem Lungenvolumen (z. B. nach Lobektomie/Pneumonektomie). In diesen Fällen wird stattdessen eine druckkontrollierte Beatmung (Hamilton DuoPAP) gewählt."
+  },
+  {
+    "q_id": 17,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 12",
+    "question": "Was kann bei Patienten im Weaning mit druckunterstützter Spontanatmung (SPONT) zu SpO2-Abfällen führen?",
+    "answer": "Unruhe/Pressen können zu SpO2-Abfällen führen."
+  },
+  {
+    "q_id": 18,
+    "file_name": "Passy-Muir-Sprechventil-PMV-Richtlinie-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Was sollte bei einer TK-Patientin/einem TK-Patienten mit Beatmung über Trachealkanüle im Hinblick auf PEEP und P support geschehen, wenn das PMV korrekt implantiert wurde?",
+    "answer": "Bei korrekt implantiertem PMV sollte PEEP und/oder P support (bis auf möglichst 0) reduziert werden."
+  },
+  {
+    "q_id": 19,
+    "file_name": "Absaugen-bei-Intubierten-und-Tracheotomierten-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Unter welchen Bedingungen wird das geschlossene Absaugsystem empfohlen?",
+    "answer": "Das geschlossene Absaugsystem wird bei PEEP ≥ 10 und/oder FiO2 ≥ 60%, bei längerer Beatmungszeit, bei Sättigungsabfällen beim Absaugvorgang, bei Kolonisation oder Infektion der Atemwege, bei viel Bronchialsekret, bei Lungenödem und in Bauchlage empfohlen."
+  },
+  {
+    "q_id": 20,
+    "file_name": "Absaugen-bei-Intubierten-und-Tracheotomierten-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Was ist nach dem Absaugen zu tun?",
+    "answer": "Nach dem Absaugen muss das Beatmungssystem rekonnektiert werden. Atmung, Beatmungs- und Vitalparameter sowie das Befinden der Patient:in müssen überprüft werden. Präoxygenation und Postoxygenation (falls aktiviert) müssen ausgeschaltet werden, sobald die Sättigung stabil ist, und der Systolenton muss ausgeschaltet werden. Der Absaugkatheter muss entsorgt und das Absaugsystem mit H2O gespült werden."
+  },
+  {
+    "q_id": 21,
+    "file_name": "Absaugen-bei-Intubierten-und-Tracheotomierten-IFI_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "Bei welcher Patientengruppe besteht eine erhöhte Verletzungsgefahr des Bronchus beim Absaugen?",
+    "answer": "Bei tracheotomierten, lungenverletzten und/oder lungenoperierten Patient:innen besteht eine erhöhte Verletzungsgefahr des Bronchus bei zu tiefem Absaugen."
+  },
+  {
+    "q_id": 22,
+    "file_name": "Intubation-schwieriger-Atemweg-SOP-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Welche Körpermasse können auf einen schwierigen Atemweg hinweisen?",
+    "answer": "Ein kurzer Hals oder ein grosser Halsumfang (über 42 cm) sind Prädiktoren für einen schwierigen Atemweg."
+  },
+  {
+    "q_id": 23,
+    "file_name": "Inhalative-Stickstoffmonoxid-Therapie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 1",
+    "question": "Wie wirkt inhalatives NO auf die Lunge und das Herz-Kreislauf-System?",
+    "answer": "Inhalatives NO verbessert die Ventilations-Perfusions-Verhältnisse, senkt den pulmonal-arteriellen Druck (PAP) und den pulmonalen Gefässwiderstand (PVR), entlastet das rechte Herz, reduziert intrapulmonale Rechts-Links-Shunts und entfaltet eine geringe Bronchodilatation. Der Einfluss auf Blutdruck und systemischen Gefässwiderstand ist minimal."
+  },
+  {
+    "q_id": 24,
+    "file_name": "Inhalative-Stickstoffmonoxid-Therapie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Ab welcher NO-Dosis kann es in schlecht belüfteten Lungenabschnitten zu einer reflektorischen Vasokonstriktion kommen?",
+    "answer": "Bei höheren Dosen über 10 ppm kann NO in schlecht belüfteten Lungenabschnitten die reflektorische Vasokonstriktion aufheben und einen intrapulmonalen Shunt verstärken."
+  },
+  {
+    "q_id": 25,
+    "file_name": "Inhalative-Stickstoffmonoxid-Therapie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Wie beeinflusst die Sauerstoffkonzentration (FiO2) die NO2-Bildung?",
+    "answer": "Die NO2-Bildung steigt exponentiell mit der Sauerstoffkonzentration (FiO2)."
+  },
+  {
+    "q_id": 26,
+    "file_name": "Inhalative-Stickstoffmonoxid-Therapie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Bei welchen Patienten mit pulmonaler Hypertonie kann iNO erfolgreich eingesetzt werden?",
+    "answer": "Bei Patientinnen und Patienten mit zugrundeliegender pulmonaler Hypertonie wurde iNO in Fällen eines akuten hypoxämischen und/oder hämodynamisch instabilen Zustands erfolgreich eingesetzt, etwa nach pulmonaler Endarteriektomie oder nach Lungentransplantation."
+  },
+  {
+    "q_id": 27,
+    "file_name": "Inhalative-Stickstoffmonoxid-Therapie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Was kann beim abrupten Stoppen der iNO-Therapie passieren?",
+    "answer": "Beim abrupten Stoppen der iNO-Therapie kann ein Rebound-Effekt mit akuter pulmonaler Hypertonie, Rechtsherzdekompensation und Verschlechterung der Ventilations-/Perfusionsverhältnisse auftreten."
+  },
+  {
+    "q_id": 28,
+    "file_name": "Inhalative-Stickstoffmonoxid-Therapie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Welche Symptome können auf Probleme im Zusammenhang mit der NO-Beatmung hindeuten und sollten zur Information des Arztes führen?",
+    "answer": "Zu den Symptomen gehören erhöhtes NO2 oder MetHb, Beatmungsprobleme, Zeichen der Rechtsherzinsuffizienz (Anstieg von ZVD und Pulmonaldrücken, Abfall des Cardiac Index, Abfall der SvO2)."
+  },
+  {
+    "q_id": 29,
+    "file_name": "Inhalative-Stickstoffmonoxid-Therapie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Wie schnell sollte man nach Dosissteigerung bei iNO mit einer Wirkung auf die pulmonalen Drücke und die Oxygenation rechnen?",
+    "answer": "Eine Senkung der pulmonalen Drücke sowie eine Verbesserung der Oxygenation sollten innerhalb von 5–20 Minuten nachweisbar sein."
+  },
+  {
+    "q_id": 30,
+    "file_name": "Standard-Intubation-SOP-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Welche Massnahmen können bei unzureichender Sicht bei der Laryngoskopie ergriffen werden?",
+    "answer": "Bei unzureichender Sicht können die Kopf- und Halsposition optimiert, die modifizierte Jacksonposition hergestellt, BURP (Backwards-Upwards-Rightwards Pressure) ausgeübt, eine externe Larynxmanipulation durchgeführt, der Spatel gewechselt oder ein Handwechsel beim Laryngoskop durchgeführt werden. Gegebenenfalls kann ein D-Blade mit dem C-MAC Videolaryngoskop verwendet werden."
+  },
+  {
+    "q_id": 31,
+    "file_name": "High-Flow-Therapie-IFI_textOnlyV2.docx",
+    "page": "page 1",
+    "question": "Welche Rolle haben Pflegefachpersonen HF/FH bei der High-Flow-Sauerstofftherapie?",
+    "answer": "Pflegefachpersonen HF/FH sind für die Betreuung und Überwachung der Patient:innen vor, während und nach der High-Flow-Sauerstofftherapie zuständig. Sie können die Therapie selbstständig bis zu einer FiO2 von 55% durchführen. Bei Tachypnoe und Unruhe arbeiten sie im Tandem."
+  },
+  {
+    "q_id": 32,
+    "file_name": "High-Flow-Therapie-IFI_textOnlyV2.docx",
+    "page": "page 1",
+    "question": "Was ist PSILI und wie könnte HFNC dazu beitragen, dies zu verringern?",
+    "answer": "PSILI steht für patient self inflicted lung injury (patienteninduzierte Lungenschädigung). Physiologische Studien zeigen, dass HFNC bei gleichem Tidalvolumen einen Anstieg des endexpiratorischen Lungenvolumens, eine höhere dynamische Compliance und eine Reduktion der Driving Pressure bewirkt, was lungenprotektiv wirken und PSILI verringern könnte."
+  },
+  {
+    "q_id": 33,
+    "file_name": "High-Flow-Therapie-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Auf was sollte man bei der Therapieskalation besonders achten?",
+    "answer": "Auf die DRIVING PRESSURE (der Druck, der benötigt wird, um die Luft in die Lunge zu befördern)."
+  },
+  {
+    "q_id": 34,
+    "file_name": "High-Flow-Therapie-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Was sollte man bei der High-Flow-Therapie nicht verwenden und warum?",
+    "answer": "Keinen HME-Filter, da dies die Atemarbeit durch erhöhte Resistance steigern kann."
+  },
+  {
+    "q_id": 35,
+    "file_name": "High-Flow-Therapie-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Warum ist es wichtig, die Patient:innen vor Beginn der High-Flow-Therapie aufzuklären?",
+    "answer": "Um die Kooperation zu fördern und eine Intubation möglichst zu vermeiden."
+  },
+  {
+    "q_id": 36,
+    "file_name": "High-Flow-Therapie-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Unter welchen Bedingungen darf eine Patient:in während einer High-Flow-Therapie essen und trinken?",
+    "answer": "Bei erhaltenen Schutzreflexen und ärztlicher Verordnung kann die Patient:in während der High-Flow-Therapie essen und trinken. Die Ernährung erfolgt abhängig von der pulmonalen Situation."
+  },
+  {
+    "q_id": 37,
+    "file_name": "High-Flow-Therapie-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Wann sollte eine High-Flow-Therapie abgebrochen werden? Nenne mindestens drei Gründe.",
+    "answer": "Die High-Flow-Therapie sollte abgebrochen werden bei fehlender Aussicht auf Verbesserung der pulmonalen Situation innerhalb von 24 Stunden, bei ausbleibender Verbesserung der respiratorischen Azidose, bei anhaltender respiratorischer Verschlechterung, bei schweren Kooperationsproblemen, bei Bewusstseinsveränderungen oder bei Aspiration."
+  },
+  {
+    "q_id": 38,
+    "file_name": "Trachealkanuele-Weaning-IFI-NORD1-C_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Welche Bedingungen müssen erfüllt sein, bevor mit dem Entblocken begonnen werden kann?",
+    "answer": "Eine stabile pulmonale Situation und ein stabiler medizinischer Zustand müssen gegeben sein. Der Patient bzw. die Patientin muss zudem mindestens 15 Minuten wach sein und eine Beurteilung bezüglich Dysphagie durch eine F.O.T.-Therapeutin erfolgt sein."
+  },
+  {
+    "q_id": 39,
+    "file_name": "Trachealkanuele-Weaning-IFI-NORD1-C_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Wann sollte man beim Entblocken nicht saugen?",
+    "answer": "Man sollte nicht während der Inspiration saugen, da dabei Sekret aspiriert werden könnte. Das Saugen sollte kurz unterhalb des Kanülenendes während der Exspiration erfolgen."
+  },
+  {
+    "q_id": 40,
+    "file_name": "Trachealkanuele-Weaning-IFI-NORD1-C_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Was ist nach dem Entblocken des Cuffs zu beachten?",
+    "answer": "Nach dem Entblocken des Cuffs sollte die Spritze am Cuff hängen bleiben, um im Notfall (z.B. Erbrechen) sofort wieder blocken zu können. Zusätzlich sollte die SpO2 kontinuierlich überwacht und gegebenenfalls eine arterielle Blutgasanalyse (ABGA) in Betracht gezogen werden."
+  },
+  {
+    "q_id": 41,
+    "file_name": "Trachealkanuele-Weaning-IFI-NORD1-C_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Welche Kriterien müssen erfüllt sein, bevor eine Dekanülierung in Betracht gezogen wird?",
+    "answer": "Ein suffizientes Speichelmanagement muss gewährleistet sein, eine gründliche Mundpflege muss möglich sein, es darf keine Refluxproblematik bestehen, die Vigilanz muss ausreichend sein, der Patient muss pulmonal stabil sein mit suffizientem Hustenstoss, abnehmendem Absaugbedarf und ohne akuten Infekt, das Weaning muss abgeschlossen sein und die Kanüle muss mindestens 24 Stunden stabil entblockt gewesen sein."
+  },
+  {
+    "q_id": 42,
+    "file_name": "Trachealkanuele-Weaning-IFI-NORD1-C_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Warum muss bei einem Wechsel zum Weaning auf eine gefensterte Aussenkanüle eine geschlossene Innenkanüle bereitliegen?",
+    "answer": "Bei einer Reanimation muss über eine geschlossene Innenkanüle beatmet werden, da sonst die Luft direkt über die offene Kanüle in den Mund statt in die Lunge entweicht."
+  },
+  {
+    "q_id": 43,
+    "file_name": "Trachealkanuele-Weaning-IFI-NORD1-C_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Warum darf man bei geblockter Kanüle nicht von vollständiger Aspiration verhindern, auch wenn die Kanüle blockiert ist?",
+    "answer": "Da der Cuff-Druck durch Husten, Schlucken und aufliegendes Sekret sinkt und die Kanüle somit nie vollständig dicht ist."
+  },
+  {
+    "q_id": 44,
+    "file_name": "Praevention-VAP-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Bei welchen Patienten sollten subglottische Absaugungen eingesetzt werden?",
+    "answer": "Subglottische Absaugungen sollten bei allen intubierten Patienten eingesetzt werden, die voraussichtlich länger als 24 Stunden beatmet werden, ausser bei Beatmungszeiten unter 24 Stunden und in Palliative-Care-Situationen."
+  },
+  {
+    "q_id": 45,
+    "file_name": "Praevention-VAP-IFI_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "In welchen Fällen darf von der Oberkörperhochlagerung bei invasiv beatmeten Patient:innen abgewichen werden?",
+    "answer": "Ausnahmen von der Oberkörperhochlagerung bestehen bei Kontraindikation für die Lagerung oder auf schriftliche Verordnung durch den verantwortlichen Intensivmediziner, beispielsweise bei Kreislaufinstabilität, instabiler Becken- oder Wirbelsäulenverletzung oder Schädel-Hirn-Trauma."
+  },
+  {
+    "q_id": 46,
+    "file_name": "Praevention-VAP-IFI_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "Unter welchen Umständen ist es erlaubt, vom täglichen Sedationsstopp bei beatmeten Patienten abzusehen?",
+    "answer": "Ausnahmen vom täglichen Sedationsstopp müssen klar deklariert und durch den Intensivmediziner verordnet werden, zum Beispiel bei Schädelhirntrauma, schwerstem Schock, ECMO-Therapie oder bei relaxierten/speziell gelagerten Patienten."
+  },
+  {
+    "q_id": 47,
+    "file_name": "Nichtinvasive-Beatmung-NIV-IFI_textOnlyV2.docx",
+    "page": "page 1",
+    "question": "Welche Alarmgrenzen sollten bei der NIV-Beatmung grosszügig gewählt werden?",
+    "answer": "Die Alarmgrenzen sollten grosszügig gewählt werden, da Hamilton S1/C6 Leckagen kompensieren. Bei Hyperkapnie ist das endexpiratorische Tidalvolumen relevant, bei Hypoxie die SaO2."
+  },
+  {
+    "q_id": 48,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Was sollte bei Verdacht auf einen Spannungspneumothorax zusätzlich zur Bronchoskopie berücksichtigt werden?",
+    "answer": "Ein Spannungspneumothorax kann mit Hyperkapnie, sinkenden Tidalvolumina und steigenden Beatmungsdrücken einhergehen und sollte klinisch bzw. sonographisch gesucht werden."
+  },
+  {
+    "q_id": 49,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Bei welchen Patienten sollte eine Bronchoskopie zur Erregeridentifikation in Betracht gezogen werden?",
+    "answer": "Eine Bronchoskopie sollte bei CAP ohne Besserung unter Therapie, unklarem respiratorischem Versagen (DD Infekt, Autoimmunität, DAH etc.) sowie bei Immunsuppression (erweitertes Keimspektrum) erwogen werden."
+  },
+  {
+    "q_id": 50,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Wann ist eine bronchoalveoläre Lavage (BAL) besonders angezeigt?",
+    "answer": "Eine BAL ist angezeigt, wenn keine andere Möglichkeit zur Gewinnung von Sputum/Tracheobronchialsekret besteht (z.B. für Pneumocystis) oder bei spezifischen mikrobiologischen Fragestellungen (z.B. Aspergillus-Antigen/Galaktomannan) wegen höherer Sensitivität/Spezifität."
+  },
+  {
+    "q_id": 51,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Wie kann die Bronchoskopie bei Patienten mit schwerer pulmonaler Hämorrhagie helfen?",
+    "answer": "Die Bronchoskopie ist essenziell zur Sicherung der Ventilation (einseitige Intubation/Bronchusblocker) und zur ersten Blutstillung bei schweren Blutungen."
+  },
+  {
+    "q_id": 52,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Wie kann eine serielle BAL bei Verdacht auf diffuse alveoläre Hämorrhagie (DAH) differenzieren?",
+    "answer": "Bei bronchialer Blutungsquelle wird das Aspirat klarer, bei DAH nimmt die Blutungsmenge zu."
+  },
+  {
+    "q_id": 53,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "Wie werden Patientinnen/Patienten informiert, die beatmet werden und sich nicht selbst äussern können?",
+    "answer": "Bei beatmeten Patientinnen/Patienten ist eine Aufklärung meist nicht möglich; die Angehörigen sollen über die Prozedur informiert werden."
+  },
+  {
+    "q_id": 54,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Welche Vor- und Nachteile haben kleinere Bronchoskope im Vergleich zu grösseren?",
+    "answer": "Kleinere Bronchoskope verlegen den Tubus weniger und erlauben eine bessere Beatmung, haben jedoch eine geringere Bildqualität und einen feinen, ineffizienten Arbeitskanal."
+  },
+  {
+    "q_id": 55,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 7",
+    "question": "Was sollte bei jeder Bronchoalveolären Lavage (BAL) zusätzlich zur Erregerdiagnostik immer durchgeführt werden und warum?",
+    "answer": "Bei jeder BAL, die nicht nur der Erregerdiagnostik dient, sollte immer eine Zytologie erfolgen, da anhand der Zellverteilung wichtige Hinweise auf die Ätiologie des Lungenversagens abgeleitet werden können."
+  },
+  {
+    "q_id": 56,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 9",
+    "question": "Was sollte man beim Betrachten des Bildes auf dem Monitor nach der Einführung des Bronchoskops beachten?",
+    "answer": "Das Bild sollte so gedreht werden, dass die Pars membranacea der Trachea am unteren Bildrand liegt, wodurch unten = dorsal, oben = ventral und links/rechts anatomisch korrekt sind."
+  },
+  {
+    "q_id": 57,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 9",
+    "question": "Was ist ein häufiger Fehler bei der Durchführung einer BAL, der die Qualität der Probe beeinträchtigen kann?",
+    "answer": "Ein häufiger Fehler ist, das Bronchoskop während der einzelnen Lavagen zu bewegen oder neu zu platzieren, da dies zu Bronchialsekret statt BAL-Flüssigkeit aus den Alveolen führen kann."
+  },
+  {
+    "q_id": 58,
+    "file_name": "Standard-Trachealkanuelen-IFI_textOnlyV2.docx",
+    "page": "page 1",
+    "question": "Wann sollte von einer Shiley Flex Evac auf eine Shiley Flex Kanüle gewechselt werden?",
+    "answer": "Ein Wechsel sollte erfolgen, wenn das Weaning zum Sprechventil wegen Airtrapping nicht möglich ist, bei einem hohen intratrachealen Druck (≥ 15 cmH2O) der das Weaning verhindert, oder wenn der Patient auf die Bettenstation verlegt wird."
+  },
+  {
+    "q_id": 59,
+    "file_name": "NIV_IFI_V_1_0_textOnlyV2.docx",
+    "page": "page 1",
+    "question": "Was ist die empfohlene Vorgehensweise bei obstruktiven Patienten hinsichtlich der PEEP-Einstellung?",
+    "answer": "Bei obstruktiven Patienten sollte PEEP gemäss dem intrinsischen PEEP erhöht werden."
+  },
+  {
+    "q_id": 60,
+    "file_name": "Checkliste-Passy-Muir-Sprechventil-GEfensterte-Trachealkanuelen_textOnlyV2.docx",
+    "page": "page 1",
+    "question": "Was sollte man vor dem Wechsel zum PMV (Passy-Muir Sprechventil) überprüfen?",
+    "answer": "Man sollte die Kontraindikationen gemäss HLD (vermutlich Handlungsleitlinien/Diagnostik) ausschliessen und das VTi (Tidalvolumen) als Referenz- bzw. Vergleichswert evaluieren."
+  },
+  {
+    "q_id": 61,
+    "file_name": "Checkliste-Passy-Muir-Sprechventil-GEfensterte-Trachealkanuelen_textOnlyV2.docx",
+    "page": "page 1",
+    "question": "Was sollte bei Dyskomfort durch zu hohen Fluss nach dem Einsetzen des PMV unternommen werden?",
+    "answer": "Bei Dyskomfort durch zu hohen Fluss sollte der PEEP bzw. der P support reduziert werden, bei Bedarf bis auf 0, um ein Derecruitment zu vermeiden."
+  },
+  {
+    "q_id": 62,
+    "file_name": "Checkliste-Passy-Muir-Sprechventil-GEfensterte-Trachealkanuelen_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Was ist bei Verdacht auf Airtrapping während der PMV-Anwendung zu tun?",
+    "answer": "Bei Verdacht auf Airtrapping soll die Beatmung diskonnektiert und ein normales Sprechventil eingesetzt werden. Zudem ist eine intratracheale Druckmessung über 3-4 Atemzüge durchzuführen."
+  },
+  {
+    "q_id": 63,
+    "file_name": "Checkliste-Passy-Muir-Sprechventil-GEfensterte-Trachealkanuelen_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Nennen Sie mindestens drei Kriterien, die einen sofortigen Abbruch des PMV-Einsatzes erforderlich machen.",
+    "answer": "Ein sofortiger Abbruch ist erforderlich bei klinischen Zeichen von Dyspnoe, Angst oder Unwohlsein des Patienten/der Patientin, sowie bei Anstieg von Herzfrequenz und/oder Blutdruck, Abfall der SpO2 oder Verschlechterung der Blutgaswerte."
+  },
+  {
+    "q_id": 64,
+    "file_name": "High-Flow-Therapie-Addendum-SOP-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Was passiert mit dem endexpiratorischen Lungenvolumen unter HFNC bei gleichem Tidalvolumen?",
+    "answer": "Das endexpiratorische Lungenvolumen steigt an."
+  },
+  {
+    "q_id": 65,
+    "file_name": "High-Flow-Therapie-Addendum-SOP-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Welchen Effekt könnte die Anwendung von HFNC auf die Lunge haben?",
+    "answer": "Sie könnte einen lungenprotektiven Effekt haben und PSILI (patient self inflicted lung injury) verringern."
+  },
+  {
+    "q_id": 66,
+    "file_name": "High-Flow-Therapie-Addendum-SOP-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Was zeigte der FLORALI-Trial hinsichtlich der Intubationsrate unter HFNC im Vergleich zu NIV und Standardsauerstoff?",
+    "answer": "Im FLORALI-Trial war HFNC gegenüber NIV und Standardsauerstoff bei der Intubationsrate nicht signifikant überlegen, aber es zeigte einen Mortalitätsvorteil."
+  },
+  {
+    "q_id": 67,
+    "file_name": "High-Flow-Therapie-Addendum-SOP-IFI_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "Welche Bedeutung haben höhere Flussraten bei hypoxischem Versagen und ab welchem Punkt bringt eine Erhöhung des Flusses keinen signifikanten Zusatznutzen für den CO2-wash-out?",
+    "answer": "Bei hypoxischem Versagen sind höhere Flussraten wichtiger, jedoch bringt eine Erhöhung des Flusses über 30 L/min keinen signifikanten Zusatznutzen für den CO2-wash-out."
+  },
+  {
+    "q_id": 68,
+    "file_name": "High-Flow-Therapie-Addendum-SOP-IFI_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "Wie sollte die Grösse der Nasenkanüle gewählt werden und welche Auswirkung hat eine kleinere Kanüle auf die Strömungsgeschwindigkeit und den generierten PEEP?",
+    "answer": "Die Grösse der Nasenkanüle sollte so gewählt werden, dass sie höchstens 50 % des Nasenlochinnendurchmessers ausfüllt; eine kleinere Kanüle erhöht die Strömungsgeschwindigkeit und beeinflusst dadurch den generierten PEEP."
+  },
+  {
+    "q_id": 69,
+    "file_name": "Doppellumentubus-DLT-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Wie kontrolliert man die Funktion des Doppellumentubus nach der Platzierung?",
+    "answer": "Man prüft die Lage und Funktion des Tubus, indem man die beidseitige Lungenbeatmung testet, den trachealen Cuff blockt und dann manuell über beide Lumina beatmet. Anschliessend kontrolliert man, ob bei beidseitiger Beatmung beide Lungen belüftet sind."
+  },
+  {
+    "q_id": 70,
+    "file_name": "Doppellumentubus-DLT-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Wie kann man die korrekte Platzierung des Doppellumentubus in einem der Hauptbronchien überprüfen?",
+    "answer": "Man blockt den endobronchialen Cuff, klemmt das tracheale Lumen ab und beatmet manuell über das bronchiale Lumen. Dann prüft man, ob nur auf der bronchial intubierten Seite Atemgeräusche zu hören sind."
+  },
+  {
+    "q_id": 71,
+    "file_name": "Doppellumentubus-DLT-IFI_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "Wie verhält sich das Atemgeräusch, wenn nur das tracheale Lumen in korrekter Lage bei linksendobronchialem DLT beatmet wird?",
+    "answer": "Es ist links apikal und basal kein Atemgeräusch (-) hörbar, rechts apikal und basal jedoch ein regelrechtes Atemgeräusch (+)."
+  },
+  {
+    "q_id": 72,
+    "file_name": "Doppellumentubus-DLT-IFI_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "Was passiert, wenn bei rechtsendobronchialem DLT nur das bronchiale Lumen in korrekter Lage beatmet wird?",
+    "answer": "Es ist links apikal und basal kein Atemgeräusch (-) hörbar, rechts apikal und basal jedoch ein regelrechtes Atemgeräusch (+), während rechts apikal und basal auch - (kein Atemgeräusch) auftreten kann."
+  },
+  {
+    "q_id": 73,
+    "file_name": "Doppellumentubus-DLT-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Warum ist es wichtig, den bronchialen Cuff regelmässig zu kontrollieren?",
+    "answer": "Es besteht die Gefahr einer Bronchialverletzung bei zu hohem Cuffdruck und stiller Aspiration von einem Lungenflügel zum nächsten."
+  },
+  {
+    "q_id": 74,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Welche Risiken sind mit der mechanischen Beatmung intensivmedizinischer Patienten verbunden?",
+    "answer": "Die mechanische Beatmung ist mit Risiken wie ventilatorassoziierter Pneumonie, Baro-/Volu-Trauma, Dekonditionierung, Critical-Illness-Polyneuromyopathie und Patient-Respirator-Dyssynchronie verknüpft."
+  },
+  {
+    "q_id": 75,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Wie funktioniert die automatische %MinVol-Steuerung beim passiven Patienten?",
+    "answer": "Beim passiven Patienten erhöht die automatische %MinVol-Steuerung das Minutenvolumen bis maximal 200 %, wenn PetCO2 oberhalb des akzeptablen Bereichs liegt, und reduziert es bis mindestens 70 %, wenn PetCO2 unterhalb des akzeptablen Bereichs liegt."
+  },
+  {
+    "q_id": 76,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "Wann wird initial auf eine Target-Shift-Veränderung verzichtet?",
+    "answer": "Initial wird auf eine Target-Shift-Veränderung verzichtet, wenn die PaCO2-PetCO2-Differenz nicht persistierend erhöht ist."
+  },
+  {
+    "q_id": 77,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Wie wird der Herz-Lungen-Interaktionsindex (HLI) bei der Beatmung genutzt?",
+    "answer": "Der HLI bewertet die hämodynamische Beeinträchtigung mittels Atemvariabilität im Pulsoximeter-Plethysmogramm und beeinflusst die Entscheidung, ob PEEP erhöht oder FiO2 angepasst wird."
+  },
+  {
+    "q_id": 78,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 7",
+    "question": "Was begünstigen Weaning und Quick Wean Intubation und maschinelle Beatmung?",
+    "answer": "IPS-assoziierte Komplikationen wie ventilatorassoziierte Pneumonie und Critical-Illness-Polyneuromyopathie."
+  },
+  {
+    "q_id": 79,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 9",
+    "question": "Warum ist eine stufenweise Reduktion der Druckunterstützung im Modus \"druckunterstützte Spontanatmung\" sinnvoll?",
+    "answer": "Eine stufenweise Reduktion der Druckunterstützung ist sinnvoll, um bei schwierigem Weaning (z. B. COPD, Critical-Illness-Polyneuropathie) eine Extubationsproblematik zu vermeiden."
+  },
+  {
+    "q_id": 80,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 10",
+    "question": "Welche Art der Beatmung wird bei Patienten mit instabilem intrazerebralem Druck und Blutfluss angewendet?",
+    "answer": "Es erfolgt eine volumenkontrollierte Beatmung im Modus APVcmv (adaptive pressure ventilation), bei der das Ziel-Tidalvolumen mit möglichst geringem Druck verabreicht wird."
+  },
+  {
+    "q_id": 81,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 11",
+    "question": "Warum wird nach einer Herztransplantation oder LVAD-Implantation eine druckkontrollierte Beatmung gewählt?",
+    "answer": "Weil die Funktion des rechten Ventrikels besonders fragil und outcome-relevant ist."
+  },
+  {
+    "q_id": 82,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 11",
+    "question": "Warum wird die Intellivent-ASV-Regelung bei einer ECMO-Therapie nicht verwendet?",
+    "answer": "Weil die CO2-Elimination überwiegend über den Oxygenator erfolgt und die Intellivent-ASV-Regelung daher nicht greift."
+  },
+  {
+    "q_id": 83,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 12",
+    "question": "Wann kann es sinnvoll sein, von Intellivent-ASV auf \"SPONT\" umzustellen?",
+    "answer": "Im Weaning mit oberflächlicher Sedation (RASS 0 ± 1), wenn Unruhe/Pressen zu SpO2-Abfällen führen und die Reaktion von Intellivent-ASV mit PEEP-Erhöhung unerwünscht ist."
+  },
+  {
+    "q_id": 84,
+    "file_name": "Passy-Muir-Sprechventil-PMV-Richtlinie-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Wann soll der Einsatz des PMV abgebrochen werden?",
+    "answer": "Der Einsatz des PMV soll sofort abgebrochen werden bei klinischen Zeichen einer Dyspnoe, Angst oder Unwohlsein des Patienten, akuten Verwirrtheitszuständen, Abfall der SpO2, Verschlechterung der Blutgase und anderen bestimmten Bedingungen."
+  },
+  {
+    "q_id": 85,
+    "file_name": "Intubation-schwieriger-Atemweg-SOP-IFI_textOnlyV2.docx",
+    "page": "page 1",
+    "question": "Was ist Plan D im Algorithmus und wann wird er eingeleitet?",
+    "answer": "Plan D ist der Front of Neck Airway (FONA) und wird eingeleitet, wenn weder Intubation noch suffiziente Oxygenierung möglich sind, also bei \"can't intubate, can't oxygenate\"."
+  },
+  {
+    "q_id": 86,
+    "file_name": "Inhalative-Stickstoffmonoxid-Therapie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Was ist eine relative Kontraindikation für die Anwendung von iNO?",
+    "answer": "Eine vorbestehende Linksherzinsuffizienz gilt als relative Kontraindikation, da eine plötzliche Verbesserung der RV-Funktion zu einem Anstieg der LV-Füllungsdrücke, Erhöhung des Wedge-Drucks, Lungenödem, systemischer Hypotonie, Bradykardie bis hin zum Kreislaufstillstand führen kann."
+  },
+  {
+    "q_id": 87,
+    "file_name": "Inhalative-Stickstoffmonoxid-Therapie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Warum sollte iNO langsam ausgeschlichen werden?",
+    "answer": "Beim abrupten Stoppen der iNO-Therapie kann ein Rebound-Effekt mit akuter pulmonaler Hypertonie, Rechtsherzdekompensation und Verschlechterung der Ventilations-/Perfusionsverhältnisse auftreten."
+  },
+  {
+    "q_id": 88,
+    "file_name": "Inhalative-Stickstoffmonoxid-Therapie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Wie lange kann iNO in der Regel verabreicht werden, bevor ein Abbruch der Therapie erwogen werden sollte, wenn keine Wirkung eintritt?",
+    "answer": "Wenn trotz Dosissteigerung nach einem 30-minütigen Trial kein Effekt eintritt, sollte ein Abbruch der iNO-Therapie erwogen werden."
+  },
+  {
+    "q_id": 89,
+    "file_name": "High-Flow-Therapie-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Welche Therapiefolge ist bei zunehmender Verschlechterung des Zustands eines Patienten vorgesehen?",
+    "answer": "Die Therapiefolge ist von HFNC (High-Flow-Nasenkanültherapie) über NIV (Nichtinvasive Beatmung) hin zu MV (Maschinelle Beatmung), wobei immer eine Eskalation in Betracht gezogen werden muss, insbesondere unter Beachtung des \"DRIVING PRESSURE\"."
+  },
+  {
+    "q_id": 90,
+    "file_name": "High-Flow-Therapie-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Wie effektiv ist eine Inhalation mit separatem Inhalationsset im Vergleich zur Inhalation über das Beatmungsgerät?",
+    "answer": "Eine Inhalation mit separatem Inhalationsset ist effektiver als über das Beatmungsgerät."
+  },
+  {
+    "q_id": 91,
+    "file_name": "Trachealkanuele-Weaning-IFI-NORD1-C_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Was sollte nach dem Entblocken der Trachealkanüle beobachtet und dokumentiert werden?",
+    "answer": "Sekretmenge, Husten, Atmungsparameter, Entblockungsdauer, SpO2, O2-Bedarf und Absaugfrequenz."
+  },
+  {
+    "q_id": 92,
+    "file_name": "Trachealkanuele-Weaning-IFI-NORD1-C_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Wie soll bei Problemen wie falscher Innenkanüle oder ungenügender Cuffentblockung vorgegangen werden?",
+    "answer": "Ein Trachvent sollte kurzfristig installiert werden, bis diese Probleme behoben sind."
+  },
+  {
+    "q_id": 93,
+    "file_name": "Trachealkanuele-Weaning-IFI-NORD1-C_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Warum sollte bei geblockter Kanüle von oraler Nahrungsaufnahme abgeraten werden?",
+    "answer": "Eine geblockte Kanüle vermittelt eine falsche Sicherheit vor Aspiration, da sie nie vollständig dicht ist und der Cuff-Druck durch Husten, Schlucken und aufliegendes Sekret sinkt. Zudem fehlt der Stimulus für die Schluckakt-Triggerung, was das Risiko von Aspiration und anderen Komplikationen erhöht."
+  },
+  {
+    "q_id": 94,
+    "file_name": "Inhalation-Fungizone-beatmete-Patientinnen-IFI_textOnlyV2.docx",
+    "page": "page 1",
+    "question": "Warum sollte Aqua als Rekonstitutions- und Verdünnungsmittel verwendet werden?",
+    "answer": "Weil Amphotericin B mit Elektrolyten wie NaCl 0,9 % inkompatibel ist und dies zu Ausfällungen führen kann."
+  },
+  {
+    "q_id": 95,
+    "file_name": "Praevention-VAP-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Wann sollte die subglottische Absaugung bei intubierten Patienten eingesetzt werden?",
+    "answer": "Bei allen intubierten Patienten, die voraussichtlich länger als 24 Stunden beatmet werden, mit Ausnahmen bei Beatmungszeit unter 24 Stunden und in Palliative-Care-Situationen."
+  },
+  {
+    "q_id": 96,
+    "file_name": "Praevention-VAP-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Was ist die Wirkung des kontinuierlichen Aspirierens von subglottischen Sekreten auf die Morbidität ventilator-assoziierter Pneumonien?",
+    "answer": "Es reduziert die Morbidität ventilator-assoziierter Pneumonien, wie in verschiedenen Studien nachgewiesen wurde."
+  },
+  {
+    "q_id": 97,
+    "file_name": "Nichtinvasive-Beatmung-NIV-IFI_textOnlyV2.docx",
+    "page": "page 1",
+    "question": "Was ist bei der Auswahl einer NIV-Maske zu berücksichtigen?",
+    "answer": "Bei der Auswahl einer NIV-Maske sollte berücksichtigt werden, ob die Maske ein Winkelstück für ein Zweischlauchsystem (wie Hamilton-S1/Hamilton-C6) besitzt und ob sie über ein Anti-Asphyxie-Ventil verfügt, das bei Druck unter 3 cm H2O den Zugang zu Raumluft ermöglicht."
+  },
+  {
+    "q_id": 98,
+    "file_name": "Nichtinvasive-Beatmung-NIV-IFI_textOnlyV2.docx",
+    "page": "page 1",
+    "question": "Welche Rolle spielt die Positionierung des Patienten bei der NIV?",
+    "answer": "Der Oberkörper des Patienten sollte aufrecht positioniert werden, um eine effektive Beatmung zu gewährleisten. Die Maske sollte zunächst aufgesetzt, aber nicht festgezurrt werden, um die Toleranz des Patienten zu testen."
+  },
+  {
+    "q_id": 99,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Wie kann ein Spannungspneumothorax klinisch diagnostiziert werden?",
+    "answer": "Durch Hyperkapnie, sinkenden Tidalvolumina und steigenden Beatmungsdrücken sowie klinischer bzw. sonographischer Untersuchung."
+  },
+  {
+    "q_id": 100,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Wann sollte eine Bronchoskopie zur Erregeridentifikation bei einer Community-acquired Pneumonie (CAP) erwogen werden?",
+    "answer": "Eine Bronchoskopie zur Erregeridentifikation sollte erwogen werden, wenn es keine Besserung unter Therapie gibt, bei unklarem respiratorischem Versagen oder bei Immunsuppression."
+  },
+  {
+    "q_id": 101,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Wie kann eine Bronchoskopie bei der Behandlung von pulmonalen Hämorrhagien helfen?",
+    "answer": "Eine Bronchoskopie kann bei schweren Blutungen essenziell zur Sicherung der Ventilation und zur ersten Blutstillung sein, sowie bei Verdacht auf diffuse alveoläre Hämorrhagie (DAH) durch serielle BAL differenzieren."
+  },
+  {
+    "q_id": 102,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Welche Rolle spielt die Bronchoskopie nach einer Lungentransplantation?",
+    "answer": "Die Bronchoskopie wird zur Prüfung der Anastomosen und zur Sekretclearance nach Transplantation eingesetzt, sowie für Erregersuche und Zelldifferenzierung (Zytologie), obwohl eine Abstossung formal nur mittels transbronchialer Biopsie gesichert werden kann."
+  },
+  {
+    "q_id": 103,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "Wie werden beatmete Patientinnen/Patienten über die Prozedur aufgeklärt, wenn sie selbst nicht in der Lage sind, eine schriftliche Aufklärung zu erhalten?",
+    "answer": "Die Angehörigen sollen über die Prozedur informiert werden."
+  },
+  {
+    "q_id": 104,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Welche Auswirkungen hat das Bronchoskop auf die Beatmung und die Bildqualität?",
+    "answer": "Kleinere Bronchoskope verlegen den Tubus weniger und erlauben bessere Beatmung, jedoch mit geringerer Bildqualität."
+  },
+  {
+    "q_id": 105,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 7",
+    "question": "Warum sollte bei jeder BAL eine Zytologie durchgeführt werden?",
+    "answer": "Eine Zytologie sollte immer durchgeführt werden, wenn die BAL nicht nur der Erregerdiagnostik dient, da anhand der Zellverteilung wichtige Hinweise auf die Ätiologie des Lungenversagens ableitbar sind."
+  },
+  {
+    "q_id": 106,
+    "file_name": "Tracheotomie-RL-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Was sollte im Falle eines Notfalls für das Tracheostoma bereitgehalten werden?",
+    "answer": "Ein Notfallmaterial-Set mit einer Ersatzkanüle gleicher Grösse, eine zweite Ersatzkanüle in einer Grösse kleiner als die Notfallreserve, eine zusätzliche Innenkanüle als Reserve, ein Trachealspreizer, ein Yankauer-Absaugkatheter und ein Endotrachealtubus der Grösse 6,0 sollten bereitgehalten werden."
+  },
+  {
+    "q_id": 107,
+    "file_name": "Standard-Trachealkanuelen-IFI_textOnlyV2.docx",
+    "page": "page 1",
+    "question": "Wann soll ein Downsizing und Wechsel von der Shiley Flex Evac auf die Shiley Flex durchgeführt werden?",
+    "answer": "Ein Downsizing und Wechsel von der Shiley Flex Evac auf die Shiley Flex soll durchgeführt werden, wenn das Weaning zum Sprechventil wegen Airtrapping nicht möglich ist oder wenn ein hoher intratrachealer Druck (≥ 15 cmH2O) besteht."
+  },
+  {
+    "q_id": 108,
+    "file_name": "Checkliste-Passy-Muir-Sprechventil-GEfensterte-Trachealkanuelen_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Was ist erforderlich, bevor die genannten Massnahmen im Komplikationsmanagement während der PMV-Anwendung ergriffen werden?",
+    "answer": "Eine Ursachenanalyse und die gemeinsame Besprechung von Pflege, Dysphagietherapeutin und Ärztin."
+  },
+  {
+    "q_id": 109,
+    "file_name": "Checkliste-Passy-Muir-Sprechventil-GEfensterte-Trachealkanuelen_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Welche Schritte müssen bei einem Wechsel zurück zur invasiven Beatmung nach PMV-Einsatz durchgeführt werden?",
+    "answer": "Das PMV und der Adapter müssen entfernt, die geschlossene Innenkanüle eingesetzt, die Trachealkanüle blockiert, die Beatmung wieder konnektiert und die Respirator-Einstellungen angepasst werden. Zusätzlich soll eine Vitalzeichenkontrolle durchgeführt werden."
+  },
+  {
+    "q_id": 110,
+    "file_name": "High-Flow-Therapie-Addendum-SOP-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Wie hängt der PEEP-Effekt bei der High-Flow-Sauerstofftherapie (HFNC) von der Flussrate und der Mundöffnungsposition ab?",
+    "answer": "Der PEEP-Effekt bei der High-Flow-Sauerstofftherapie (HFNC) ist fluss- und mundöffnungsabhängig. Bei einer Flussrate von etwa 50 L/min beträgt der PEEP etwa 2–3 cmH2O, bei 60 L/min etwa 3–6 cmH2O. Bei geschlossenen Lippen ist der PEEP höher als bei offenen."
+  },
+  {
+    "q_id": 111,
+    "file_name": "High-Flow-Therapie-Addendum-SOP-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Welche physiologischen Vorteile hat die High-Flow-Nasenkanüle (HFNC) im Vergleich zur konventionellen Sauerstofftherapie?",
+    "answer": "Gemäss physiologischen Studien steigt unter HFNC bei gleichem Tidalvolumen das endexpiratorische Lungenvolumen an; dies erhöht die dynamische Compliance, senkt die Driving Pressure und geht mit einer homogenere Verteilung der Ventilation einher. Dies könnte einen lungenprotektiven Effekt haben und PSILI (patient self inflicted lung injury) verringern."
+  },
+  {
+    "q_id": 112,
+    "file_name": "High-Flow-Therapie-Addendum-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Welche Therapieform wird bei Patienten mit hohem Atemdrive und grossen Tidalvolumina angewendet, um Lungenprotektion zu gewährleisten?",
+    "answer": "Sedation und mechanische Ventilation."
+  },
+  {
+    "q_id": 113,
+    "file_name": "Doppellumentubus-DLT-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Was ist bei rechtsseitiger Intubation besonders zu beachten?",
+    "answer": "Bei rechtsseitiger Intubation ist wegen der anatomischen Verhältnisse besonders auf die Beatmung des rechten Oberlappens zu achten; zusätzlich ist die Lage des DLT mittels Bronchoskopie zu überprüfen."
+  },
+  {
+    "q_id": 114,
+    "file_name": "Doppellumentubus-DLT-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Wie wird der bronchiale Cuff kontrolliert und warum ist dies wichtig?",
+    "answer": "Der bronchiale Cuff wird mehrmals pro Schicht mittels Druckmesser kontrolliert. Dies ist wichtig, da der bronchiale Cuff sich schlecht kontrollieren lässt und die Gefahr einer stillen Aspiration von einem Lungenflügel zum nächsten besteht."
+  },
+  {
+    "q_id": 115,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Welche Risiken sind mit der mechanischen Beatmung verbunden und wie kann man diese minimieren?",
+    "answer": "Die mechanische Beatmung ist mit Risiken wie ventilatorassoziierter Pneumonie, Baro-/Volu-Trauma, Dekonditionierung, Critical-Illness-Polyneuromyopathie und Patient-Respirator-Dyssynchronie verknüpft. Eine möglichst rasche Entwöhnung vom Respirator kann diese Risiken minimieren und Morbidität, Mortalität und Therapiekosten senken."
+  },
+  {
+    "q_id": 116,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Welche Bedingungen sind relative Kontraindikationen für die Verwendung von Intellivent-ASV?",
+    "answer": "eine SpO2-Messdifferenz > 5 % zur SaO2 (z. B. bei hoher Carboxy- oder Methämoglobinämie), ein PetCO2-Wert, der um > 2,7 kPa [20 mmHg] von PaCO2 abweicht (zusammengesetzt aus physiologischer Differenz 0,7 kPa [5 mmHg] plus maximalem Target-Shift 2,0 kPa [15 mmHg], z. B. bei niedrigem Cardiac Output oder ausgeprägtem Ventilations-Perfusions-Mismatch), sowie ungenügende Sensorqualität (SpO2, PetCO2), die die Closed-Loop-Steuerung verunmöglicht"
+  },
+  {
+    "q_id": 117,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Wie wird die %MinVol-Steuerung beim aktiven Patienten geregelt?",
+    "answer": "Beim aktiven Patienten orientiert sich die %MinVol-Steuerung primär an der spontanen Atemfrequenz im Vergleich zur nach Otis errechneten physiologischsten Frequenz. Liegt PetCO2 im Zielbereich und ist die Atemfrequenz zu hoch, wird %MinVol gesteigert; ist die Atemfrequenz zu tief, wird %MinVol reduziert."
+  },
+  {
+    "q_id": 118,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Wie wird die automatische PEEP/SpO2-Steuerung geregelt?",
+    "answer": "Die automatische PEEP/SpO2-Steuerung entscheidet anhand der aktuell eingestellten PEEP-/FiO2-Kombination, ob PEEP, FiO2 oder beide angepasst werden. Bei Erhöhung der Therapie orientiert sich die Regelung an den ARDS Network-Empfehlungen (FiO2 und PEEP werden parallel erhöht), bei Reduktion folgt sie dem Open-Lung-Konzept (zuerst FiO2, dann PEEP reduzieren)."
+  },
+  {
+    "q_id": 119,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "Was ist die Funktion \"Target Shift\" und wann wird sie verwendet?",
+    "answer": "Die Funktion \"Target Shift\" ermöglicht eine manuelle Anpassung der PetCO2- und SpO2-Zielwerte bei persistierender erhöhter PaCO2-PetCO2-Differenz. Sie wird verwendet, wenn der Patient einen tiefen Cardiac Output, einen V/Q-Mismatch oder einen vergrösserten Totraum hat."
+  },
+  {
+    "q_id": 120,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "Wie kann der Patientenzustand im Cockpit ausgewählt werden, um Anfangseinstellungen sowie PetCO2- und SpO2-Zielwerte dem Krankheitsbild anzupassen?",
+    "answer": "Der Patientenzustand kann im Cockpit als \"ARDS\", \"chronische Hyperkapnie\" oder \"Schädelhirntrauma\" ausgewählt werden, um Anfangseinstellungen sowie PetCO2- und SpO2-Zielwerte dem Krankheitsbild anzupassen."
+  },
+  {
+    "q_id": 121,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Bei welcher Atemvariabilität im Pulsoximeter-Plethysmogramm wird PEEP nicht weiter erhöht und eine ungenügende SpO2 nur mit FiO2-Erhöhung beantwortet?",
+    "answer": "Bei einer Atemvariabilität im Pulsoximeter-Plethysmogramm von > 15 % wird PEEP nicht weiter erhöht und eine ungenügende SpO2 nur mit FiO2-Erhöhung beantwortet."
+  },
+  {
+    "q_id": 122,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 7",
+    "question": "Was sind die Komplikationen, die durch Weaning und Quick Wean Intubation und maschinelle Beatmung begünstigt werden?",
+    "answer": "IPS-assoziierte Komplikationen wie ventilatorassoziierte Pneumonie und Critical-Illness-Polyneuromyopathie."
+  },
+  {
+    "q_id": 123,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 9",
+    "question": "Was ist der Intellivent-ASV-Modus und wie wird die Druckunterstützung bei schwierigem Weaning reduziert?",
+    "answer": "Der Intellivent-ASV-Modus ist ein Closed-Loop-Beatmungsmodus, bei dem die Druckunterstützung trotz 100%iger Tubuskompensation im Weaning nicht bis 0 mbar reduziert wird. Bei schwierigem Weaning (z. B. COPD, Critical-Illness-Polyneuropathie) ist eine stufenweise Reduktion im Modus „druckunterstützte Spontanatmung“ bis 0 mbar sinnvoll."
+  },
+  {
+    "q_id": 124,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 11",
+    "question": "Was ist der Hauptgrund, warum die Intellivent-ASV-Regelung bei ECMO-Therapie nicht greift?",
+    "answer": "Die CO2-Elimination erfolgt überwiegend über den Oxygenator, daher greift die Intellivent-ASV-Regelung nicht."
+  },
+  {
+    "q_id": 125,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 11",
+    "question": "Bei welchen Bedingungen ist die druckkontrollierte Beatmung (Hamilton DuoPAP) die bessere Wahl?",
+    "answer": "Bei veränderter Thoraxwand-Compliance (Open-Chest, Flail Chest, zirkuläre Verbrennung) oder reduziertem Lungenvolumen (z. B. nach Lobektomie/Pneumonektomie)."
+  },
+  {
+    "q_id": 126,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 11",
+    "question": "Was ist der Hauptvorteil der druckkontrollierten Beatmung (Hamilton DuoPAP) im Vergleich zu den ASV-Algorithmen?",
+    "answer": "Die druckkontrollierte Beatmung (Hamilton DuoPAP) ist bei veränderter Thoraxwand-Compliance oder reduziertem Lungenvolumen besser geeignet, da sie nicht auf normaler Physiologie basiert."
+  },
+  {
+    "q_id": 127,
+    "file_name": "Beatmung-SOP-IFI_textOnlyV2.docx",
+    "page": "page 12",
+    "question": "Was ist der Hauptgrund, warum die Umstellung von Intellivent-ASV auf „SPONT“ im Weaning sinnvoll ist?",
+    "answer": "Die Umstellung auf „SPONT“ ist sinnvoll, da Unruhe/Pressen zu SpO2-Abfällen führen können, worauf Intellivent-ASV mit PEEP-Erhöhung reagiert. Dies kann im Weaning unerwünscht sein."
+  },
+  {
+    "q_id": 128,
+    "file_name": "Passy-Muir-Sprechventil-PMV-Richtlinie-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Welche klinischen Zeichen oder Umstände führen zum sofortigen Abbruch des PMV-Einsatzes?",
+    "answer": "Klinische Zeichen einer Dyspnoe, Angst oder Unwohlsein der/des Patient*in, akute Verwirrtheitszustände/Blutdruck, Abfall der SpO2, Verschlechterung der Blutgase, zunehmende Rachelenbildung sowie Veränderungen der Beatmungsparameter, insbesondere Abfall des inspiratorischen Tidalvolumens (VTi)."
+  },
+  {
+    "q_id": 129,
+    "file_name": "Absaugen-bei-Intubierten-und-Tracheotomierten-IFI_textOnlyV2.docx",
+    "page": "page 1",
+    "question": "Welche Kriterien gelten für einen Absaugversuch bei intubierten und/oder tracheotomierten Patient:innen?",
+    "answer": "Sicht-, hör- oder palpierbares Sekret im Atemweg, plötzlicher Abfall der Sauerstoffsättigung in der Pulsoxymetrie oder in den Blutgasen, \"Sägezahn-Muster\" in der Flowkurve oder im Flow-Volume-Loop am Respirator, Anstieg des Spitzendruckes bei volumenkontrollierter Beatmung, Abfall des Tidalvolumens bei druckkontrollierter Beatmung, Atemnot mit Unruhe und/oder Anstieg von Herzfrequenz, Blutdruck und Atemfrequenz."
+  },
+  {
+    "q_id": 130,
+    "file_name": "Absaugen-bei-Intubierten-und-Tracheotomierten-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Welche klinischen Indikatoren gibt es für die Initiierung des endotrachealen Absaugens bei Kindern?",
+    "answer": "Laut einer integrativen Review von Davies et al. (2015) gibt es mehrere klinische Indikatoren für die Initiierung des endotrachealen Absaugens bei Kindern, darunter erhöhte Atemfrequenz, erhöhte Atemarbeit, erhöhte Sauerstoffsättigung, erhöhte Kohlendioxidspannung, erhöhte Atemwegsresistenz und die Anwesenheit von Sekret im Atemweg."
+  },
+  {
+    "q_id": 131,
+    "file_name": "Absaugen-bei-Intubierten-und-Tracheotomierten-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Was ist der aktuelle Stand der Evidenz für das endotracheale Absaugen bei erwachsenen Patienten, die mechanisch beatmet werden?",
+    "answer": "Laut Pedersen et al. (2009) gibt es nur begrenzte Evidenz für das endotracheale Absaugen bei erwachsenen Patienten, die mechanisch beatmet werden. Die Autoren kommen zu dem Schluss, dass das Absaugen nur bei klinischen Indikatoren durchgeführt werden sollte und dass weitere Forschung notwendig ist, um die Wirksamkeit und Sicherheit des Absaugens zu evaluieren."
+  },
+  {
+    "q_id": 132,
+    "file_name": "Absaugen-bei-Intubierten-und-Tracheotomierten-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Welche klinischen Indikatoren gibt es für das endotracheale Absaugen bei erwachsenen Patienten, die mechanisch beatmet werden?",
+    "answer": "Laut Sole et al. (2015) gibt es mehrere klinische Indikatoren für das endotracheale Absaugen bei erwachsenen Patienten, die mechanisch beatmet werden, darunter erhöhte Atemfrequenz, erhöhte Atemarbeit, erhöhte Kohlendioxidspannung, erhöhte Atemwegsresistenz und die Anwesenheit von Sekret im Atemweg. Die Autoren empfehlen, dass das Absaugen nur bei klinischen Indikatoren durchgeführt werden sollte und dass die Indikatoren individuell bewertet werden sollten."
+  },
+  {
+    "q_id": 133,
+    "file_name": "Intubation-schwieriger-Atemweg-SOP-IFI_textOnlyV2.docx",
+    "page": "page 1",
+    "question": "Was passiert, wenn die tracheale Intubation mit C-MAC nach maximal 2 + 1 Versuchen nicht gelingt?",
+    "answer": "Es wird von Plan A zu Plan B/C (Rescue Oxygenation) gewechselt, bei dem eine Larynxmaske oder ein Larynxtubus eingelegt wird."
+  },
+  {
+    "q_id": 134,
+    "file_name": "Intubation-schwieriger-Atemweg-SOP-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Welche Prädiktoren werden für schwierige Maskenbeatmung/Intubation geprüft?",
+    "answer": "Vollbart oder fehlende Zähne, Mundöffnung < 3.5 cm, Mallampati-Klasse III–IV, Pro-, Retro- oder Mikrognathie, Makroglossie, Raumforderungen oder Verletzungen im Bereich des Atemweges, eingeschränkte Reklination der Halswirbelsäule, kurzer Hals oder grosser Halsumfang (>42 cm), Adipositas mit BMI > 35 und obstruktives Schlafapnoesyndrom, dokumentierte schwierige Intubation oder Intubationsausweis."
+  },
+  {
+    "q_id": 135,
+    "file_name": "Intubation-schwieriger-Atemweg-SOP-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Was wird bei der Entscheidung, ob „Maskenbeatmung erwartet möglich / Aspirationsrisiko tief“ zutrifft, getan?",
+    "answer": "Bei Entscheidung NEIN erfolgt eine fiberoptisch wache Intubation, bei Entscheidung JA erfolgt das Vorgehen gemäss Algorithmus Standard Intubation, wobei eine Intubation mit C-MAC oder eine Intubation fiberoptisch schlafend erwogen wird."
+  },
+  {
+    "q_id": 136,
+    "file_name": "Inhalative-Stickstoffmonoxid-Therapie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 1",
+    "question": "Wie wirkt iNO inhalativ und welche Auswirkungen hat es auf den Körper?",
+    "answer": "iNO wirkt inhalativ selektiv in gut belüfteten Lungenarealen. Es verbessert die Ventilations-Perfusions-Verhältnisse, senkt den pulmonal-arteriellen Druck (PAP) und den pulmonalen Gefässwiderstand (PVR), entlastet das rechte Herz, reduziert intrapulmonale Rechts-Links-Shunts (Steal-Phänomen) und entfaltet eine geringe Bronchodilatation. Der Einfluss auf Blutdruck und systemischen Gefässwiderstand ist minimal."
+  },
+  {
+    "q_id": 137,
+    "file_name": "Inhalative-Stickstoffmonoxid-Therapie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Was kann NO in schlecht belüfteten Lungenabschnitten bewirken, wenn es in höheren Dosen als 10 ppm verabreicht wird?",
+    "answer": "NO kann in schlecht belüfteten Lungenabschnitten die reflektorische Vasokonstriktion aufheben und einen intrapulmonalen Shunt verstärken."
+  },
+  {
+    "q_id": 138,
+    "file_name": "Inhalative-Stickstoffmonoxid-Therapie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Wie entsteht NO2 und welche Auswirkungen hat es auf die Lunge und Blutgefässe?",
+    "answer": "NO2 entsteht durch die Reaktion von NO mit Sauerstoff (O2) und kann Alveolen sowie Gefässe direkt schädigen. Die NO2-Bildung steigt exponentiell mit der Sauerstoffkonzentration (FiO2), und der NO2-Spiegel sollte 2 ppm nicht überschreiten."
+  },
+  {
+    "q_id": 139,
+    "file_name": "Quick Wean en IFI_textOnlyV2.docx",
+    "page": "page 1",
+    "question": "Welche Bedingungen müssen erfüllt sein, damit der Patient %MV in Schritten von 10 % alle 5 Minuten bis maximal 70 % reduzieren kann?",
+    "answer": "Damit der Patient %MV in Schritten von 10 % alle 5 Minuten bis maximal 70 % reduzieren kann, muss spontane Atmung vorliegen und die Atemfrequenz AF kleiner oder gleich der maximal eingestellten Atemfrequenz (maximal RR set) sein."
+  },
+  {
+    "q_id": 140,
+    "file_name": "Cuffhygiene-bei-Tracheotomierten-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Wer entscheidet, ob die Cuffhygiene durchgeführt werden darf, wenn die Beatmungsparameter davon abweichen oder instabile Situationen auftreten?",
+    "answer": "In solchen Fällen wird in Rücksprache mit dem ärztlichen Dienst im Rahmen der Visiten entschieden, ob die Cuffhygiene durchgeführt werden darf."
+  },
+  {
+    "q_id": 141,
+    "file_name": "Cuffhygiene-bei-Tracheotomierten-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Welche Beatmungsparameter sind für die Cuffhygiene bei Tracheotomierten ohne Rücksprache erlaubt?",
+    "answer": "Bei einem PEEP von maximal 8 cmH2O und einem FiO2 von maximal 0,4 darf die Cuffhygiene ohne Rücksprache erfolgen."
+  },
+  {
+    "q_id": 142,
+    "file_name": "High-Flow-Therapie-IFI_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "Was sollte bei der Überwachung und dem Alarmmanagement beachtet werden?",
+    "answer": "Bei der Überwachung und dem Alarmmanagement sollten der Bewusstseinszustand, Vigilanz, Agitation, Atemmuster, Atemfrequenz und Dyspnoe regelmässig beurteilt werden. Die Sauerstoffsättigung (SpO2) sollte kontinuierlich überwacht werden, und bei Bedarf kann die SpO2-Überwachung am Hamilton genutzt werden. Arterielle Blutgasanalyse (ABGA) sollte gemäss ärztlicher Anordnung kontrolliert werden. Regelmässige Augen-, Nasen- und Mundpflege sollte erwogen und bei Bedarf durchgeführt werden. Der Gesichtsbereich sollte auf Druckstellen und Dekubitus durch Interface oder Maske kontrolliert werden. Roter Alarm (Druckgrenze erreicht) sollte durch die Kontrolle des Patienteninterface und des Patientenanschlusses auf Okklusionen überprüft werden. Gelber Alarm (Flow kann nicht erreicht/gemessener Flow liegt 10% unter eingestelltem Flow) sollte durch die Prüfung von Ursachen wie Leckagen oder Fehlfunktionen überprüft werden. Das Schlauchsystem sollte regelmässig visuell kontrolliert werden, da es keine Alarmmeldung bei Schlauchdiskonnektion gibt."
+  },
+  {
+    "q_id": 143,
+    "file_name": "High-Flow-Therapie-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Wann sollte die High-Flow-Therapie abgebrochen werden?",
+    "answer": "Die High-Flow-Therapie sollte abgebrochen werden bei fehlender Aussicht auf Verbesserung der pulmonalen Situation innerhalb von 24 Stunden, bei ausbleibender Verbesserung der respiratorischen Azidose, bei anhaltender respiratorischer Verschlechterung, bei schweren Kooperationsproblemen, bei Bewusstseinsveränderungen oder bei Aspiration."
+  },
+  {
+    "q_id": 144,
+    "file_name": "CTEPH-SOP-IFI_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Welche Massnahmen sollten bei der Hämodynamik ergriffen werden, um die Gefahr einer Ruptur ausgedünnter Lungenarterien zu reduzieren?",
+    "answer": "Um die Gefahr einer Ruptur ausgedünnter Lungenarterien zu reduzieren, sollten folgende Massnahmen ergriffen werden: \n   - Streben Sie eine möglichst rasche Negativbilanzierung an, sofern hämodynamisch vertretbar.\n   - Vermeiden Sie möglichst den Einsatz von Inotropika.\n   - Halten Sie den pulmonalarteriellen Druck möglichst tief.\n   - Orientieren Sie sich am präoperativen Ziel-CI (in der Regel um 2.0 L/m2).\n   - Stellen Sie eine SvO2 ≥ 50% sicher.\n   - Führen Sie kein Wedgen durch; der Pulmonaliskatheter soll im Pulmonalishauptstamm liegen.\n   - Streben Sie eine MAP von 70–85 mmHg an (Ratio: Rechtsherzhypertrophie) und passen Sie im Verlauf entsprechend dem klinischen Zustand an.\n   - Verabreichen Sie kein Adrenalin ohne Rücksprache mit dem verantwortlichen Kaderarzt bzw. THO.\n   - Halten Sie das Ziel mPAP < 40 mmHg bzw. nicht höher als die Hälfte des systolischen systemischen arteriellen Drucks ein.\n   - Leiten Sie bei hohem mPAP eine inhalative NO-Therapie ein.\n   - Setzen Sie falls erforderlich zusätzlich Milrinon ein.\n   - Betreiben Sie den Schrittmacher präferentiell im Modus AAI ein. Setzen Sie ihn im Modus DDD, falls AAI nicht möglich ist.\n   - Beachten Sie eine Transfusionsgrenze von Hämoglobin > 70 g/l."
+  },
+  {
+    "q_id": 145,
+    "file_name": "CTEPH-SOP-IFI_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "Welche Rolle spielt die chirurgische Behandlung bei der Therapie von CTEPH?",
+    "answer": "Die chirurgische Behandlung, insbesondere die pulmonale Thrombendarteriektomie (PTE), ist eine etablierte Therapieoption für CTEPH. Jenkins et al. (2013) und Opitz und Ulrich (2018) beschreiben die Rolle der chirurgischen Behandlung bei der Therapie von CTEPH."
+  },
+  {
+    "q_id": 146,
+    "file_name": "Trachealkanuele-Weaning-IFI-NORD1-C_textOnlyV2.docx",
+    "page": "page 2",
+    "question": "Welche Voraussetzungen müssen für das Entblocken einer Trachealkanüle erfüllt sein?",
+    "answer": "Eine stabile pulmonale Situation, ein stabiler medizinischer Zustand, die Patientin bzw. der Patient ist mindestens 15 Minuten wach, eine Beurteilung bezüglich Dysphagie durch die F.O.T.-Therapeutin und keine Kontraindikationen wie akuter bronchopulmonaler oder nasopharyngealer Infekt, instabiler Kreislauf, instabile Atmung oder rezidivierendes Erbrechen."
+  },
+  {
+    "q_id": 147,
+    "file_name": "Trachealkanuele-Weaning-IFI-NORD1-C_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Welche Parameter werden nach dem Entblocken beobachtet und dokumentiert?",
+    "answer": "Sekretmenge, Husten, Atmungsparameter, Entblockungsdauer, SpO2, O2-Bedarf und Absaugfrequenz."
+  },
+  {
+    "q_id": 148,
+    "file_name": "Trachealkanuele-Weaning-IFI-NORD1-C_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Welche Kriterien sind für die Dekanülierung erforderlich?",
+    "answer": "Ein suffizientes Speichelmanagement ist gewährleistet, eine gründliche Mundpflege ist möglich, es besteht keine Refluxproblematik, die Vigilanz ist ausreichend, die Patientin bzw. der Patient ist pulmonal stabil mit suffizientem Hustenstoss, abnehmendem Absaugbedarf, ohne akuten Infekt und nach abgeschlossenem Weaning."
+  },
+  {
+    "q_id": 149,
+    "file_name": "Trachealkanuele-Weaning-IFI-NORD1-C_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "Was ist das Ziel des Sprechventiltrainings?",
+    "answer": "Das Sprechventiltraining fördert den Entwöhnungsprozess tracheotomierter Patientinnen und Patienten von der Trachealkanüle mit dem langfristigen Ziel der Dekanülierung. Kurzfristige Ziele sind die Gewöhnung an den Gebrauch der oberen Atemwege (Ausatmen via Larynx, Pharynx, Mund oder Nase), die verbale Äusserungsfähigkeit sowie physiologisches Husten und Räuspern."
+  },
+  {
+    "q_id": 150,
+    "file_name": "Trachealkanuele-Weaning-IFI-NORD1-C_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "Welche Voraussetzungen müssen für das Sprechventiltraining erfüllt sein?",
+    "answer": "Stellen Sie sicher, dass eine ärztliche Verordnung für das Sprechventiltraining vorliegt. Stellen Sie sicher, dass die Patientin bzw. der Patient wach und kooperativ ist. Prüfen Sie, dass die Patientin bzw. der Patient mit Tracheofix C/P (Cuff/Phonations-Option) von Rüsch ausgestattet ist. Sorgen Sie für eine aufrechte Sitzposition im Bett (z.B. Lang- oder Schrägsitz). Prüfen Sie ein suffizientes Schlucken (keine Speichelseen in Mund und Rachen). Stellen Sie sicher, dass ein suffizientes Clearing (Husten/Räuspern) möglich ist. Überwachen Sie mindestens mit SpO2 und EKG."
+  },
+  {
+    "q_id": 151,
+    "file_name": "Praevention-VAP-IFI_textOnlyV2.docx",
+    "page": "page 5",
+    "question": "Bei welchen Patient:innen sollte die Oberkörperhochlagerung nicht durchgeführt werden?",
+    "answer": "Die Oberkörperhochlagerung sollte bei Patient:innen mit Kontraindikation, wie Kreislaufinstabilität, instabilen Becken- oder Wirbelsäulenverletzungen, Schädel-Hirn-Trauma und anderen neurointensivmedizinischen Krankheitsbildern, die eine angepasste Lagerung erfordern, nicht durchgeführt werden. Ausnahmen bestehen nur bei schriftlicher Verordnung durch den verantwortlichen Intensivmediziner."
+  },
+  {
+    "q_id": 152,
+    "file_name": "Praevention-VAP-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Welche medizinischen und pflegerischen Massnahmen werden zur Prävention von ventilator-assoziierten Pneumonien empfohlen?",
+    "answer": "Das Kapitel beschreibt weitere medizinische und pflegerische Massnahmen zur Prävention ventilator-assoziierter Pneumonien, wie das Umsetzen von Weaningkonzepten oder -protokollen, die Anwendung von Weaningkonzepten oder -protokollen bei Langzeitbeatmung, die Überprüfung der Indikation für Stressulcusprophylaxe, die Anwendung von Analgosedations- und Delirmanagement-SOP, die Anwendung von Beatmungs-SOP, die tägliche Überprüfung der Indikation für Stressulcusprophylaxe durch den verantwortlichen Intensivmediziner, die Anwendung von Subglottic Secret Drainage (SDS) und die Verwendung von Endotrachealtuben mit Polyurethan-Cuff und SDS."
+  },
+  {
+    "q_id": 153,
+    "file_name": "Praevention-VAP-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Welche Rolle spielen Weaningkonzepte oder -protokolle bei der Prävention von ventilator-assoziierten Pneumonien?",
+    "answer": "Weaningkonzepte oder -protokolle werden bei der Prävention von ventilator-assoziierten Pneumonien empfohlen, insbesondere bei Langzeitbeatmung (> 24 h)."
+  },
+  {
+    "q_id": 154,
+    "file_name": "Praevention-VAP-IFI_textOnlyV2.docx",
+    "page": "page 6",
+    "question": "Welche Rolle spielt die Subglottic Secret Drainage (SDS) bei der Prävention von ventilator-assoziierten Pneumonien?",
+    "answer": "Die Subglottic Secret Drainage (SDS) wird als eine wirksame Massnahme zur Prävention von ventilator-assoziierten Pneumonien angesehen, wie aus mehreren Studien hervorgeht."
+  },
+  {
+    "q_id": 155,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 3",
+    "question": "Was kann mittels Bronchoskopie bei unzureichender Beatmung, steigenden Beatmungsdrücken oder Verdacht auf Tubusverlegung/-fehllage gesucht und ggf. behoben werden?",
+    "answer": "Bei unzureichender Beatmung, steigenden Beatmungsdrücken oder Verdacht auf Tubusverlegung/-fehllage kann mittels Bronchoskopie rasch die Ursache gesucht und ggf. behoben werden."
+  },
+  {
+    "q_id": 156,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Wann sollte eine Bronchoskopie zur Erregeridentifikation in Betracht gezogen werden?",
+    "answer": "Eine Bronchoskopie sollte erwogen werden bei CAP ohne Besserung unter Therapie, unklarem respiratorischem Versagen (DD Infekt, Autoimmunität, DAH etc.) sowie bei Immunsuppression (erweitertes Keimspektrum)."
+  },
+  {
+    "q_id": 157,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Welche Vorteile bietet die Bronchoskopie im Vergleich zu einer „blinden“ Sputumaspiration?",
+    "answer": "Die Bronchoskopie ermöglicht eine erweiterte Erregerdiagnostik via Absaugkatheter, was eine höhere Sensitivität und Spezifität bietet."
+  },
+  {
+    "q_id": 158,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Wie wird bei schweren bronchialen Blutungen vorgegangen?",
+    "answer": "Bei schweren bronchialen Blutungen ist die Bronchoskopie essenziell zur Sicherung der Ventilation (einseitige Intubation/Bronchusblocker) und zur ersten Blutstillung. Pneumologie sollte hinzugezogen werden (Instrumentarium/Erfahrung für Blutstillung und selektive Bronchusblockade)."
+  },
+  {
+    "q_id": 159,
+    "file_name": "Bronchoskopie-SOP-IFI_textOnlyV2.docx",
+    "page": "page 4",
+    "question": "Wie kann die diffuse alveoläre Hämorrhagie (DAH) diagnostiziert werden?",
+    "answer": "Die diffuse alveoläre Hämorrhagie (DAH) kann durch die serielle BAL diagnostiziert werden: bei bronchialer Blutungsquelle wird das Aspirat klarer, bei DAH nimmt die Blutungsmenge zu. Rund 30% der Vaskulitis-Patientinnen/-Patienten mit DAH zeigen makroskopisch keine Blutung in der Bronchoskopie; die blutende Kapillaritis wird erst durch BAL demaskiert."
+  }
+]
