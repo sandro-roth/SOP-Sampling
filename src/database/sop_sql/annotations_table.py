@@ -14,7 +14,10 @@ CREATE TABLE IF NOT EXISTS annotations (
     alt_answer TEXT,
 
     question_accepted INTEGER DEFAULT 0 CHECK (question_accepted IN (0, 1)),
-
+    
+    question_clarity INTEGER DEFAULT 1 CHECK (question_clarity BETWEEN 1 AND 5),
+    question_relevance INTEGER DEFAULT 1 CHECK (question_relevance BETWEEN 1 AND 5),
+    question_context_fit INTEGER DEFAULT 1 CHECK (question_context_fit BETWEEN 1 AND 5),
     fluent INTEGER DEFAULT 1 CHECK (fluent BETWEEN 1 AND 5),
     comprehensive INTEGER DEFAULT 1 CHECK (comprehensive BETWEEN 1 AND 5),
     factual INTEGER DEFAULT 1 CHECK (factual BETWEEN 1 AND 5),
