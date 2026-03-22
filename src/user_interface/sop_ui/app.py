@@ -55,7 +55,7 @@ def get_example_by_id(q_id: int) -> tuple[int, str, str, str]:
 
 
 def save_annotation_to_db(qstn: str, q_id: int,  alt_q: str | None, passg: str, ansr: str, alt_a: str | None,
-                          flu: int, comp: int, fact: int, ann_id: int, q_acc: bool = True) -> None:
+                          clear: int, relev: int, cotxt: int, flu: int, comp: int, fact: int, ann_id: int, q_acc: bool = True) -> None:
     """
     Takes Userinterface inputs which describe the answer to the question like how fluent, comprehensive and factual
     the answer is. It is called from the Flask app posting to the /submit_annotation.
@@ -67,14 +67,18 @@ def save_annotation_to_db(qstn: str, q_id: int,  alt_q: str | None, passg: str, 
         passg (str): Passage text in the Question Bank.
         ansr (str): Passage answer in the Question Bank.
         alt_a (str | None): Answer text provided by the annotator if they reject the original answer.
-        flu (int): Fluent parameter, describes how fluent the question is with ratings (1-5).
-        comp (int): Comprehensive parameter, describes how comprehensive the question is with ratings (1-5).
-        fact (int): Factual parameter, describes how factual the questions is with ratings (1-5).
+        clear (int): Clear parameter, describes how clear the question is with ratings (1-5).
+        relev (int): Relevant parameter, describes how relevant the question is with ratings (1-5).
+        cotxt (int): Context parameter, describes how good the context is represented with ratings (1-5).
+        flu (int): Fluent parameter, describes how fluent the answer is with ratings (1-5).
+        comp (int): Comprehensive parameter, describes how comprehensive the answer is with ratings (1-5).
+        fact (int): Factual parameter, describes how factual the answer is with ratings (1-5).
         ann_id (int): Annotator Foreign-key of User table (current user).
         q_acc (bool): Question accepted boolean default True.
 
     """
-    a_data = [(qstn, q_id, alt_q, passg, ansr, alt_a, q_acc, flu, comp, fact, ann_id)]
+    a_data = [(qstn, q_id, alt_q, passg, ansr, alt_a, q_acc,
+               clear, relev, cotxt, flu, comp, fact, ann_id)]
     db_push(data=a_data, db=db_path, table='annotations', statements=statements)
 
 def create_app() -> Flask:
@@ -177,6 +181,9 @@ def create_app() -> Flask:
         # Read values from UI
         user_pk = session.get("user_pk")
         question_id = int(request.form['question_id'])
+        clarity = int(request.form['question_clarity'])
+        relevance = int(request.form['question_relevance'])
+        context = int(request.form['question_context_fit'])
         fluency = int(request.form['fluency'])
         comprehensive = int(request.form['comprehensiveness'])
         factual = int(request.form['factuality'])
@@ -193,12 +200,13 @@ def create_app() -> Flask:
             return "Question not found", 400
 
         # Store in DB
-        flask_log.info(f'\nQuestion_id: {question_id}\nFluency: {fluency}\nComprehensiveness: {comprehensive}\nFactual: {factual}')
+        flask_log.info(f'\nQuestion_id: {question_id}\nClarity: {clarity}\nRelevance: {relevance}\nContext: {context}'
+                       f'\nFluency: {fluency}\nComprehensiveness: {comprehensive}\nFactual: {factual}')
         flask_log.info(f'Alternative Question: {alt_quest}')
         flask_log.info(f'Alternative Answer: {alt_ans}')
 
         save_annotation_to_db(qstn=question_text, q_id=question_id, alt_q=alt_quest, passg=passage_text, ansr=answer_text,
-                              alt_a=alt_ans, flu=fluency, comp=comprehensive, fact=factual, ann_id=user_pk, q_acc=True)
+                              alt_a=alt_ans, clear=clarity, relev=relevance, cotxt=context, flu=fluency, comp=comprehensive, fact=factual, ann_id=user_pk, q_acc=True)
 
         # Clear skipped questions and load next question
         session.pop("skipped_question_ids", None)
