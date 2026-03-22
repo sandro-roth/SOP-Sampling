@@ -419,17 +419,38 @@
           return;
         }
 
-        const names = ['question_clarity', question_relevance', 'question_context_fit','fluency', 'comprehensiveness', 'factuality'];
-        const values = names.map(function (name) {
-          const checked = form.querySelector('input[name="' + name + '"]:checked');
-          return checked ? parseInt(checked.value, 10) : 0;
-        });
+        const questionNames = [
+          'question_clarity',
+          'question_relevance',
+          'question_context_fit'
+        ];
 
-        const lowCount = values.filter(function (v) {
-          return v > 0 && v < 3;
-        }).length;
+        const answerNames = [
+          'fluency',
+          'comprehensiveness',
+          'factuality'
+        ];
 
-        if (lowCount >= 2) {
+        function getValues(names) {
+          return names.map(function (name) {
+            const checked = form.querySelector('input[name="' + name + '"]:checked');
+            return checked ? parseInt(checked.value, 10) : 0;
+          });
+        }
+
+        function countLow(values) {
+          return values.filter(function (v) {
+            return v > 0 && v < 3;
+          }).length;
+        }
+
+        const questionValues = getValues(questionNames);
+        const answerValues = getValues(answerNames);
+
+        const lowQuestionCount = countLow(questionValues);
+        const lowAnswerCount = countLow(answerValues);
+
+        if (lowQuestionCount >= 2 || lowAnswerCount >= 2) {
           event.preventDefault();
           modal.style.display = 'flex';
         }
