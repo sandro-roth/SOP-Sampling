@@ -37,7 +37,7 @@ def get_next_example_from_db(usr_pk: int, fun_pk: int) -> tuple[int, str, str, s
 
     return question['q_id'], question['question'], question['answer'], question['file_name'], question['page']
 
-def get_example_by_id(q_id: int) -> tuple[int, str, str, str]:
+def get_example_by_id(q_id: int) -> tuple[int, str, str, str, str]:
     """
 
     :param q_id:
@@ -50,7 +50,7 @@ def get_example_by_id(q_id: int) -> tuple[int, str, str, str]:
 
     for q in data:
         if q.get('q_id') == q_id:
-            return q["q_id"], q["question"], q["answer"], q["context"]
+            return q["q_id"], q["question"], q["answer"], q["file_name"], q["page"]
     raise RuntimeError(f"No question found with q_id={q_id}")
 
 
