@@ -370,10 +370,17 @@
       </div>
 
       <!-- RIGHT COLUMN: passage (read-only) -->
-<!--      <div class="right-column">-->
-<!--        <div class="passage-title">Kontext</div>-->
-<!--        <div class="passage-box">{{ passage_text | trim }}</div>-->
-<!--      </div>-->
+      <div class="right-column">
+        <div class="passage-title">Kontext</div>
+        <div class="passage-box" style="padding: 0; overflow: hidden; height: 700px;">
+          <iframe
+            src="{{ url_for('serve_pdf', filename=file_name) }}#page={{ file_page }}"
+            width="100%"
+            height="100%"
+            style="border: none;">
+          </iframe>
+        </div>
+      </div>
 
     </div>
   {% endif %}
