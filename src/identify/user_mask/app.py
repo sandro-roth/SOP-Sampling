@@ -171,6 +171,34 @@ def create_app() -> Flask:
         ]
         return Response(ui_resp.content, ui_resp.status_code, headers)
 
+    @app.route('/pdf/<path:filename>', methods=['GET'])
+    def proxy_pdf(filename):
+        ui_url = f"http://{UI_HOST}:{UI_PORT}/pdf/{filename}"
+
+        try:
+            ui_resp = requests.get(
+                ui_url,
+                params=request.args,
+                cookies=request.cookies,
+                timeout=10,
+                stream=True,
+            )
+        except requests.RequestException as e:
+            flask_log.error("Error contacting UI service (pdf): %s", e)
+            return "UI service unavailable", 502
+
+        excluded_headers = {
+            "content-encoding", "content-length",
+            "transfer-encoding", "connection"
+        }
+        headers = [
+            (name, value)
+            for name, value in ui_resp.headers.items()
+            if name.lower() not in excluded_headers
+        ]
+
+        return Response(ui_resp.content, ui_resp.status_code, headers)
+
     @app.route('/skip_question', methods=['GET'])
     def proxy_skip_question():
         ui_url = f"http://{UI_HOST}:{UI_PORT}/skip_question"
