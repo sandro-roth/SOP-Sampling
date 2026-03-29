@@ -135,6 +135,8 @@ def create_app() -> Flask:
     @app.get('/pdf/<path:filename>')
     def serve_pdf(filename):
         pdf_path = (pdf_dir / filename).resolve()
+        flask_log.info("serve_pdf called with filename=%s", filename)
+        flask_log.info("Resolved path=%s", pdf_path)
 
         if not pdf_path.exists():
             flask_log.error("PDF not found: %s", pdf_path)
@@ -196,6 +198,7 @@ def create_app() -> Flask:
             flask_log.info("No more questions for this user/function: %s", e)
             return render_template('index.html', no_questions=True)
 
+        flask_log.info("PDF for template: file_name=%s, file_page=%s", file_name, file_page)
         return render_template('index.html', no_questions=False,
                                question_id=question_id, question_text=question_text.strip(),
                                answer_text=answer_text.strip(), file_name=file_name, file_page=file_page)
