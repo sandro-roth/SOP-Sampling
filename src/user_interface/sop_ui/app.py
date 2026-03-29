@@ -157,7 +157,7 @@ def create_app() -> Flask:
 
         return render_template('index.html', no_question=False,
                                question_id=question_id, question_text=question_text.strip(),
-                               answer_text=answer_text.strip(), passage_text=passage_text.strip())
+                               answer_text=answer_text.strip())
 
     @app.get('/skip_question')
     def skip_question():
