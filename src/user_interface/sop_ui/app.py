@@ -28,7 +28,7 @@ def get_next_example_from_db(usr_pk: int, fun_pk: int) -> tuple[int, str, str, s
     This function retrieves next question (make sure every question only 2 annotators use predefined function)
 
     Returns:
-         (question_id, question_text, answer_text, passage_text)
+         (question_id, question_text, answer_text, pdf file name, page for passage)
     """
 
     json_file = load_q_bank()
@@ -54,7 +54,7 @@ def get_example_by_id(q_id: int) -> tuple[int, str, str, str, str]:
     raise RuntimeError(f"No question found with q_id={q_id}")
 
 
-def save_annotation_to_db(qstn: str, q_id: int,  alt_q: str | None, passg: str, ansr: str, alt_a: str | None,
+def save_annotation_to_db(qstn: str, q_id: int,  alt_q: str | None, f_name: str, f_page: str, ansr: str, alt_a: str | None,
                           clear: int, relev: int, cotxt: int, flu: int, comp: int, fact: int, ann_id: int, q_acc: bool = True) -> None:
     """
     Takes Userinterface inputs which describe the answer to the question like how fluent, comprehensive and factual
@@ -64,7 +64,8 @@ def save_annotation_to_db(qstn: str, q_id: int,  alt_q: str | None, passg: str, 
         qstn (str): Question text in the Question Bank going to be rated.
         q_id (int): Foreign-key of questions in the Question Bank.
         alt_q (str | None): Question text provided by the annotator if they reject the original question.
-        passg (str): Passage text in the Question Bank.
+        f_name (str): File name from where the passage is located.
+        f_page (str): Page where the passage is located.
         ansr (str): Passage answer in the Question Bank.
         alt_a (str | None): Answer text provided by the annotator if they reject the original answer.
         clear (int): Clear parameter, describes how clear the question is with ratings (1-5).
@@ -77,7 +78,7 @@ def save_annotation_to_db(qstn: str, q_id: int,  alt_q: str | None, passg: str, 
         q_acc (bool): Question accepted boolean default True.
 
     """
-    a_data = [(qstn, q_id, alt_q, passg, ansr, alt_a, q_acc,
+    a_data = [(qstn, q_id, alt_q, f_name, f_page, ansr, alt_a, q_acc,
                clear, relev, cotxt, flu, comp, fact, ann_id)]
     db_push(data=a_data, db=db_path, table='annotations', statements=statements)
 
@@ -194,7 +195,7 @@ def create_app() -> Flask:
 
         # Load original example from JSON via id
         try:
-            q_id_db, question_text, answer_text, passage_text = get_example_by_id(question_id)
+            q_id_db, question_text, answer_text, f_name, f_page = get_example_by_id(question_id)
         except RuntimeError as e:
             flask_log.error("Could not load question %s from JSON: %s", question_id, e)
             return "Question not found", 400
@@ -205,7 +206,7 @@ def create_app() -> Flask:
         flask_log.info(f'Alternative Question: {alt_quest}')
         flask_log.info(f'Alternative Answer: {alt_ans}')
 
-        save_annotation_to_db(qstn=question_text, q_id=question_id, alt_q=alt_quest, passg=passage_text, ansr=answer_text,
+        save_annotation_to_db(qstn=question_text, q_id=question_id, alt_q=alt_quest, file_name=f_name, file_page=f_page, ansr=answer_text,
                               alt_a=alt_ans, clear=clarity, relev=relevance, cotxt=context, flu=fluency, comp=comprehensive, fact=factual, ann_id=user_pk, q_acc=True)
 
         # Clear skipped questions and load next question
