@@ -29,19 +29,19 @@ else
 fi
 
 # 2) Remove existing sop_questions_0_5.json
-if [ -f "$CONFIG_DIR/sop_questions_0_5.json" ]; then
-  rm -f "$CONFIG_DIR/sop_questions_0_5.json"
-  echo "sop_questions_0_5.json removed"
+if [ -f "$CONFIG_DIR/sop_qas_per_page_v2.json" ]; then
+  rm -f "$CONFIG_DIR/sop_qas_per_page_v2.json"
+  echo "sop_qas_per_page_v2.json removed"
 else
-  echo "sop_questions_0_5.json not found"
+  echo "sop_qas_per_page_v2.json not found"
 fi
 
 # 3) Restore backup
-if [ -f "$CONFIG_DIR/sop_questions_0_5_backup.json" ]; then
-  cp "$CONFIG_DIR/sop_questions_0_5_backup.json" "$CONFIG_DIR/sop_questions_0_5.json"
-  echo "Backup restored to sop_questions_0_5.json"
+if [ -f "$CONFIG_DIR/sop_qas_per_page_v2_backup.json" ]; then
+  cp "$CONFIG_DIR/sop_qas_per_page_v2_backup.json" "$CONFIG_DIR/sop_qas_per_page_v2.json"
+  echo "Backup restored to sop_qas_per_page_v2.json"
 else
-  echo "Backup file not found: $CONFIG_DIR/sop_questions_0_5_backup.json"
+  echo "Backup file not found: $CONFIG_DIR/sop_qas_per_page_v2_backup.json"
   exit 1
 fi
 
