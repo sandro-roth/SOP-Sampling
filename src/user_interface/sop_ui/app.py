@@ -24,6 +24,27 @@ def load_q_bank():
             q_bank = json.load(file)
     return q_bank
 
+def normalize_file_and_page(file_name: str, page: str) -> tuple[str, int]:
+    """
+    Converts "...._textOnlyV2.docx" ---> "....._original.pdf" as well as "page number" ---> int(number)
+
+    Args:
+        file_name (str): Filename from the Json questions database where the context comes from for the question.
+        page (str): Note of the page where the context comes from
+
+    Return:
+        (normalized_file_name: str, page_number: int)
+    """
+
+    if file_name.endswith('_textOnlyV2.docx'):
+        file_name = file_name.replace('_textOnlyV2.docx', "_original.pdf")
+    try:
+        page_number = int(''.join(filter(str.isdiget, page)))
+    except ValueError:
+        raise RuntimeError(f'Invalid page format: {page}')
+
+    return file_name, page_number
+
 def get_next_example_from_db(usr_pk: int, fun_pk: int) -> tuple[int, str, str, str, str]:
     """
     This function retrieves next question (make sure every question only 2 annotators use predefined function)
