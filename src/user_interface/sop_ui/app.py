@@ -206,7 +206,7 @@ def create_app() -> Flask:
         flask_log.info(f'Alternative Question: {alt_quest}')
         flask_log.info(f'Alternative Answer: {alt_ans}')
 
-        save_annotation_to_db(qstn=question_text, q_id=question_id, alt_q=alt_quest, file_name=f_name, file_page=f_page, ansr=answer_text,
+        save_annotation_to_db(qstn=question_text, q_id=question_id, alt_q=alt_quest, f_name=f_name, f_page=f_page, ansr=answer_text,
                               alt_a=alt_ans, clear=clarity, relev=relevance, cotxt=context, flu=fluency, comp=comprehensive, fact=factual, ann_id=user_pk, q_acc=True)
 
         # Clear skipped questions and load next question
