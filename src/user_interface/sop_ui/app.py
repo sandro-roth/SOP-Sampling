@@ -1,5 +1,6 @@
 import os
 import json
+import re
 
 from pathlib import Path
 from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory, abort
@@ -38,14 +39,16 @@ def normalize_file_and_page(file_name: str, page: str) -> tuple[str, int]:
 
     if file_name.endswith('_textOnlyV2.docx'):
         file_name = file_name.replace('_textOnlyV2.docx', "_original.pdf")
-    try:
-        page_number = int(''.join(filter(str.isdiget, page)))
-    except ValueError:
-        raise RuntimeError(f'Invalid page format: {page}')
+
+    match = re.search(r"\d+", page)
+    if not match:
+        raise RuntimeError(f"Invalid page format: {page}")
+
+    page_number = int(match.group())
 
     return file_name, page_number
 
-def get_next_example_from_db(usr_pk: int, fun_pk: int) -> tuple[int, str, str, str, str]:
+def get_next_example_from_db(usr_pk: int, fun_pk: int) -> tuple[int, str, str, str, int]:
     """
     This function retrieves next question (make sure every question only 2 annotators use predefined function)
 
@@ -56,10 +59,11 @@ def get_next_example_from_db(usr_pk: int, fun_pk: int) -> tuple[int, str, str, s
     json_file = load_q_bank()
     question = sampling(statements=statements, j_file=json_file, usr_id=usr_pk, fun_id=fun_pk)
     log_loc.info(f"{question['q_id']}, {question['question']}, {question['answer']}")
+    file_name, page_number = normalize_file_and_page(question['file_name'], question['page'])
 
-    return question['q_id'], question['question'], question['answer'], question['file_name'], question['page']
+    return question['q_id'], question['question'], question['answer'], file_name, page_number
 
-def get_example_by_id(q_id: int) -> tuple[int, str, str, str, str]:
+def get_example_by_id(q_id: int) -> tuple[int, str, str, str, int]:
     """
 
     :param q_id:
@@ -72,7 +76,8 @@ def get_example_by_id(q_id: int) -> tuple[int, str, str, str, str]:
 
     for q in data:
         if q.get('q_id') == q_id:
-            return q["q_id"], q["question"], q["answer"], q["file_name"], q["page"]
+            file_name, file_page = normalize_file_and_page(q['file_name'], q['page'])
+            return q["q_id"], q["question"], q["answer"], file_name, file_page
     raise RuntimeError(f"No question found with q_id={q_id}")
 
 
