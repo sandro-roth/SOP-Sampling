@@ -76,11 +76,13 @@ services:
       CONFIG_DIR: /config
       LOG_DIR: /logs
       DATA_DIR: /data/survey.db
+      FILE_DIR: /docs/pdfs
       DATA_DIR_QUESTIONS: "${DATA_DIR_QUESTION_COMPOSE}"
       PREVIEW_DIR: /data/previews/
     volumes:
       - ./config:/config
       - ./data:/data
+      - ./docs:/docs
       - ./logs:/logs
     expose:
       - "${SOP_UI_PORT}"
