@@ -137,7 +137,7 @@ def create_app() -> Flask:
         try:
             # Try a few times to avoid immediately repeating a skipped question
             for _ in range(15):
-                question_id, question_text, answer_text, passage_text = get_next_example_from_db(
+                question_id, question_text, answer_text, file_name, file_page = get_next_example_from_db(
                     usr_pk=user_pk,
                     fun_pk=func_pk
                 )
@@ -146,7 +146,7 @@ def create_app() -> Flask:
             else:
                 # If we only find skipped ones, clear skip list and take whatever we get next
                 session["skipped_question_ids"] = []
-                question_id, question_text, answer_text, passage_text = get_next_example_from_db(
+                question_id, question_text, answer_text, file_name, file_page = get_next_example_from_db(
                     usr_pk=user_pk,
                     fun_pk=func_pk
                 )
