@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS annotations (
 
     alt_question TEXT,
 
-    passage TEXT NOT NULL,
+    file_name TEXT NOT NULL,
+    file_page TEXT NOT NULL,
     answer TEXT NOT NULL,
 
     alt_answer TEXT,
