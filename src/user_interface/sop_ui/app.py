@@ -14,6 +14,7 @@ statements = load_yaml()
 q_bank_path = Path(os.getenv('DATA_DIR_QUESTIONS')).resolve()
 q_bank = None
 db_path = os.getenv('DATA_DIR')
+pdf_dir = Path(os.getenv('FILE_DIR', '/docs/pdfs')).resolve()
 
 
 def load_q_bank():
@@ -105,6 +106,20 @@ def create_app() -> Flask:
     app.secret_key = secret
     flask_log = get_logger(__name__)
 
+    @app.get('/pdf/<path:filename>')
+    def serve_pdf(filename):
+        pdf_path = (pdf_dir / filename).resolve()
+
+        if not pdf_path.exists():
+            flask_log.error("PDF not found: %s", pdf_path)
+            abort(404)
+
+        if pdf_dir not in pdf_path.parents and pdf_path != pdf_dir:
+            flask_log.error("Invalid PDF path access: %s", pdf_path)
+            abort(403)
+
+        return send_from_directory(pdf_dir, filename)
+
     @app.get('/')
     def home():
         user_pk = session.get("user_pk")
@@ -155,9 +170,9 @@ def create_app() -> Flask:
             flask_log.info("No more questions for this user/function: %s", e)
             return render_template('index.html', no_questions=True)
 
-        return render_template('index.html', no_question=False,
+        return render_template('index.html', no_questions=False,
                                question_id=question_id, question_text=question_text.strip(),
-                               answer_text=answer_text.strip())
+                               answer_text=answer_text.strip(), file_name=file_name, file_page=file_page)
 
     @app.get('/skip_question')
     def skip_question():
