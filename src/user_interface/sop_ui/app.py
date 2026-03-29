@@ -23,7 +23,7 @@ def load_q_bank():
             q_bank = json.load(file)
     return q_bank
 
-def get_next_example_from_db(usr_pk: int, fun_pk: int) -> tuple[int, str, str, str]:
+def get_next_example_from_db(usr_pk: int, fun_pk: int) -> tuple[int, str, str, str, str]:
     """
     This function retrieves next question (make sure every question only 2 annotators use predefined function)
 
@@ -35,7 +35,7 @@ def get_next_example_from_db(usr_pk: int, fun_pk: int) -> tuple[int, str, str, s
     question = sampling(statements=statements, j_file=json_file, usr_id=usr_pk, fun_id=fun_pk)
     log_loc.info(f"{question['q_id']}, {question['question']}, {question['answer']}")
 
-    return question['q_id'], question['question'], question['answer'], question['context']
+    return question['q_id'], question['question'], question['answer'], question['file_name'], question['page']
 
 def get_example_by_id(q_id: int) -> tuple[int, str, str, str]:
     """
