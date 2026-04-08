@@ -109,6 +109,31 @@ def save_annotation_to_db(qstn: str, q_id: int,  alt_q: str | None, f_name: str,
                clear, relev, cotxt, flu, comp, fact, ann_id)]
     db_push(data=a_data, db=db_path, table='annotations', statements=statements)
 
+def save_alternative_to_question_bank(
+    alt_question: str | None,
+    alt_answer: str | None,
+    file_name: str,
+    file_page: int,
+    flask_log
+) -> int | None:
+    """
+    Add alternative question and answer to the JSON question bank only if both are present.
+    Reload the in memory cache afterwards so the new entry can be sampled immediately.
+    """
+    new_q_id = append_alternative_question_to_json(
+        json_path=q_bank_path,
+        alt_question=alt_question,
+        alt_answer=alt_answer,
+        file_name=file_name,
+        page=file_page
+    )
+
+    if new_q_id is not None:
+        load_q_bank(force_reload=True)
+        flask_log.info("Added alternative QA to JSON with q_id=%s", new_q_id)
+
+    return new_q_id
+
 def create_app() -> Flask:
     """
     Create and configure the Flask application.

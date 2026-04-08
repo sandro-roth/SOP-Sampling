@@ -411,7 +411,7 @@ def append_alternative_question_to_json(
         "file_name": file_name,
         "page": str(page),
         "question": alt_question,
-        "answer": alt_answer        
+        "answer": alt_answer
     }
 
     data.append(new_entry)
