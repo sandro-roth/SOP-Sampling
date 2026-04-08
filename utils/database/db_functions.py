@@ -370,17 +370,27 @@ def preview_db(db: str, pre_dir:str | None = None, limit: int | None = 100) -> N
 
 def append_alternative_question_to_json(
     json_path: str | Path,
-    alt_question: str,
-    alt_answer: str,
+    alt_question: str | None,
+    alt_answer: str | None,
     file_name: str,
     page: int
-) -> int:
+) -> int | None:
     """
     Append a new alternative question and answer to the JSON question bank.
 
+    The entry is only added if both alt_question and alt_answer are present.
+    If one or both are missing, nothing is written.
+
     Returns:
-        int: newly assigned q_id
+        int | None:
+            Newly assigned q_id if a new entry was added, otherwise None.
     """
+    alt_question = (alt_question or "").strip()
+    alt_answer = (alt_answer or "").strip()
+
+    if not alt_question or not alt_answer:
+        return None
+
     json_path = Path(json_path)
 
     with json_path.open('r', encoding='utf-8') as f:
@@ -398,10 +408,10 @@ def append_alternative_question_to_json(
 
     new_entry = {
         "q_id": new_q_id,
-        "question": alt_question.strip(),
-        "answer": alt_answer.strip(),
         "file_name": file_name,
-        "page": str(page)
+        "page": str(page),
+        "question": alt_question,
+        "answer": alt_answer        
     }
 
     data.append(new_entry)
