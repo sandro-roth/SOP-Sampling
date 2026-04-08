@@ -245,23 +245,27 @@ def create_app() -> Flask:
             flask_log.info(f'Alternative Question: {alt_quest}')
             flask_log.info(f'Alternative Answer: {alt_ans}')
 
-            save_annotation_to_db(
-                qstn=question_text,
-                q_id=question_id,
-                alt_q=alt_quest,
-                f_name=f_name,
-                f_page=f_page,
-                ansr=answer_text,
-                alt_a=alt_ans,
-                clear=0,
-                relev=1,
-                cotxt=0,
-                flu=0,
-                comp=0,
-                fact=0,
-                ann_id=user_pk,
-                q_acc=False
-            )
+            try:
+                save_annotation_to_db(
+                    qstn=question_text,
+                    q_id=question_id,
+                    alt_q=alt_quest,
+                    f_name=f_name,
+                    f_page=f_page,
+                    ansr=answer_text,
+                    alt_a=alt_ans,
+                    clear=1,
+                    relev=1,
+                    cotxt=1,
+                    flu=1,
+                    comp=1,
+                    fact=1,
+                    ann_id=user_pk,
+                    q_acc=False
+                )
+            except Exception:
+                flask_log.exception("Failed to save non relevant annotation for question_id=%s", question_id)
+                return "Could not save annotation", 500
 
             session.pop("skipped_question_ids", None)
             return redirect(url_for('home'))
