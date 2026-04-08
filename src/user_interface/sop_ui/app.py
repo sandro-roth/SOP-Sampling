@@ -81,7 +81,7 @@ def get_example_by_id(q_id: int) -> tuple[int, str, str, str, int]:
     raise RuntimeError(f"No question found with q_id={q_id}")
 
 
-def save_annotation_to_db(qstn: str, q_id: int,  alt_q: str | None, f_name: str, f_page: str, ansr: str, alt_a: str | None,
+def save_annotation_to_db(qstn: str, q_id: int,  alt_q: str | None, f_name: str, f_page: int, ansr: str, alt_a: str | None,
                           clear: int, relev: int, cotxt: int, flu: int, comp: int, fact: int, ann_id: int, q_acc: bool = True) -> None:
     """
     Takes Userinterface inputs which describe the answer to the question like how fluent, comprehensive and factual
@@ -92,7 +92,7 @@ def save_annotation_to_db(qstn: str, q_id: int,  alt_q: str | None, f_name: str,
         q_id (int): Foreign-key of questions in the Question Bank.
         alt_q (str | None): Question text provided by the annotator if they reject the original question.
         f_name (str): File name from where the passage is located.
-        f_page (str): Page where the passage is located.
+        f_page (int): Page where the passage is located.
         ansr (str): Passage answer in the Question Bank.
         alt_a (str | None): Answer text provided by the annotator if they reject the original answer.
         clear (int): Clear parameter, describes how clear the question is with ratings (1-5).
@@ -223,39 +223,88 @@ def create_app() -> Flask:
 
     @app.post('/submit_annotation')
     def submit_annotation():
-        # Read values from UI
         user_pk = session.get("user_pk")
-        question_id = int(request.form['question_id'])
-        clarity = int(request.form['question_clarity'])
-        relevance = int(request.form['question_relevance'])
-        context = int(request.form['question_context_fit'])
-        fluency = int(request.form['fluency'])
-        comprehensive = int(request.form['comprehensiveness'])
-        factual = int(request.form['factuality'])
+        if user_pk is None:
+            flask_log.error("submit_annotation called without session user_pk")
+            return "Missing user id", 400
 
-        # Optional alternatives from hidden fields
+        question_id = int(request.form['question_id'])
+        initial_relevance = request.form.get('initial_relevance')
+
         alt_quest = request.form.get('alternative_question', '').strip() or None
         alt_ans = request.form.get('alternative_answer', '').strip() or None
 
-        # Load original example from JSON via id
         try:
             q_id_db, question_text, answer_text, f_name, f_page = get_example_by_id(question_id)
         except RuntimeError as e:
             flask_log.error("Could not load question %s from JSON: %s", question_id, e)
             return "Question not found", 400
 
-        # Store in DB
-        flask_log.info(f'\nQuestion_id: {question_id}\nClarity: {clarity}\nRelevance: {relevance}\nContext: {context}'
-                       f'\nFluency: {fluency}\nComprehensiveness: {comprehensive}\nFactual: {factual}')
-        flask_log.info(f'Alternative Question: {alt_quest}')
-        flask_log.info(f'Alternative Answer: {alt_ans}')
+        if initial_relevance == 'no':
+            flask_log.info(f'Question_id: {question_id} marked as not relevant')
+            flask_log.info(f'Alternative Question: {alt_quest}')
+            flask_log.info(f'Alternative Answer: {alt_ans}')
 
-        save_annotation_to_db(qstn=question_text, q_id=question_id, alt_q=alt_quest, f_name=f_name, f_page=f_page, ansr=answer_text,
-                              alt_a=alt_ans, clear=clarity, relev=relevance, cotxt=context, flu=fluency, comp=comprehensive, fact=factual, ann_id=user_pk, q_acc=True)
+            save_annotation_to_db(
+                qstn=question_text,
+                q_id=question_id,
+                alt_q=alt_quest,
+                f_name=f_name,
+                f_page=f_page,
+                ansr=answer_text,
+                alt_a=alt_ans,
+                clear=0,
+                relev=1,
+                cotxt=0,
+                flu=0,
+                comp=0,
+                fact=0,
+                ann_id=user_pk,
+                q_acc=False
+            )
 
-        # Clear skipped questions and load next question
-        session.pop("skipped_question_ids", None)
-        return redirect(url_for('home'))
+            session.pop("skipped_question_ids", None)
+            return redirect(url_for('home'))
+
+        if initial_relevance == 'yes':
+            try:
+                clarity = int(request.form['question_clarity'])
+                context = int(request.form['question_context_fit'])
+                fluency = int(request.form['fluency'])
+                comprehensive = int(request.form['comprehensiveness'])
+                factual = int(request.form['factuality'])
+            except (KeyError, ValueError):
+                return "Detailed ratings are missing", 400
+
+            flask_log.info(
+                f'\nQuestion_id: {question_id}\nClarity: {clarity}\nContext: {context}'
+                f'\nFluency: {fluency}\nComprehensiveness: {comprehensive}\nFactual: {factual}'
+            )
+            flask_log.info(f'Alternative Question: {alt_quest}')
+            flask_log.info(f'Alternative Answer: {alt_ans}')
+
+            save_annotation_to_db(
+                qstn=question_text,
+                q_id=question_id,
+                alt_q=alt_quest,
+                f_name=f_name,
+                f_page=f_page,
+                ansr=answer_text,
+                alt_a=alt_ans,
+                clear=clarity,
+                relev=5,
+                cotxt=context,
+                flu=fluency,
+                comp=comprehensive,
+                fact=factual,
+                ann_id=user_pk,
+                q_acc=True
+            )
+
+            session.pop("skipped_question_ids", None)
+            return redirect(url_for('home'))
+
+        return "Initial relevance missing", 400
     return app
 
 def main() -> None:
