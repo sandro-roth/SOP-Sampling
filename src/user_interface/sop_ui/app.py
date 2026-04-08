@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory, abort
 
-from utils import setup_logging, get_logger, __load_env, sampling, db_push, load_yaml
+from utils import setup_logging, get_logger, __load_env, sampling, db_push, load_yaml, append_alternative_question_to_json
 
 # Setup
 cwd = Path(__file__).resolve()
