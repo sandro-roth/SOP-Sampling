@@ -3,6 +3,7 @@ import random
 import logging
 
 import pandas as pd
+import json
 import sqlite3
 from contextlib import contextmanager
 from pathlib import Path
@@ -366,3 +367,46 @@ def preview_db(db: str, pre_dir:str | None = None, limit: int | None = 100) -> N
             df.to_string(buf=file, max_cols=None, index=False)
 
     con.close()
+
+def append_alternative_question_to_json(
+    json_path: str | Path,
+    alt_question: str,
+    alt_answer: str,
+    file_name: str,
+    page: int
+) -> int:
+    """
+    Append a new alternative question and answer to the JSON question bank.
+
+    Returns:
+        int: newly assigned q_id
+    """
+    json_path = Path(json_path)
+
+    with json_path.open('r', encoding='utf-8') as f:
+        data = json.load(f)
+
+    if not isinstance(data, list):
+        raise RuntimeError('Question bank JSON must contain a list')
+
+    existing_ids = [
+        int(item.get('q_id', 0))
+        for item in data
+        if str(item.get('q_id', '')).isdigit()
+    ]
+    new_q_id = max(existing_ids, default=0) + 1
+
+    new_entry = {
+        "q_id": new_q_id,
+        "question": alt_question.strip(),
+        "answer": alt_answer.strip(),
+        "file_name": file_name,
+        "page": str(page)
+    }
+
+    data.append(new_entry)
+
+    with json_path.open('w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+    return new_q_id
