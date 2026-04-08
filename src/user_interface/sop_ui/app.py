@@ -271,6 +271,17 @@ def create_app() -> Flask:
             flask_log.info(f'Alternative Answer: {alt_ans}')
 
             try:
+                save_alternative_to_question_bank(
+                    alt_question=alt_quest,
+                    alt_answer=alt_ans,
+                    file_name=f_name,
+                    file_page=f_page,
+                    flask_log=flask_log
+                )
+            except Exception:
+                flask_log.exception("Failed to append alternative QA to JSON for question_id=%s", question_id)
+
+            try:
                 save_annotation_to_db(
                     qstn=question_text,
                     q_id=question_id,
@@ -311,6 +322,17 @@ def create_app() -> Flask:
             )
             flask_log.info(f'Alternative Question: {alt_quest}')
             flask_log.info(f'Alternative Answer: {alt_ans}')
+
+            try:
+                save_alternative_to_question_bank(
+                    alt_question=alt_quest,
+                    alt_answer=alt_ans,
+                    file_name=f_name,
+                    file_page=f_page,
+                    flask_log=flask_log
+                )
+            except Exception:
+                flask_log.exception("Failed to append alternative QA to JSON for question_id=%s", question_id)
 
             save_annotation_to_db(
                 qstn=question_text,
