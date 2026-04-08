@@ -1,10 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="utf-8">
   <title>SOP UI</title>
 
-  <!-- Pico CSS and HTMX from your static folder -->
   <link rel="stylesheet" href="{{ url_for('static', filename='pico.min.css') }}">
   <script src="{{ url_for('static', filename='htmx.min.js') }}"></script>
 
@@ -17,19 +16,17 @@
     .layout {
       display: flex;
       gap: 1.5rem;
-      align-items: flex-start;  /* NICHT stretch */
+      align-items: flex-start;
     }
-
 
     .left-column {
       flex: 2;
-      /* keine Flex-Column, linke Seite bleibt wie gehabt */
     }
 
     .right-column {
       flex: 1.5;
       display: flex;
-      flex-direction: column;  /* Kontext-Titel + Box vertikal anordnen */
+      flex-direction: column;
       min-width: 400px;
     }
 
@@ -60,13 +57,13 @@
 
     .box-content {
       font-size: 0.95rem;
-      white-space: pre-line; /* keeps line breaks, remove indents*/
+      white-space: pre-line;
       padding: 0;
       margin: 0;
     }
 
     textarea {
-      padding: 0.4rem !important; /* small clean padding, no indent */
+      padding: 0.4rem !important;
       margin: 0;
     }
 
@@ -94,7 +91,6 @@
       padding: 0.35rem 0.4rem;
     }
 
-    /* Erste Spalte: Text + ? */
     .ratings-table th:first-child,
     .ratings-table td:first-child {
       text-align: left;
@@ -102,13 +98,11 @@
       font-weight: 500;
     }
 
-    /* Spalte 2 → "1 (Nein)" : schmaler */
     .ratings-table th:nth-child(2),
     .ratings-table td:nth-child(2) {
       width: 15%;
     }
 
-    /* Spalten 3, 4, 5 ("2", "3", "4"): etwas breiter */
     .ratings-table th:nth-child(3),
     .ratings-table td:nth-child(3),
     .ratings-table th:nth-child(4),
@@ -118,7 +112,6 @@
       width: 10%;
     }
 
-    /* Spalte 6 → "5 (Ja)" */
     .ratings-table th:nth-child(6),
     .ratings-table td:nth-child(6) {
       width: 15%;
@@ -209,6 +202,29 @@
       z-index: 100;
     }
 
+    .hidden-section {
+      display: none;
+    }
+
+    .binary-rating {
+      margin-bottom: 1rem;
+    }
+
+    .binary-options {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+
+    .binary-options label {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-bottom: 0;
+      font-weight: 500;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body class="container">
@@ -227,13 +243,10 @@
   {% else %}
     <div class="layout">
 
-      <!-- LEFT COLUMN: question, answer, ratings, button -->
       <div class="left-column">
-        <form method="post" action="{{ url_for('submit_annotation') }}">
-          <!-- Hidden ID so the backend knows which question this is -->
+        <form method="post" action="{{ url_for('submit_annotation') }}" id="annotationForm">
           <input type="hidden" name="question_id" value="{{ question_id }}">
 
-          <!-- Question box (read-only) -->
           <div class="box-header" id="questionBox">
             <div class="box-header-top">
               <div class="box-title">Frage</div>
@@ -241,131 +254,136 @@
             <div class="box-content">{{ question_text | trim }}</div>
           </div>
 
-          <!-- Question ratings -->
-          <p class="ratings-heading">Die Frage ist</p>
-          <table class="ratings-table">
-            <thead>
-              <tr>
-                <th></th>
-                <th>1 (Nein)</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5 (Ja)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  Klar formuliert
-                  <span class="tooltip" data-tip="Ist die Frage verständlich und eindeutig formuliert?">?</span>
-                </td>
-                <td><input type="radio" name="question_clarity" value="1" required></td>
-                <td><input type="radio" name="question_clarity" value="2"></td>
-                <td><input type="radio" name="question_clarity" value="3"></td>
-                <td><input type="radio" name="question_clarity" value="4"></td>
-                <td><input type="radio" name="question_clarity" value="5"></td>
-              </tr>
-              <tr>
-                <td>
-                  Relevant
-                  <span class="tooltip" data-tip="Ist die Frage inhaltlich sinnvoll und relevant zum Kontext?">?</span>
-                </td>
-                <td><input type="radio" name="question_relevance" value="1" required></td>
-                <td><input type="radio" name="question_relevance" value="2"></td>
-                <td><input type="radio" name="question_relevance" value="3"></td>
-                <td><input type="radio" name="question_relevance" value="4"></td>
-                <td><input type="radio" name="question_relevance" value="5"></td>
-              </tr>
-              <tr>
-                <td>
-                  Kontextgetreu
-                  <span class="tooltip" data-tip="Passt die Frage gut zum angezeigten Kontext?">?</span>
-                </td>
-                <td><input type="radio" name="question_context_fit" value="1" required></td>
-                <td><input type="radio" name="question_context_fit" value="2"></td>
-                <td><input type="radio" name="question_context_fit" value="3"></td>
-                <td><input type="radio" name="question_context_fit" value="4"></td>
-                <td><input type="radio" name="question_context_fit" value="5"></td>
-              </tr>
-            </tbody>
-          </table>
-
-          <!-- Answer box (read-only) -->
-          <div class="box-header" id="answerBox">
+          <div class="box-header binary-rating">
             <div class="box-header-top">
-              <div class="box-title">Antwort</div>
+              <div class="box-title">
+                Ist die Frage relevant?
+                <span class="tooltip" data-tip="Ist die Frage inhaltlich sinnvoll und relevant zum Kontext?">?</span>
+              </div>
             </div>
-            <div class="box-content">{{ answer_text | trim }}</div>
+
+            <div class="binary-options">
+              <label>
+                <input type="radio" name="initial_relevance" value="yes" required>
+                Ja
+              </label>
+              <label>
+                <input type="radio" name="initial_relevance" value="no" required>
+                Nein
+              </label>
+            </div>
           </div>
 
-          <!-- Ratings -->
-          <p class="ratings-heading">Die Antwort ist</p>
-          <table class="ratings-table">
-            <thead>
-              <tr>
-                <th></th>
-                <th>1 (Nein)</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5 (Ja)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  Flüssig
-                  <span class="tooltip" data-tip="Wie gut lesbar und natürlich klingt die Antwort?">?</span>
-                </td>
-                <td><input type="radio" name="fluency" value="1" required></td>
-                <td><input type="radio" name="fluency" value="2"></td>
-                <td><input type="radio" name="fluency" value="3"></td>
-                <td><input type="radio" name="fluency" value="4"></td>
-                <td><input type="radio" name="fluency" value="5"></td>
-              </tr>
-              <tr>
-                <td>
-                  Umfassend
-                  <span class="tooltip" data-tip="Wie vollständig und tiefgehend beantwortet die Antwort die Frage?">?</span>
-                </td>
-                <td><input type="radio" name="comprehensiveness" value="1" required></td>
-                <td><input type="radio" name="comprehensiveness" value="2"></td>
-                <td><input type="radio" name="comprehensiveness" value="3"></td>
-                <td><input type="radio" name="comprehensiveness" value="4"></td>
-                <td><input type="radio" name="comprehensiveness" value="5"></td>
-              </tr>
-              <tr>
-                <td>
-                  Sachlich korrekt
-                  <span class="tooltip" data-tip="Sind alle enthaltenen Informationen korrekt und präzise?">?</span>
-                </td>
-                <td><input type="radio" name="factuality" value="1" required></td>
-                <td><input type="radio" name="factuality" value="2"></td>
-                <td><input type="radio" name="factuality" value="3"></td>
-                <td><input type="radio" name="factuality" value="4"></td>
-                <td><input type="radio" name="factuality" value="5"></td>
-              </tr>
-            </tbody>
-          </table>
+          <div id="detailedSection" class="hidden-section">
+            <p class="ratings-heading">Die Frage ist</p>
+            <table class="ratings-table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>1 (Nein)</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
+                  <th>5 (Ja)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    Klar formuliert
+                    <span class="tooltip" data-tip="Ist die Frage verständlich und eindeutig formuliert?">?</span>
+                  </td>
+                  <td><input type="radio" name="question_clarity" value="1"></td>
+                  <td><input type="radio" name="question_clarity" value="2"></td>
+                  <td><input type="radio" name="question_clarity" value="3"></td>
+                  <td><input type="radio" name="question_clarity" value="4"></td>
+                  <td><input type="radio" name="question_clarity" value="5"></td>
+                </tr>
+                <tr>
+                  <td>
+                    Kontextgetreu
+                    <span class="tooltip" data-tip="Passt die Frage gut zum angezeigten Kontext?">?</span>
+                  </td>
+                  <td><input type="radio" name="question_context_fit" value="1"></td>
+                  <td><input type="radio" name="question_context_fit" value="2"></td>
+                  <td><input type="radio" name="question_context_fit" value="3"></td>
+                  <td><input type="radio" name="question_context_fit" value="4"></td>
+                  <td><input type="radio" name="question_context_fit" value="5"></td>
+                </tr>
+              </tbody>
+            </table>
 
-          <!-- Hidden fields for optional alternatives -->
+            <div class="box-header" id="answerBox">
+              <div class="box-header-top">
+                <div class="box-title">Antwort</div>
+              </div>
+              <div class="box-content">{{ answer_text | trim }}</div>
+            </div>
+
+            <p class="ratings-heading">Die Antwort ist</p>
+            <table class="ratings-table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>1 (Nein)</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
+                  <th>5 (Ja)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    Flüssig
+                    <span class="tooltip" data-tip="Wie gut lesbar und natürlich klingt die Antwort?">?</span>
+                  </td>
+                  <td><input type="radio" name="fluency" value="1"></td>
+                  <td><input type="radio" name="fluency" value="2"></td>
+                  <td><input type="radio" name="fluency" value="3"></td>
+                  <td><input type="radio" name="fluency" value="4"></td>
+                  <td><input type="radio" name="fluency" value="5"></td>
+                </tr>
+                <tr>
+                  <td>
+                    Umfassend
+                    <span class="tooltip" data-tip="Wie vollständig und tiefgehend beantwortet die Antwort die Frage?">?</span>
+                  </td>
+                  <td><input type="radio" name="comprehensiveness" value="1"></td>
+                  <td><input type="radio" name="comprehensiveness" value="2"></td>
+                  <td><input type="radio" name="comprehensiveness" value="3"></td>
+                  <td><input type="radio" name="comprehensiveness" value="4"></td>
+                  <td><input type="radio" name="comprehensiveness" value="5"></td>
+                </tr>
+                <tr>
+                  <td>
+                    Sachlich korrekt
+                    <span class="tooltip" data-tip="Sind alle enthaltenen Informationen korrekt und präzise?">?</span>
+                  </td>
+                  <td><input type="radio" name="factuality" value="1"></td>
+                  <td><input type="radio" name="factuality" value="2"></td>
+                  <td><input type="radio" name="factuality" value="3"></td>
+                  <td><input type="radio" name="factuality" value="4"></td>
+                  <td><input type="radio" name="factuality" value="5"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
           <input type="hidden" name="alternative_question" id="alternative_question">
           <input type="hidden" name="alternative_answer" id="alternative_answer">
 
-          <!-- Submit and skip buttons-->
           <div class="submit-row" style="display: flex; gap: 0.6rem; align-items: center;">
             <button type="submit">Absenden und nächste Frage</button>
 
             <button type="button" class="secondary"
                     onclick="window.location.href='{{ url_for('skip_question') }}?question_id={{ question_id }}'">
-                    Frage überspringen
+              Frage überspringen
             </button>
           </div>
         </form>
       </div>
 
-      <!-- RIGHT COLUMN: passage (read-only) -->
       <div class="right-column">
         <div class="passage-title">Kontext</div>
         <div class="passage-box" style="padding: 0; overflow: hidden; height: 700px;">
@@ -380,14 +398,12 @@
 
     </div>
   {% endif %}
-  <!-- Modal for alternative question and answer -->
+
   <div id="altModal" class="modal-backdrop" style="display: none;">
     <div class="modal-content">
       <h2>Alternative Frage und Antwort</h2>
-      <p>
-        Mindestens zwei Kriterien wurden niedrig bewertet.
-        Sie können eine alternative Frage und eine alternative Antwort vorschlagen,
-        wenn Sie möchten.
+      <p id="modalText">
+        Sie können eine alternative Frage und eine alternative Antwort vorschlagen, wenn Sie möchten.
       </p>
 
       <label for="modalAlternativeQuestion"><strong>Alternative Frage (optional)</strong></label>
@@ -405,9 +421,16 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      const form = document.querySelector('form');
+      const form = document.getElementById('annotationForm');
+      if (!form) {
+        return;
+      }
+
+      const detailedSection = document.getElementById('detailedSection');
+      const relevanceRadios = form.querySelectorAll('input[name="initial_relevance"]');
 
       const modal = document.getElementById('altModal');
+      const modalText = document.getElementById('modalText');
       const modalAltQ = document.getElementById('modalAlternativeQuestion');
       const modalAltA = document.getElementById('modalAlternativeAnswer');
       const hiddenAltQ = document.getElementById('alternative_question');
@@ -416,15 +439,83 @@
       const confirmBtn = document.getElementById('modalConfirmBtn');
 
       let allowSubmitWithoutCheck = false;
+      let modalReason = null;
+
+      function setDetailedRequired(enabled) {
+        const detailedInputs = detailedSection.querySelectorAll('input[type="radio"]');
+        detailedInputs.forEach(function (input) {
+          input.required = false;
+        });
+
+        if (enabled) {
+          const requiredNames = [
+            'question_clarity',
+            'question_context_fit',
+            'fluency',
+            'comprehensiveness',
+            'factuality'
+          ];
+
+          requiredNames.forEach(function (name) {
+            const firstInput = form.querySelector('input[name="' + name + '"]');
+            if (firstInput) {
+              firstInput.required = true;
+            }
+          });
+        }
+      }
+
+      function clearDetailedRatings() {
+        const detailedInputs = detailedSection.querySelectorAll('input[type="radio"]');
+        detailedInputs.forEach(function (input) {
+          input.checked = false;
+        });
+      }
+
+      function updateVisibility() {
+        const selected = form.querySelector('input[name="initial_relevance"]:checked');
+        if (!selected) {
+          detailedSection.style.display = 'none';
+          setDetailedRequired(false);
+          return;
+        }
+
+        if (selected.value === 'yes') {
+          detailedSection.style.display = 'block';
+          setDetailedRequired(true);
+        } else {
+          detailedSection.style.display = 'none';
+          setDetailedRequired(false);
+          clearDetailedRatings();
+        }
+      }
+
+      relevanceRadios.forEach(function (radio) {
+        radio.addEventListener('change', updateVisibility);
+      });
+
+      updateVisibility();
 
       form.addEventListener('submit', function (event) {
         if (allowSubmitWithoutCheck) {
           return;
         }
 
+        const selectedRelevance = form.querySelector('input[name="initial_relevance"]:checked');
+        if (!selectedRelevance) {
+          return;
+        }
+
+        if (selectedRelevance.value === 'no') {
+          event.preventDefault();
+          modalReason = 'irrelevant';
+          modalText.textContent = 'Die Frage wurde als nicht relevant bewertet. Sie können optional eine alternative Frage und Antwort vorschlagen.';
+          modal.style.display = 'flex';
+          return;
+        }
+
         const questionNames = [
           'question_clarity',
-          'question_relevance',
           'question_context_fit'
         ];
 
@@ -455,6 +546,8 @@
 
         if (lowQuestionCount >= 2 || lowAnswerCount >= 2) {
           event.preventDefault();
+          modalReason = 'low_scores';
+          modalText.textContent = 'Mindestens zwei Kriterien wurden niedrig bewertet. Sie können eine alternative Frage und eine alternative Antwort vorschlagen, wenn Sie möchten.';
           modal.style.display = 'flex';
         }
       });
@@ -463,6 +556,8 @@
         modal.style.display = 'none';
         hiddenAltQ.value = '';
         hiddenAltA.value = '';
+        modalAltQ.value = '';
+        modalAltA.value = '';
         allowSubmitWithoutCheck = true;
         form.submit();
       });
