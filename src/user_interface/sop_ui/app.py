@@ -18,9 +18,9 @@ db_path = os.getenv('DATA_DIR')
 pdf_dir = Path(os.getenv('FILE_DIR', '/docs/pdfs')).resolve()
 
 
-def load_q_bank():
+def load_q_bank(force_reload: bool = False):
     global q_bank
-    if q_bank is None:
+    if q_bank is None or force_reload:
         with open(q_bank_path, 'r', encoding='utf-8') as file:
             q_bank = json.load(file)
     return q_bank
